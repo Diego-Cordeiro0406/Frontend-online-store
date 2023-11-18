@@ -1,6 +1,9 @@
+import Header from '../components/Header';
+
 function MainScreen() {
   return (
     <main>
+      <Header />
       <p
         data-testid="home-initial-message"
       >
