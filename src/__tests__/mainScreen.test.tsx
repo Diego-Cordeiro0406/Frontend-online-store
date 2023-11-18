@@ -4,7 +4,7 @@ import renderWithRouter from './helpers/renderWithRouter';
 import App from '../App';
 
 
-describe('2 - Crie uma página de listagem de produtos vazia', () => {
+describe('Testa a página de listagem de produtos vazia', () => {
   it(`A tela contém a mensagem pedida: 'Digite algum termo de pesquisa ou escolha uma
       categoria.'`, () => {
     renderWithRouter(<App />);
