@@ -1,2 +1,3 @@
 src/__tests__/*.tsx
 src/__tests__/helpers/*.tsx
+src/__tests__/__mocks__/*.ts

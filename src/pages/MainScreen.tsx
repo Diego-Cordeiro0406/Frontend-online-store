@@ -1,9 +1,11 @@
+import CategoriesBar from '../components/CategoriesBar';
 import Header from '../components/Header';
 
 function MainScreen() {
   return (
     <main>
       <Header />
+      <CategoriesBar />
       <p
         data-testid="home-initial-message"
       >
