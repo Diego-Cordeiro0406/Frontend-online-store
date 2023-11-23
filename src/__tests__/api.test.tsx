@@ -9,13 +9,11 @@
 // import App from '../App';
 
 
-// describe('Testa o acesso à api do Mercado Livre', () => {
-//   it('Testa a função getCategories', () => {
+describe('Testa o acesso à api do Mercado Livre', () => {
+  it('Testa a função getCategories', () => {
 //     const mockFetch = vi.spyOn(api, 'getCategories')
 //     renderWithRouter(<App />);
 //     expect(mockFetch).toHaveBeenCalled()
 //     expect(mockFetch).toHaveBeenCalledTimes(1)
-//   });
-
-
-// });
+  });
+});
