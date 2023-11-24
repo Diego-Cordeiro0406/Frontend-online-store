@@ -4,7 +4,7 @@ import renderWithRouter from './helpers/renderWithRouter';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
 
-describe('3 - Crie a página do carrinho de compras', () => {
+describe('Testa a página do carrinho de compras', () => {
   it('A home deve ter o botão do carrinho de compras', () => {
     renderWithRouter(<App />);
     expect(screen.getByTestId('shopping-cart-button')).toBeDefined();

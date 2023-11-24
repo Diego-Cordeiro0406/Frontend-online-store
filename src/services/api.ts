@@ -8,7 +8,10 @@ export async function getCategories(): Promise<Categories[]> {
   return data;
 }
 
-export async function getProductsFromCategoryAndQuery(categoryId: string, query: string) {
+export async function getProductsFromCategoryAndQuery(
+  query: string,
+  categoryId?: string,
+) {
   if (!categoryId) {
     const response = await
     fetch(`${URL_DATABASE}sites/MLB/search?q=${query}`);
@@ -19,7 +22,7 @@ export async function getProductsFromCategoryAndQuery(categoryId: string, query:
   }
 
   const response = await
-  fetch(`${URL_DATABASE}sites/MLB/search?category=${categoryId}&q=${query}`);
+  fetch(`${URL_DATABASE}sites/MLB/search?category=${categoryId}`);
 
   const data = await response.json();
 
