@@ -8,7 +8,7 @@ import App from '../App';
 import categoriesMock from './__mocks__/categories';
 import searchQueryMOck from './__mocks__/searchQuery';
 import * as api from '../services/api'
-// import queryMock from './__mocks__/query';
+import queryMock from './__mocks__/query';
 
 describe('Testa a página de listagem de produtos vazia', () => {
   afterEach(() => vi.clearAllMocks());
@@ -68,24 +68,22 @@ describe(`Testa os produtos buscados por termos, com os dados resumidos, associa
   });
 });
 
-// describe('Testa se ao selecionar uma categoria é mostrado somente os produtos daquela categoria', () => {
-//   afterEach(() => vi.clearAllMocks());
-//   it(`Filtra corretamente os produtos de uma página para exibir somente os daquela
-//       categoria`, async () => {
-//   const mockFetch = vi.spyOn(api, 'getProductsFromCategoryAndQuery').mockResolvedValue(queryMock)
+describe('Testa se ao selecionar uma categoria é mostrado somente os produtos daquela categoria', () => {
+  afterEach(() => vi.clearAllMocks());
+  it(`Filtra corretamente os produtos de uma página para exibir somente os daquela
+      categoria`, async () => {
+  const mockFetch = vi.spyOn(api, 'getProductsFromCategoryAndQuery').mockResolvedValue(queryMock)
 
-    // renderWithRouter(<App />);
-//     expect(global.fetch).toHaveBeenCalled();
+    renderWithRouter(<App />);
+    
 
-    // const categoriesEl = await screen.findAllByTestId('category');
-    // userEvent.click(categoriesEl[29]);
-    // await waitFor(() => expect(mockFetch).toHaveBeenCalled());
+    const categoriesEl = await screen.findAllByTestId('category');
 
-//     expect(global.fetch).toHaveBeenCalledTimes(2);
+    userEvent.click(categoriesEl[29]);
+    await waitFor(() => expect(mockFetch).toHaveBeenCalled());
+    expect(mockFetch).toHaveBeenCalledTimes(1);
 
-//     const productsEl = await screen.findAllByTestId('product');
-//     expect(productsEl.length).toEqual(
-//       queryMock.results.length,
-//     );
-//   });
-// });
+    const productsEl = await screen.findAllByTestId('product');
+    expect(productsEl.length).toEqual(queryMock.results.length);
+  });
+});

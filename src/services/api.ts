@@ -22,7 +22,7 @@ export async function getProductsFromCategoryAndQuery(
   }
 
   const response = await
-  fetch(`${URL_DATABASE}sites/MLB/search?category=${categoryId}&q=${query}`);
+  fetch(`${URL_DATABASE}sites/MLB/search?category=${categoryId}`);
 
   const data = await response.json();
 

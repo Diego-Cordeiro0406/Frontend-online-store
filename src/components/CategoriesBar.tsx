@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import CategoriesContext from '../context/CategoriesContext';
 
 interface CategoriesBarProps {
@@ -10,6 +10,7 @@ function CategoriesBar({ sendRadioValue, sendProductsRequest }: CategoriesBarPro
   const categoriesContext = useContext(CategoriesContext);
 
   const [valorInput, setvalorInput] = useState('');
+  const [lastValorInput, setLastValorInput] = useState('');
 
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const novoValor = event.target.value;
@@ -17,26 +18,28 @@ function CategoriesBar({ sendRadioValue, sendProductsRequest }: CategoriesBarPro
     sendRadioValue(novoValor);
   };
 
-  const handleClick = async () => {
-    // Use o valor do estado local diretamente
-    if (valorInput) {
-      await sendProductsRequest(valorInput);
+  useEffect(() => {
+    if (valorInput !== lastValorInput) {
+      setLastValorInput(valorInput); // Atualiza o último valor
+      if (valorInput) {
+        sendProductsRequest(valorInput);
+      }
     }
-  };
+  }, [valorInput, sendProductsRequest, lastValorInput]);
 
   const categoriesList = categoriesContext.map((category) => (
     <span key={ category.id } id="categories-list">
       <input
         name="categories"
+        data-testid="category"
         value={ category.id }
         type="radio"
         id={ category.name }
         checked={ valorInput === category.id }
         onChange={ handleRadioChange }
-        onClick={ handleClick }
+        // onClick={ handleClick }
       />
       <label
-        data-testid="category"
         htmlFor={ category.name }
       >
         {category.name}
