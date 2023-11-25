@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import MainScreen from './pages/MainScreen';
 import ShoppingCart from './pages/ShoppingCart';
+import ProductDetails from './pages/ProductDetails';
 import CategoriesContext from './context/CategoriesContext';
 import { getCategories } from './services/api';
 import { Categories } from './types/typesApi';
@@ -25,6 +26,10 @@ function App() {
       <Routes>
         <Route path="/" element={ <MainScreen /> } />
         <Route path="/cart" element={ <ShoppingCart /> } />
+        <Route
+          path="/product/:id"
+          element={ <ProductDetails /> }
+        />
       </Routes>
     </CategoriesContext.Provider>
 

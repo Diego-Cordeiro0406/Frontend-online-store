@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { screen, waitFor } from '@testing-library/react';
+import { act, screen, waitFor } from '@testing-library/react';
 import renderWithRouter from './helpers/renderWithRouter';
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
@@ -43,7 +43,10 @@ describe(`Testa os produtos buscados por termos, com os dados resumidos, associa
   it('Exibe a mensagem "Nenhum produto foi encontrado" caso a busca não retorne produtos', async () => {
     renderWithRouter(<App />);
 
+    await act(async () => {
     userEvent.click(screen.getByTestId('query-button'));
+    })
+
     await waitFor(() => expect(screen.getByText('Nenhum produto foi encontrado')).toBeInTheDocument());
   })
   
@@ -51,13 +54,19 @@ describe(`Testa os produtos buscados por termos, com os dados resumidos, associa
     const mockFetch = vi.spyOn(api, 'getProductsFromCategoryAndQuery').mockResolvedValue(searchQueryMOck)
     renderWithRouter(<App />);
  
+    await act(async () => {
     userEvent.type(
       screen.getByTestId('query-input'),
       'carro'
     );
+    })
 
     const buttonEl = await screen.findByTestId('query-button')
+
+    await act(async () => {
     userEvent.click(buttonEl);
+    })
+
     await waitFor(() => expect(mockFetch).toHaveBeenCalled());
     expect(mockFetch).toHaveBeenCalledTimes(1);
 
@@ -79,7 +88,10 @@ describe('Testa se ao selecionar uma categoria é mostrado somente os produtos d
 
     const categoriesEl = await screen.findAllByTestId('category');
 
+    await act(async () => {
     userEvent.click(categoriesEl[29]);
+    })
+
     await waitFor(() => expect(mockFetch).toHaveBeenCalled());
     expect(mockFetch).toHaveBeenCalledTimes(1);
 
