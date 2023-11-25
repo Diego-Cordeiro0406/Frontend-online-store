@@ -29,7 +29,7 @@ export async function getProductsFromCategoryAndQuery(
   return data;
 }
 
-export async function getProductById(id: string) {
+export async function getProductById(id: string | undefined) {
   const response = await fetch(`${URL_DATABASE}items/${id}`);
   const jsonData = await response.json();
   return jsonData;

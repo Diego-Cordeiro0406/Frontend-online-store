@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 import CategoriesBar from '../components/CategoriesBar';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import { Product } from '../types/typesApi';
+import ProductCard from '../components/ProductCard';
 
-interface MainScreenProps {}
+interface MainScreenProps { }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function MainScreen(_props: MainScreenProps) {
@@ -67,11 +68,18 @@ function MainScreen(_props: MainScreenProps) {
               Nenhum produto foi encontrado
             </p>
           ) : data.map((product) => (
-            <div data-testid="product" key={ product.id }>
-              <h3>{product.title}</h3>
-              <img src={ product.thumbnail } alt={ product.title } />
-              <p>{`R$ ${product.price}`}</p>
-            </div>
+            <Link
+              key={ product.id }
+              data-testid="product-detail-link"
+              to={ `/product/${product.id}` }
+            >
+              <ProductCard
+                key={ product.id }
+                title={ product.title }
+                img={ product.thumbnail }
+                price={ product.price }
+              />
+            </Link>
           ))
         }
       </main>
