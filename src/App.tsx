@@ -8,7 +8,7 @@ import CategoriesContext from './context/CategoriesContext';
 import { getCategories } from './services/api';
 import { Categories } from './types/typesApi';
 
-// import './App.css';
+import './App.css';
 
 function App() {
   const [data, setData] = useState<Categories[]>([]);

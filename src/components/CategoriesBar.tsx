@@ -28,7 +28,11 @@ function CategoriesBar({ sendRadioValue, sendProductsRequest }: CategoriesBarPro
   }, [valorInput, sendProductsRequest, lastValorInput]);
 
   const categoriesList = categoriesContext.map((category) => (
-    <span key={ category.id } id="categories-list">
+    <span
+      key={ category.id }
+      id="categories-list"
+      className="flex justify-start w-full my-1"
+    >
       <input
         name="categories"
         data-testid="category"
@@ -40,6 +44,7 @@ function CategoriesBar({ sendRadioValue, sendProductsRequest }: CategoriesBarPro
         // onClick={ handleClick }
       />
       <label
+        className="hover:font-bold"
         htmlFor={ category.name }
       >
         {category.name}
@@ -48,7 +53,18 @@ function CategoriesBar({ sendRadioValue, sendProductsRequest }: CategoriesBarPro
   ));
 
   return (
-    <aside>
+    <aside
+      className="
+      flex
+      flex-col
+      w-1/5
+      justify-start
+      items-center
+      max-h-screen
+      overflow-auto
+      overscroll-contain
+      "
+    >
       {categoriesList}
     </aside>
   );
