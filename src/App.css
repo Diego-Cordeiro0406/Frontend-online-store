@@ -19,7 +19,7 @@
 
 
 ::-webkit-scrollbar {
-  width: 8px; /* Largura da barra de rolagem vertical */
+  width: 0px; /* Largura da barra de rolagem vertical */
 }
 
 /* Estilo do polegar (a parte móvel da barra de rolagem) */

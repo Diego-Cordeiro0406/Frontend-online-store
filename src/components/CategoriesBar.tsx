@@ -63,6 +63,7 @@ function CategoriesBar({ sendRadioValue, sendProductsRequest }: CategoriesBarPro
       max-h-screen
       overflow-auto
       overscroll-contain
+      shadow-xl
       "
     >
       {categoriesList}
