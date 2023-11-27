@@ -5,7 +5,7 @@
   flex-direction: column;
   overflow: hidden;
   max-height: 100vh;
-  
+  font-family: Epilogue;
 }
 
  /* body {
@@ -33,9 +33,7 @@
   background-color: #f0f0f0; /* Cor da pista */
   border-radius: 6px; /* Borda arredondada da pista */
 }
-/*
-body {
-  margin: 0;
-  width: 100vw;
-  height: 100vh;
-} */
+
+.width {
+  border: 1px solid rgb(151, 135, 135);
+}

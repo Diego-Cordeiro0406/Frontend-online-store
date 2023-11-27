@@ -34,6 +34,7 @@ function CategoriesBar({ sendRadioValue, sendProductsRequest }: CategoriesBarPro
       className="flex justify-start w-full my-1"
     >
       <input
+        className="appearance-none"
         name="categories"
         data-testid="category"
         value={ category.id }
@@ -44,7 +45,7 @@ function CategoriesBar({ sendRadioValue, sendProductsRequest }: CategoriesBarPro
         // onClick={ handleClick }
       />
       <label
-        className="hover:font-bold"
+        className="hover:font-bold hover:underline text-lg font-medium"
         htmlFor={ category.name }
       >
         {category.name}
@@ -66,6 +67,10 @@ function CategoriesBar({ sendRadioValue, sendProductsRequest }: CategoriesBarPro
       shadow-xl
       "
     >
+      <p className="w-full mt-6 text-xl font-bold">Categorias</p>
+      <div className="w-full flex justify-start my-6">
+        <span className="w-60 width" />
+      </div>
       {categoriesList}
     </aside>
   );
