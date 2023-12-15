@@ -15,6 +15,7 @@ interface MainScreenProps { }
 function MainScreen(_props: MainScreenProps) {
   const [search, setSearch] = useState('');
   const [isTrue, setTrue] = useState(false);
+  const [isLoading, setLoading] = useState(false);
   const [data, setData] = useState<Product[]>([]);
   const [categoryInput, setCategoryInput] = useState<string | null>(null);
 
@@ -23,16 +24,23 @@ function MainScreen(_props: MainScreenProps) {
   };
 
   async function sendProductsRequest() {
-    if (categoryInput) {
-      const returned = await getProductsFromCategoryAndQuery(search, categoryInput);
-      setData(returned.results);
-    } else {
-      const returned = await getProductsFromCategoryAndQuery(search);
-      setData(returned.results);
+    try {
+      setLoading(true);
+      if (categoryInput) {
+        const returned = await getProductsFromCategoryAndQuery(search, categoryInput);
+        setData(returned.results);
+      } else {
+        const returned = await getProductsFromCategoryAndQuery(search);
+        setData(returned.results);
+      }
+      if (data.length === 0) setTrue(true);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
-    if (data.length === 0) setTrue(true);
   }
-
+  console.log(isLoading);
   return (
     <>
       <header
@@ -108,7 +116,7 @@ function MainScreen(_props: MainScreenProps) {
           "
         >
           {
-            data.length === 0 && !isTrue && (
+            data.length === 0 && !isTrue && !isLoading && (
               <p
                 className="flex items-center"
                 data-testid="home-initial-message"
@@ -118,25 +126,26 @@ function MainScreen(_props: MainScreenProps) {
             )
           }
           {
-            data.length === 0 && isTrue ? (
+            data.length === 0 && isTrue && (
               <p data-testid="not-found-product">
                 Nenhum produto foi encontrado
               </p>
-            ) : data.map((product) => (
-              <Link
-                key={ product.id }
-                data-testid="product-detail-link"
-                to={ `/product/${product.id}` }
-              >
-                <ProductCard
-                  key={ product.id }
-                  title={ product.title }
-                  img={ product.thumbnail }
-                  price={ product.price }
-                />
-              </Link>
-            ))
+            )
           }
+          { isLoading ? <p>batata</p> : data.map((product) => (
+            <Link
+              key={ product.id }
+              data-testid="product-detail-link"
+              to={ `/product/${product.id}` }
+            >
+              <ProductCard
+                key={ product.id }
+                title={ product.title }
+                img={ product.thumbnail }
+                price={ product.price }
+              />
+            </Link>
+          ))}
         </section>
 
       </main>
