@@ -1,6 +1,4 @@
 #root {
-  /* margin: 0;
-  padding: 0; */
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -8,18 +6,13 @@
   font-family: Epilogue;
 }
 
- /* body {
-  margin: 0;
-  padding: 0;
-  max-height: 100vh;
- } */
 .section-container {
   max-height: 762px;
 }
 
 
 ::-webkit-scrollbar {
-  width: 0px; /* Largura da barra de rolagem vertical */
+  width: 1px; /* Largura da barra de rolagem vertical */
 }
 
 /* Estilo do polegar (a parte móvel da barra de rolagem) */
@@ -36,4 +29,13 @@
 
 .width {
   border: 1px solid rgb(151, 135, 135);
+}
+
+.product-container {
+  height: 516px;
+  width: 488px;
+}
+
+.picture-size {
+  max-height: 400px;
 }

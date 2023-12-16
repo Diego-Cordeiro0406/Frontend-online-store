@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa';
+import { ScaleLoader } from 'react-spinners';
 
 import CategoriesBar from '../components/CategoriesBar';
 import { getProductsFromCategoryAndQuery } from '../services/api';
@@ -40,7 +41,7 @@ function MainScreen(_props: MainScreenProps) {
       setLoading(false);
     }
   }
-  console.log(isLoading);
+
   return (
     <>
       <header
@@ -132,7 +133,7 @@ function MainScreen(_props: MainScreenProps) {
               </p>
             )
           }
-          { isLoading ? <p>batata</p> : data.map((product) => (
+          { isLoading ? <ScaleLoader color="#36d7b7" /> : data.map((product) => (
             <Link
               key={ product.id }
               data-testid="product-detail-link"
