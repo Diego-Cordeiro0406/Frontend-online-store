@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from 'react';
-import CategoriesContext from '../context/CategoriesContext';
+import Context from '../context/Context';
 
 interface CategoriesBarProps {
   sendRadioValue: (dados: string) => void;
@@ -7,10 +7,22 @@ interface CategoriesBarProps {
 }
 
 function CategoriesBar({ sendRadioValue, sendProductsRequest }: CategoriesBarProps) {
-  const categoriesContext = useContext(CategoriesContext);
-
   const [valorInput, setvalorInput] = useState('');
   const [lastValorInput, setLastValorInput] = useState('');
+
+  useEffect(() => {
+    if (valorInput !== lastValorInput) {
+      setLastValorInput(valorInput);
+      if (valorInput) {
+        sendProductsRequest(valorInput);
+      }
+    }
+  }, [valorInput, sendProductsRequest, lastValorInput]);
+
+  const context = useContext(Context);
+
+  if (!context) return null;
+  const { categories } = context;
 
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const novoValor = event.target.value;
@@ -18,16 +30,7 @@ function CategoriesBar({ sendRadioValue, sendProductsRequest }: CategoriesBarPro
     sendRadioValue(novoValor);
   };
 
-  useEffect(() => {
-    if (valorInput !== lastValorInput) {
-      setLastValorInput(valorInput); // Atualiza o último valor
-      if (valorInput) {
-        sendProductsRequest(valorInput);
-      }
-    }
-  }, [valorInput, sendProductsRequest, lastValorInput]);
-
-  const categoriesList = categoriesContext.map((category) => (
+  const categoriesList = categories.map((category) => (
     <span
       key={ category.id }
       id="categories-list"
@@ -42,7 +45,6 @@ function CategoriesBar({ sendRadioValue, sendProductsRequest }: CategoriesBarPro
         id={ category.name }
         checked={ valorInput === category.id }
         onChange={ handleRadioChange }
-        // onClick={ handleClick }
       />
       <label
         className="hover:font-bold hover:underline text-lg font-medium"

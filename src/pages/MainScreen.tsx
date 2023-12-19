@@ -1,14 +1,12 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { FaSearch } from 'react-icons/fa';
 import { ScaleLoader } from 'react-spinners';
 
 import CategoriesBar from '../components/CategoriesBar';
-import { getProductsFromCategoryAndQuery } from '../services/api';
 import { Product } from '../types/typesApi';
 import ProductCard from '../components/ProductCard';
-import logo from '../images/logo.png';
-import cart from '../images/Vector.svg';
+import Header from '../components/Header';
+import Context from '../context/Context';
 
 interface MainScreenProps { }
 
@@ -24,15 +22,28 @@ function MainScreen(_props: MainScreenProps) {
     setCategoryInput(dataCategory);
   };
 
+  const getInputValue = (inputData: string) => {
+    setSearch(inputData);
+  };
+
+  // useEffect(() => {
+  //   sendProductsRequest();
+  // }, [location]);
+
+  const context = useContext(Context);
+
+  if (!context) return null;
+  const { getProductsFromCategoryAndQuery } = context;
+
   async function sendProductsRequest() {
     try {
       setLoading(true);
       if (categoryInput) {
         const returned = await getProductsFromCategoryAndQuery(search, categoryInput);
-        setData(returned.results);
+        setData(returned);
       } else {
         const returned = await getProductsFromCategoryAndQuery(search);
-        setData(returned.results);
+        setData(returned);
       }
       if (data.length === 0) setTrue(true);
     } catch (error) {
@@ -44,53 +55,11 @@ function MainScreen(_props: MainScreenProps) {
 
   return (
     <>
-      <header
-        className="
-        bg-blue-700
-        flex
-        h-32
-        justify-between items-center
-        shadow-xl
-        "
-      >
-        <img className="w-40 h-12 ml-5" src={ logo } alt="logo" />
-        <div className="h-10 flex items-center justify-center relative">
-          <input
-            className="
-            rounded-xl
-            h-full
-            w-96
-            p-2
-            font-sans
-            focus:outline-none
-            focus:ring
-            focus:ring-emerald-500"
-            placeholder="Digite o que você procura"
-            data-testid="query-input"
-            onChange={ ({ target }) => setSearch(target.value) }
-          />
-          <button
-            data-testid="query-button"
-            onClick={ sendProductsRequest }
-            aria-label="Pesquisar"
-            className="absolute p-2 ml-96 mr-8"
-          >
-            <FaSearch className="w-5 h-5" />
-          </button>
-        </div>
-        <Link data-testid="shopping-cart-button" to="/cart">
-          <button
-            aria-label="Carrinho"
-            className="h-10 w-10 mr-5"
-          >
-            <img
-              src={ cart }
-              alt="cart-logo"
-              className="h-10 w-10"
-            />
-          </button>
-        </Link>
-      </header>
+      <Header
+        sendInputValue={ getInputValue }
+        // eslint-disable-next-line react/jsx-no-bind
+        sendProductsRequest={ sendProductsRequest }
+      />
       <main
         className="
         flex
@@ -148,7 +117,6 @@ function MainScreen(_props: MainScreenProps) {
             </Link>
           ))}
         </section>
-
       </main>
     </>
 

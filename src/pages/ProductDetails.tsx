@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+
+import Header from '../components/Header';
 import { Product } from '../types/typesApi';
-import { getProductById } from '../services/api';
+import Context from '../context/Context';
 
 function ProductDetails() {
   const { id } = useParams();
@@ -15,22 +17,27 @@ function ProductDetails() {
     fetchProduct();
   }, [id]);
 
+  const context = useContext(Context);
+
+  if (!context) return null;
+  const { getProductById } = context;
+
   return (
-    <main className="flex justify-center h-screen">
-      {/* <Link data-testid="shopping-cart-button" to="/cart">
-        <button>Carrinho</button>
-      </Link> */}
-      <section
-        className="
+    <>
+      <Header />
+      <main className="flex justify-center h-screen">
+
+        <section
+          className="
           flex
           w-3/6
           justify-center
           items-center
           bg-slate-100"
-        data-testid="product"
-      >
-        <span
-          className="
+          data-testid="product"
+        >
+          <span
+            className="
             flex flex-col
             justify-evenly
             items-center
@@ -38,23 +45,22 @@ function ProductDetails() {
             product-container
             shadow-2xl
             "
-        >
-          <h3
-            className="text-xl text-center"
-            data-testid="product-detail-name"
           >
-            {product?.title}
-          </h3>
-          <img
-            className="picture-size"
-            data-testid="product-detail-image"
-            src={ product?.pictures[0].url }
-            alt={ product?.title }
-          />
-        </span>
-      </section>
-      <section className="flex w-3/6">
-        <span className="flex flex-col justify-center w-full h-full pl-10">
+            <h3
+              className="text-xl text-center"
+              data-testid="product-detail-name"
+            >
+              {product?.title}
+            </h3>
+            <img
+              className="picture-size"
+              data-testid="product-detail-image"
+              src={ product?.pictures[0].url }
+              alt={ product?.title }
+            />
+          </span>
+        </section>
+        <section className="flex w-3/6 flex-col justify-center h-full pl-16">
           <h3 className="font-bold text-2xl font-mono pb-10">Especificações tecnicas</h3>
           <ul className="max-h-96 overflow-y-scroll text-slate-700 max-w-md">
             {
@@ -94,9 +100,9 @@ function ProductDetails() {
               Adicionar ao carrinho
             </button>
           </div>
-        </span>
-      </section>
-    </main>
+        </section>
+      </main>
+    </>
   );
 }
 
