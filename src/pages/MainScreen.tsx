@@ -1,65 +1,28 @@
-import { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { ScaleLoader } from 'react-spinners';
 
 import CategoriesBar from '../components/CategoriesBar';
-import { Product } from '../types/typesApi';
 import ProductCard from '../components/ProductCard';
 import Header from '../components/Header';
 import Context from '../context/Context';
 
-interface MainScreenProps { }
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function MainScreen(_props: MainScreenProps) {
-  const [search, setSearch] = useState('');
-  const [isTrue, setTrue] = useState(false);
-  const [isLoading, setLoading] = useState(false);
-  const [data, setData] = useState<Product[]>([]);
-  const [categoryInput, setCategoryInput] = useState<string | null>(null);
-
-  const getValorRadio = (dataCategory: string) => {
-    setCategoryInput(dataCategory);
-  };
-
-  const getInputValue = (inputData: string) => {
-    setSearch(inputData);
-  };
-
-  // useEffect(() => {
-  //   sendProductsRequest();
-  // }, [location]);
-
+function MainScreen() {
   const context = useContext(Context);
 
-  if (!context) return null;
-  const { getProductsFromCategoryAndQuery } = context;
-
-  async function sendProductsRequest() {
-    try {
-      setLoading(true);
-      if (categoryInput) {
-        const returned = await getProductsFromCategoryAndQuery(search, categoryInput);
-        setData(returned);
-      } else {
-        const returned = await getProductsFromCategoryAndQuery(search);
-        setData(returned);
-      }
-      if (data.length === 0) setTrue(true);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
+  const location = useLocation();
+  useEffect(() => {
+    if (location.pathname === '/' && context?.batata) {
+      sendProductsRequest(search);
     }
-  }
+  }, [location]);
+
+  if (!context) return null;
+  const { sendProductsRequest, search, isLoading, isTrue, data } = context;
 
   return (
     <>
-      <Header
-        sendInputValue={ getInputValue }
-        // eslint-disable-next-line react/jsx-no-bind
-        sendProductsRequest={ sendProductsRequest }
-      />
+      <Header />
       <main
         className="
         flex
@@ -68,11 +31,7 @@ function MainScreen(_props: MainScreenProps) {
         overscroll-contain
         "
       >
-        <CategoriesBar
-          sendRadioValue={ getValorRadio }
-          // eslint-disable-next-line react/jsx-no-bind
-          sendProductsRequest={ sendProductsRequest }
-        />
+        <CategoriesBar />
         <section
           className="
           bg-slate-200
@@ -102,20 +61,21 @@ function MainScreen(_props: MainScreenProps) {
               </p>
             )
           }
-          { isLoading ? <ScaleLoader color="#36d7b7" /> : data.map((product) => (
-            <Link
-              key={ product.id }
-              data-testid="product-detail-link"
-              to={ `/product/${product.id}` }
-            >
-              <ProductCard
+          { isLoading ? <ScaleLoader data-testid="loading" color="#36d7b7" /> : data
+            .map((product) => (
+              <Link
                 key={ product.id }
-                title={ product.title }
-                img={ product.thumbnail }
-                price={ product.price }
-              />
-            </Link>
-          ))}
+                data-testid="product-detail-link"
+                to={ `/product/${product.id}` }
+              >
+                <ProductCard
+                  key={ product.id }
+                  title={ product.title }
+                  img={ product.thumbnail }
+                  price={ product.price }
+                />
+              </Link>
+            ))}
         </section>
       </main>
     </>

@@ -1,5 +1,5 @@
 import { ReactNode, useState } from 'react';
-import { Categories } from '../types/typesApi';
+import { Categories, Product } from '../types/typesApi';
 import Context, { MyContextProps } from './Context';
 
 interface MyProviderProps {
@@ -8,13 +8,20 @@ interface MyProviderProps {
 
 function Provider({ children }: MyProviderProps) {
   const [categories, setCategories] = useState([]);
+  const [batata, setBatata] = useState(false);
+  const [search, setSearch] = useState('');
+  const [valueInput, setValueInput] = useState('');
+  const [isTrue, setTrue] = useState(false);
+  const [isLoading, setLoading] = useState(false);
+  const [data, setData] = useState<Product[]>([]);
+
   const URL_DATABASE = 'https://api.mercadolibre.com/';
 
   async function getCategories(): Promise<Categories[]> {
     const response = await fetch(`${URL_DATABASE}sites/MLB/categories`);
-    const data = await response.json();
-    setCategories(data);
-    return data;
+    const dataCategory = await response.json();
+    setCategories(dataCategory);
+    return dataCategory;
   }
 
   async function getProductById(id: string | undefined) {
@@ -31,24 +38,59 @@ function Provider({ children }: MyProviderProps) {
       const response = await
       fetch(`${URL_DATABASE}sites/MLB/search?q=${query}`);
 
-      const data = await response.json();
+      const dataQuery = await response.json();
 
-      return data.results;
+      return dataQuery.results;
     }
 
     const response = await
     fetch(`${URL_DATABASE}sites/MLB/search?category=${categoryId}`);
 
-    const data = await response.json();
+    const dataQuery = await response.json();
 
-    return data.results;
+    return dataQuery.results;
   }
+
+  async function sendProductsRequest(query: string) {
+    try {
+      setLoading(true);
+      if (valueInput) {
+        const returned = await getProductsFromCategoryAndQuery(query, valueInput);
+        setData(returned);
+      } else {
+        const returned = await getProductsFromCategoryAndQuery(query);
+        setData(returned);
+      }
+      if (data.length === 0) setTrue(true);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = event.target.value;
+    setValueInput(newValue);
+    setSearch('');
+  };
 
   const value:MyContextProps = {
     getCategories,
     getProductById,
     getProductsFromCategoryAndQuery,
     categories,
+    batata,
+    setBatata,
+    search,
+    setSearch,
+    valueInput,
+    setValueInput,
+    handleRadioChange,
+    isTrue,
+    isLoading,
+    data,
+    sendProductsRequest,
   };
   return (
     <Context.Provider value={ value }>

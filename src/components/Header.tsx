@@ -1,34 +1,34 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa';
 
 import logo from '../images/logo.png';
 import cart from '../images/Vector.svg';
+import Context from '../context/Context';
 
-interface HeaderProps {
-  sendInputValue?:(dados: string) => void
-  sendProductsRequest?: (data: string) => Promise<void>
-}
+// interface HeaderProps {
+//   sendProductsRequest?: (data: string) => Promise<void>
+// }
 
-function Header({
-  sendInputValue = () => {},
-  sendProductsRequest = async () => {} }: HeaderProps) {
-  const [search, setSearch] = useState('');
-
+function Header() {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const novoValor = event.target.value;
     setSearch(novoValor);
-    sendInputValue(novoValor);
   };
 
   const navigate = useNavigate();
   const location = useLocation();
 
+  const context = useContext(Context);
+
+  if (!context) return null;
+  const { setBatata, search, setSearch, sendProductsRequest } = context;
+
   const handleClick = async () => {
     try {
       if (location.pathname !== '/') {
         navigate('/');
-        await sendProductsRequest(search);
+        setBatata(true);
       } else {
         await sendProductsRequest(search);
       }

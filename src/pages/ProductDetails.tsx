@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { FaPlus, FaMinus } from 'react-icons/fa';
 
 import Header from '../components/Header';
 import { Product } from '../types/typesApi';
@@ -62,7 +63,7 @@ function ProductDetails() {
         </section>
         <section className="flex w-3/6 flex-col justify-center h-full pl-16">
           <h3 className="font-bold text-2xl font-mono pb-10">Especificações tecnicas</h3>
-          <ul className="max-h-96 overflow-y-scroll text-slate-700 max-w-md">
+          <ul className="max-h-96 overflow-y-scroll text-slate-700 max-w-lg">
             {
             product?.attributes.slice(1).map((attribute) => (
               <li
@@ -74,14 +75,31 @@ function ProductDetails() {
             ))
           }
           </ul>
-          <div className="flex items-end h-7 justify-start pt-7 h-36 items-center">
+          <div className="flex h-7 justify-start pt-20 items-center">
             <p className="text-end font-normal mr-1">R$</p>
             <p
-              className="font-medium text-2xl h-7"
+              className="font-medium text-2xl h-7 mr-5"
               data-testid="product-detail-price"
             >
               {`${product?.price}`}
             </p>
+            <FaMinus className="cursor-pointer" style={ { color: '#B0B3BB' } } />
+            <span
+              className="
+                rounded-full
+                bg-gray-400
+                w-5
+                h-5
+                text-white
+                flex
+                justify-center
+                items-center
+                mx-2.5
+              "
+            >
+              1
+            </span>
+            <FaPlus className="cursor-pointer" style={ { color: '#B0B3BB' } } />
             <button
               className="
                 bg-green-400

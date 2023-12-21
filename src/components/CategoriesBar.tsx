@@ -1,34 +1,34 @@
 import { useContext, useState, useEffect } from 'react';
 import Context from '../context/Context';
 
-interface CategoriesBarProps {
-  sendRadioValue: (dados: string) => void;
-  sendProductsRequest: (data: string) => Promise<void>
-}
+// interface CategoriesBarProps {
+// sendProductsRequest: (data: string) => Promise<void>
+// }
 
-function CategoriesBar({ sendRadioValue, sendProductsRequest }: CategoriesBarProps) {
-  const [valorInput, setvalorInput] = useState('');
+function CategoriesBar() {
+  // const [valorInput, setvalorInput] = useState('');
   const [lastValorInput, setLastValorInput] = useState('');
-
-  useEffect(() => {
-    if (valorInput !== lastValorInput) {
-      setLastValorInput(valorInput);
-      if (valorInput) {
-        sendProductsRequest(valorInput);
-      }
-    }
-  }, [valorInput, sendProductsRequest, lastValorInput]);
 
   const context = useContext(Context);
 
-  if (!context) return null;
-  const { categories } = context;
+  useEffect(() => {
+    if (context && context.valueInput !== lastValorInput) {
+      setLastValorInput(context.valueInput);
+      if (context.valueInput) {
+        context.sendProductsRequest(context.valueInput);
+      }
+    }
+  }, [context, lastValorInput]);
 
-  const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const novoValor = event.target.value;
-    setvalorInput(novoValor);
-    sendRadioValue(novoValor);
-  };
+  if (!context) return null;
+
+  const { categories, valueInput, handleRadioChange } = context;
+  // const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const novoValor = event.target.value;
+  //   setvalorInput(novoValor);
+  //   sendRadioValue(novoValor);
+  //   setSearch('');
+  // };
 
   const categoriesList = categories.map((category) => (
     <span
@@ -43,7 +43,7 @@ function CategoriesBar({ sendRadioValue, sendProductsRequest }: CategoriesBarPro
         value={ category.id }
         type="radio"
         id={ category.name }
-        checked={ valorInput === category.id }
+        checked={ valueInput === category.id }
         onChange={ handleRadioChange }
       />
       <label

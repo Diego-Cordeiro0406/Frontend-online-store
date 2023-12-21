@@ -12,14 +12,16 @@ function App() {
   const context = useContext(Context);
 
   useEffect(() => {
-    async function fetchData() {
-      await getCategories();
-    }
-    fetchData();
-  }, []);
-  if (!context) return null;
+    if (context) {
+      const fetchData = async () => {
+        await context.getCategories();
+      };
 
-  const { getCategories } = context;
+      fetchData();
+    }
+  }, [context]);
+
+  if (!context) return null;
 
   return (
     <Routes>
