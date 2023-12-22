@@ -25,9 +25,16 @@ function Provider({ children }: MyProviderProps) {
   }
 
   async function getProductById(id: string | undefined) {
-    const response = await fetch(`${URL_DATABASE}items/${id}`);
-    const jsonData = await response.json();
-    return jsonData;
+    try {
+      setLoading(true);
+      const response = await fetch(`${URL_DATABASE}items/${id}`);
+      const jsonData = await response.json();
+      return jsonData;
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   }
 
   async function getProductsFromCategoryAndQuery(

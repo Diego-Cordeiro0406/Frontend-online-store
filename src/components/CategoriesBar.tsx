@@ -1,12 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
 import Context from '../context/Context';
 
-// interface CategoriesBarProps {
-// sendProductsRequest: (data: string) => Promise<void>
-// }
-
 function CategoriesBar() {
-  // const [valorInput, setvalorInput] = useState('');
   const [lastValorInput, setLastValorInput] = useState('');
 
   const context = useContext(Context);
@@ -23,12 +18,6 @@ function CategoriesBar() {
   if (!context) return null;
 
   const { categories, valueInput, handleRadioChange } = context;
-  // const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const novoValor = event.target.value;
-  //   setvalorInput(novoValor);
-  //   sendRadioValue(novoValor);
-  //   setSearch('');
-  // };
 
   const categoriesList = categories.map((category) => (
     <span
