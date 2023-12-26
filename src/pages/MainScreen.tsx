@@ -1,87 +1,82 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { ScaleLoader } from 'react-spinners';
 
 import CategoriesBar from '../components/CategoriesBar';
-import { getProductsFromCategoryAndQuery } from '../services/api';
-import { Product } from '../types/typesApi';
 import ProductCard from '../components/ProductCard';
+import Header from '../components/Header';
+import Context from '../context/Context';
 
-interface MainScreenProps { }
+function MainScreen() {
+  const context = useContext(Context);
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function MainScreen(_props: MainScreenProps) {
-  const [search, setSearch] = useState('');
-  const [isTrue, setTrue] = useState(false);
-  const [data, setData] = useState<Product[]>([]);
-  const [categoryInput, setCategoryInput] = useState<string | null>(null);
-
-  const getValorRadio = (dataCategory: string) => {
-    setCategoryInput(dataCategory);
-  };
-
-  async function sendProductsRequest() {
-    if (categoryInput) {
-      const returned = await getProductsFromCategoryAndQuery(search, categoryInput);
-      setData(returned.results);
-    } else {
-      const returned = await getProductsFromCategoryAndQuery(search);
-      setData(returned.results);
+  const location = useLocation();
+  useEffect(() => {
+    if (location.pathname === '/' && context?.batata) {
+      sendProductsRequest(search);
     }
-    if (data.length === 0) setTrue(true);
-  }
+  }, [location]);
+
+  if (!context) return null;
+  const { sendProductsRequest, search, isLoading, isTrue, data } = context;
 
   return (
     <>
-      <header>
-        <input
-          data-testid="query-input"
-          onChange={ ({ target }) => setSearch(target.value) }
-        />
-        <button
-          data-testid="query-button"
-          onClick={ sendProductsRequest }
+      <Header />
+      <main
+        className="
+        flex
+        flex-row
+        overflow-auto
+        overscroll-contain
+        "
+      >
+        <CategoriesBar />
+        <section
+          className="
+          bg-slate-200
+          flex
+          w-full
+          justify-evenly
+          items-center
+          flex-wrap
+          overflow-y-scroll
+          section-container
+          "
         >
-          pesquisar
-        </button>
-        <Link data-testid="shopping-cart-button" to="/cart">
-          <button>Carrinho</button>
-        </Link>
-      </header>
-      <main>
-        <CategoriesBar
-          sendRadioValue={ getValorRadio }
-          // eslint-disable-next-line react/jsx-no-bind
-          sendProductsRequest={ sendProductsRequest }
-        />
-        {
-          data.length === 0 && !isTrue && (
-            <p
-              data-testid="home-initial-message"
-            >
-              Digite algum termo de pesquisa ou escolha uma categoria.
-            </p>
-          )
-        }
-        {
-          data.length === 0 && isTrue ? (
-            <p data-testid="not-found-product">
-              Nenhum produto foi encontrado
-            </p>
-          ) : data.map((product) => (
-            <Link
-              key={ product.id }
-              data-testid="product-detail-link"
-              to={ `/product/${product.id}` }
-            >
-              <ProductCard
+          {
+            data.length === 0 && !isTrue && !isLoading && (
+              <p
+                className="flex items-center"
+                data-testid="home-initial-message"
+              >
+                Digite algum termo de pesquisa ou escolha uma categoria.
+              </p>
+            )
+          }
+          {
+            data.length === 0 && isTrue && (
+              <p data-testid="not-found-product">
+                Nenhum produto foi encontrado
+              </p>
+            )
+          }
+          { isLoading ? <ScaleLoader data-testid="loading" color="#36d7b7" /> : data
+            .map((product) => (
+              <Link
                 key={ product.id }
-                title={ product.title }
-                img={ product.thumbnail }
-                price={ product.price }
-              />
-            </Link>
-          ))
-        }
+                data-testid="product-detail-link"
+                to={ `/product/${product.id}` }
+              >
+                <ProductCard
+                  key={ product.id }
+                  title={ product.title }
+                  img={ product.thumbnail }
+                  price={ product.price }
+                />
+              </Link>
+            ))}
+        </section>
       </main>
     </>
 
