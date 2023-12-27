@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, createContext } from 'react';
-import { Categories, Product } from '../types/typesApi';
+import { Categories, Product, ProductCart } from '../types/typesApi';
 
 type BatataState = boolean;
 type SearchState = string;
@@ -13,8 +13,8 @@ export interface MyContextProps {
     categoryId?: string,
   ) => Promise<Product[]>
   categories: Categories[],
-  batata: boolean,
-  setBatata: Dispatch<SetStateAction<BatataState>>
+  route: boolean,
+  setRoute: Dispatch<SetStateAction<BatataState>>
   search: string,
   setSearch: Dispatch<SetStateAction<SearchState>>,
   valueInput: string,
@@ -24,6 +24,8 @@ export interface MyContextProps {
   isLoading: boolean,
   data: Product[],
   sendProductsRequest: (query: string) => any
+  cart: ProductCart[],
+  addCart: (obj: ProductCart) => any
 }
 
 const Context = createContext<MyContextProps | undefined>(undefined);

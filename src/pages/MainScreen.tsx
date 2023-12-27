@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { ScaleLoader } from 'react-spinners';
 
 import CategoriesBar from '../components/CategoriesBar';
@@ -12,7 +12,7 @@ function MainScreen() {
 
   const location = useLocation();
   useEffect(() => {
-    if (location.pathname === '/' && context?.batata) {
+    if (location.pathname === '/' && context?.route) {
       sendProductsRequest(search);
     }
   }, [location]);
@@ -63,18 +63,13 @@ function MainScreen() {
           }
           { isLoading ? <ScaleLoader data-testid="loading" color="#36d7b7" /> : data
             .map((product) => (
-              <Link
+              <ProductCard
                 key={ product.id }
-                data-testid="product-detail-link"
-                to={ `/product/${product.id}` }
-              >
-                <ProductCard
-                  key={ product.id }
-                  title={ product.title }
-                  img={ product.thumbnail }
-                  price={ product.price }
-                />
-              </Link>
+                id={ product.id }
+                title={ product.title }
+                img={ product.thumbnail }
+                price={ product.price }
+              />
             ))}
         </section>
       </main>

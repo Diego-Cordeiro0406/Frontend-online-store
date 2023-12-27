@@ -19,7 +19,7 @@ function App() {
 
       fetchData();
     }
-  }, [context]);
+  }, []);
 
   if (!context) return null;
 

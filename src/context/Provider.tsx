@@ -1,5 +1,5 @@
 import { ReactNode, useState } from 'react';
-import { Categories, Product } from '../types/typesApi';
+import { Categories, Product, ProductCart } from '../types/typesApi';
 import Context, { MyContextProps } from './Context';
 
 interface MyProviderProps {
@@ -8,12 +8,13 @@ interface MyProviderProps {
 
 function Provider({ children }: MyProviderProps) {
   const [categories, setCategories] = useState([]);
-  const [batata, setBatata] = useState(false);
+  const [route, setRoute] = useState(false);
   const [search, setSearch] = useState('');
   const [valueInput, setValueInput] = useState('');
   const [isTrue, setTrue] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [data, setData] = useState<Product[]>([]);
+  const [cart, setCart] = useState<ProductCart[]>([]);
 
   const URL_DATABASE = 'https://api.mercadolibre.com/';
 
@@ -82,13 +83,18 @@ function Provider({ children }: MyProviderProps) {
     setSearch('');
   };
 
+  const addCart = (obj: ProductCart) => {
+    const updatedCart = [...cart, obj];
+    setCart(updatedCart);
+  };
+
   const value:MyContextProps = {
     getCategories,
     getProductById,
     getProductsFromCategoryAndQuery,
     categories,
-    batata,
-    setBatata,
+    route,
+    setRoute,
     search,
     setSearch,
     valueInput,
@@ -98,6 +104,8 @@ function Provider({ children }: MyProviderProps) {
     isLoading,
     data,
     sendProductsRequest,
+    cart,
+    addCart,
   };
   return (
     <Context.Provider value={ value }>

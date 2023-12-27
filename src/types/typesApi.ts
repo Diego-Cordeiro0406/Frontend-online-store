@@ -3,6 +3,13 @@ export type Categories = {
   name: string
 };
 
+export type ProductCart = {
+  id: string,
+  title: string;
+  img: string;
+  price: number;
+};
+
 export type Product = {
   id: string;
   site_id: string;

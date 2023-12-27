@@ -37,11 +37,12 @@ function ProductDetails() {
             <main className="flex justify-center h-screen">
               <section
                 className="
-          flex
-          w-3/6
-          justify-center
-          items-center
-          bg-slate-100"
+                  flex
+                  w-3/6
+                  justify-center
+                  items-center
+                  bg-slate-100
+                "
                 data-testid="product"
               >
                 <span
@@ -113,18 +114,18 @@ function ProductDetails() {
                   <FaPlus className="cursor-pointer" style={ { color: '#B0B3BB' } } />
                   <button
                     className="
-                bg-green-400
-                text-white
-                font-mono
-                h-10
-                p-2
-                rounded
-                hover:-translate-y-1
-                hover:scale-110
-                hover:bg-green-700
-                duration-300
-                ml-5
-                "
+                      bg-green-400
+                      text-white
+                      font-mono
+                      h-10
+                      p-2
+                      rounded
+                      hover:-translate-y-1
+                      hover:scale-110
+                      hover:bg-green-700
+                      duration-300
+                      ml-5
+                    "
                   >
                     Adicionar ao carrinho
                   </button>
