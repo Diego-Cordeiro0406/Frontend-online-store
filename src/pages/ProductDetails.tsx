@@ -47,12 +47,12 @@ function ProductDetails() {
               >
                 <span
                   className="
-            flex flex-col
-            justify-evenly
-            items-center
-            bg-white
-            product-container
-            shadow-2xl
+                    flex flex-col
+                    justify-evenly
+                    items-center
+                    bg-white
+                    product-container
+                    shadow-2xl
             "
                 >
                   <h3
@@ -98,16 +98,16 @@ function ProductDetails() {
                   <FaMinus className="cursor-pointer" style={ { color: '#B0B3BB' } } />
                   <span
                     className="
-                rounded-full
-                bg-gray-400
-                w-5
-                h-5
-                text-white
-                flex
-                justify-center
-                items-center
-                mx-2.5
-              "
+                      rounded-full
+                      bg-gray-400
+                      w-5
+                      h-5
+                      text-white
+                      flex
+                      justify-center
+                      items-center
+                      mx-2.5
+                  "
                   >
                     1
                   </span>
