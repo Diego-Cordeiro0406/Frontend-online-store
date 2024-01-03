@@ -88,6 +88,13 @@ function Provider({ children }: MyProviderProps) {
     setCart(updatedCart);
   };
 
+  const getQuantity = (): number => {
+    const total = cart.reduce((acc, curr) => {
+      return acc + curr.price;
+    }, 0);
+    return total;
+  };
+
   const value:MyContextProps = {
     getCategories,
     getProductById,
@@ -106,6 +113,7 @@ function Provider({ children }: MyProviderProps) {
     sendProductsRequest,
     cart,
     addCart,
+    getQuantity,
   };
   return (
     <Context.Provider value={ value }>

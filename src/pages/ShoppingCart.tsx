@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { FaPlus, FaMinus } from 'react-icons/fa';
+import { AiOutlineDelete } from 'react-icons/ai';
 import Context from '../context/Context';
 import Header from '../components/Header';
 
@@ -7,7 +8,7 @@ function ShoppingCart() {
   const context = useContext(Context);
 
   if (!context) return null;
-  const { cart } = context;
+  const { cart, getQuantity } = context;
 
   return (
     <>
@@ -15,11 +16,16 @@ function ShoppingCart() {
       {
         cart.length === 0
           ? (
-            <p
+            <span
+              className="flex justify-center items-center w-screen h-screen"
               data-testid="shopping-cart-empty-message"
             >
-              Seu carrinho está vazio
-            </p>
+              <h3
+                className="text-3xl font-semibold uppercase text-green-500"
+              >
+                Seu carrinho está vazio
+              </h3>
+            </span>
           )
           : (
             <main className="flex justify-center h-screen">
@@ -63,11 +69,16 @@ function ShoppingCart() {
               cart
                 .map((product) => (
                   <div
-                    className="flex flex-col items-center justify-evenly w-[30rem] h-28"
+                    className="flex flex-col items-center justify-evenly w-[36rem] h-28"
                     key={ product.id }
                   >
-                    <span className="w-[30rem] width" />
-                    <div className="flex items-center w-[30rem]">
+                    <span className="w-[36rem] width" />
+                    <div className="flex items-center justify-evenly w-[36rem]">
+                      <button
+                        aria-label="delete"
+                      >
+                        <AiOutlineDelete size="1.5rem" />
+                      </button>
                       <img src={ product.img } alt={ product.title } />
                       <h3
                         className="
@@ -120,7 +131,18 @@ function ShoppingCart() {
                   h-full
                 "
               >
-                <h3>Valor total da compra</h3>
+                <h3
+                  className="
+                    w-80
+                    h-12
+                    font-bold
+                    text-center
+                    text-2xl
+                    "
+                >
+                  Valor total da compra:
+                </h3>
+                <p className="font-bold text-2xl">{`R$ ${getQuantity()}`}</p>
                 <button
                   className="
                   bg-green-400
@@ -128,12 +150,12 @@ function ShoppingCart() {
                   font-mono
                   h-10
                   p-2
+                  mt-4
                   rounded
                   hover:-translate-y-1
                   hover:scale-110
                   hover:bg-green-700
                   duration-300
-                  ml-5
                 "
                 >
                   Finalizar compra

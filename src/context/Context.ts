@@ -26,6 +26,7 @@ export interface MyContextProps {
   sendProductsRequest: (query: string) => any
   cart: ProductCart[],
   addCart: (obj: ProductCart) => any
+  getQuantity: () => number
 }
 
 const Context = createContext<MyContextProps | undefined>(undefined);
