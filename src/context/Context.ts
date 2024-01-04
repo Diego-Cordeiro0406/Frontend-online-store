@@ -4,10 +4,11 @@ import { Categories, Product, ProductCart } from '../types/typesApi';
 type BatataState = boolean;
 type SearchState = string;
 type InputState = string;
+type ProductState = Product;
 
 export interface MyContextProps {
   getCategories: () => Promise<Categories[]>;
-  getProductById: (id: string | undefined) => Promise<Product>;
+  getProductById: (id: string | undefined) => Promise<void>;
   getProductsFromCategoryAndQuery: (
     query: string,
     categoryId?: string,
@@ -23,10 +24,15 @@ export interface MyContextProps {
   isTrue: boolean,
   isLoading: boolean,
   data: Product[],
-  sendProductsRequest: (query: string) => any
+  productData: Product | null,
+  setProduct: Dispatch<SetStateAction<ProductState | null>>,
+  sendProductsRequest: (query: string) => void,
   cart: ProductCart[],
-  addCart: (obj: ProductCart) => any
+  addCart: (obj: ProductCart) => void,
   getQuantity: () => number
+  removeProduct: (id: string) => void,
+  addQuantity: (id: string) => void,
+  sutractQuantity: (id: string) => void,
 }
 
 const Context = createContext<MyContextProps | undefined>(undefined);

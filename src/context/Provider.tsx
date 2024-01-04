@@ -14,6 +14,7 @@ function Provider({ children }: MyProviderProps) {
   const [isTrue, setTrue] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [data, setData] = useState<Product[]>([]);
+  const [productData, setProduct] = useState<Product | null>(null);
   const [cart, setCart] = useState<ProductCart[]>([]);
 
   const URL_DATABASE = 'https://api.mercadolibre.com/';
@@ -30,7 +31,7 @@ function Provider({ children }: MyProviderProps) {
       setLoading(true);
       const response = await fetch(`${URL_DATABASE}items/${id}`);
       const jsonData = await response.json();
-      return jsonData;
+      setProduct(jsonData);
     } catch (error) {
       console.log(error);
     } finally {
@@ -90,9 +91,38 @@ function Provider({ children }: MyProviderProps) {
 
   const getQuantity = (): number => {
     const total = cart.reduce((acc, curr) => {
-      return acc + curr.price;
+      return acc + (curr.price * curr.quantity);
     }, 0);
-    return total;
+    return Number(total.toFixed(2));
+  };
+
+  // const addQuantityInTheProductDetails = () => {
+
+  // };
+
+  const addQuantity = (id: string): void => {
+    const updateQuantity = cart.map((product) => {
+      if (product.id === id) {
+        return { ...product, quantity: product.quantity + 1 };
+      }
+      return product;
+    });
+    setCart(updateQuantity);
+  };
+
+  const sutractQuantity = (id: string): void => {
+    const updateQuantity = cart.map((product) => {
+      if (product.id === id && product.quantity > 1) {
+        return { ...product, quantity: product.quantity - 1 };
+      }
+      return product;
+    });
+    setCart(updateQuantity);
+  };
+
+  const removeProduct = (id: string): void => {
+    const newCart = cart.filter((product) => product.id !== id);
+    setCart(newCart);
   };
 
   const value:MyContextProps = {
@@ -110,10 +140,15 @@ function Provider({ children }: MyProviderProps) {
     isTrue,
     isLoading,
     data,
+    productData,
+    setProduct,
     sendProductsRequest,
     cart,
     addCart,
     getQuantity,
+    removeProduct,
+    addQuantity,
+    sutractQuantity,
   };
   return (
     <Context.Provider value={ value }>

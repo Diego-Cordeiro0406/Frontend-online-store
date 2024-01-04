@@ -8,7 +8,7 @@ function ShoppingCart() {
   const context = useContext(Context);
 
   if (!context) return null;
-  const { cart, getQuantity } = context;
+  const { cart, getQuantity, addQuantity, sutractQuantity, removeProduct } = context;
 
   return (
     <>
@@ -76,6 +76,7 @@ function ShoppingCart() {
                     <div className="flex items-center justify-evenly w-[36rem]">
                       <button
                         aria-label="delete"
+                        onClick={ () => removeProduct(product.id) }
                       >
                         <AiOutlineDelete size="1.5rem" />
                       </button>
@@ -96,6 +97,7 @@ function ShoppingCart() {
                       <FaMinus
                         className="cursor-pointer ml-6"
                         style={ { color: '#B0B3BB' } }
+                        onClick={ () => sutractQuantity(product.id) }
                       />
                       <span
                         className="
@@ -112,9 +114,17 @@ function ShoppingCart() {
                       >
                         {product.quantity}
                       </span>
-                      <FaPlus className="cursor-pointer" style={ { color: '#B0B3BB' } } />
+                      <FaPlus
+                        className="cursor-pointer"
+                        style={ { color: '#B0B3BB' } }
+                        onClick={ () => addQuantity(product.id) }
+                      />
                       <p className="pl-6 pr-2">R$</p>
-                      <p className="w-12">{product.price}</p>
+                      <p
+                        className="w-12"
+                      >
+                        {Number((product.price * product.quantity).toFixed(2))}
+                      </p>
                     </div>
                   </div>
                 ))

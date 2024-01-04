@@ -1,29 +1,36 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import { ScaleLoader } from 'react-spinners';
 
 import Header from '../components/Header';
-import { Product } from '../types/typesApi';
 import Context from '../context/Context';
 
 function ProductDetails() {
   const { id } = useParams();
-  const [product, setProduct] = useState<Product | null>(null);
 
   useEffect(() => {
-    async function fetchProduct() {
-      const data = await getProductById(id);
-      setProduct(data);
-    }
-    fetchProduct();
+    getProductById(id);
   }, [id]);
 
   const context = useContext(Context);
 
   if (!context) return null;
-  const { getProductById, isLoading } = context;
+  const {
+    getProductById,
+    isLoading,
+    productData,
+    addCart,
+  } = context;
 
+  // const toAdd = {
+  //   id: productData?.id,
+  //   title: productData?.title,
+  //   img: productData?.thumbnail,
+  //   price: productData?.price,
+  //   quantity: 1,
+  // };
+  // setToCart(toAdd);
   return (
     <>
       <Header />
@@ -59,13 +66,13 @@ function ProductDetails() {
                     className="text-xl text-center"
                     data-testid="product-detail-name"
                   >
-                    {product?.title}
+                    {productData?.title}
                   </h3>
                   <img
                     className="picture-size"
                     data-testid="product-detail-image"
-                    src={ product?.pictures[0].url }
-                    alt={ product?.title }
+                    src={ productData?.pictures[0].url }
+                    alt={ productData?.title }
                   />
                 </span>
               </section>
@@ -77,7 +84,7 @@ function ProductDetails() {
                 </h3>
                 <ul className="max-h-96 overflow-y-scroll text-slate-700 max-w-lg">
                   {
-            product?.attributes.slice(1).map((attribute) => (
+            productData?.attributes.slice(1).map((attribute) => (
               <li
                 className="ml-5 font-sans"
                 key={ attribute.id }
@@ -93,7 +100,7 @@ function ProductDetails() {
                     className="font-medium text-2xl h-7 mr-5"
                     data-testid="product-detail-price"
                   >
-                    {`${product?.price}`}
+                    {`${productData?.price}`}
                   </p>
                   <FaMinus className="cursor-pointer" style={ { color: '#B0B3BB' } } />
                   <span
@@ -111,7 +118,11 @@ function ProductDetails() {
                   >
                     1
                   </span>
-                  <FaPlus className="cursor-pointer" style={ { color: '#B0B3BB' } } />
+                  <FaPlus
+                    className="cursor-pointer"
+                    style={ { color: '#B0B3BB' } }
+                    // onClick={ () => toAdd.quantity += 1 }
+                  />
                   <button
                     className="
                       bg-green-400
@@ -126,6 +137,7 @@ function ProductDetails() {
                       duration-300
                       ml-5
                     "
+                    // onClick={ () => addCart(toAdd) }
                   >
                     Adicionar ao carrinho
                   </button>
