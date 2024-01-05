@@ -1,18 +1,22 @@
-import { useContext, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import { ScaleLoader } from 'react-spinners';
+import { TiArrowBack } from 'react-icons/ti';
 
 import Header from '../components/Header';
 import Context from '../context/Context';
+import { ProductCart } from '../types/typesApi';
 
 function ProductDetails() {
   const { id } = useParams();
+  const [toCart, setCart] = useState<ProductCart>();
 
   useEffect(() => {
     getProductById(id);
-  }, [id]);
-
+    setToCart();
+  }, []);
+  const navigate = useNavigate();
   const context = useContext(Context);
 
   if (!context) return null;
@@ -23,14 +27,29 @@ function ProductDetails() {
     addCart,
   } = context;
 
-  // const toAdd = {
-  //   id: productData?.id,
-  //   title: productData?.title,
-  //   img: productData?.thumbnail,
-  //   price: productData?.price,
-  //   quantity: 1,
-  // };
-  // setToCart(toAdd);
+  const setToCart = () => {
+    if (productData) {
+      const toAdd = {
+        id: productData.id,
+        title: productData.title,
+        img: productData.thumbnail,
+        price: productData.price,
+        quantity: 1,
+      };
+      setCart(toAdd);
+    }
+  };
+
+  const manipulateQuantity = (manipulate: boolean) => {
+    if (toCart && manipulate) {
+      console.log('clicou');
+      const updatedQuantity = { ...toCart, quantity: toCart.quantity + 1 };
+      setCart(updatedQuantity);
+    } else if (toCart && manipulate === false && toCart.quantity > 1) {
+      const updatedQuantity = { ...toCart, quantity: toCart.quantity - 1 };
+      setCart(updatedQuantity);
+    }
+  };
   return (
     <>
       <Header />
@@ -42,6 +61,22 @@ function ProductDetails() {
               color="#36d7b7"
           /> : (
             <main className="flex justify-center h-screen">
+              <button
+                className="
+                  absolute
+                  top-32
+                  left-10
+                  flex
+                  items-center
+                  font-semibold
+                  text-lg
+                  text-[#2FC18C]
+                "
+                onClick={ () => navigate(-1) }
+              >
+                <TiArrowBack size="1.5em" style={ { color: '#2FC18C' } } />
+                Voltar
+              </button>
               <section
                 className="
                   flex
@@ -102,7 +137,11 @@ function ProductDetails() {
                   >
                     {`${productData?.price}`}
                   </p>
-                  <FaMinus className="cursor-pointer" style={ { color: '#B0B3BB' } } />
+                  <FaMinus
+                    className="cursor-pointer"
+                    style={ { color: '#B0B3BB' } }
+                    onClick={ () => manipulateQuantity(false) }
+                  />
                   <span
                     className="
                       rounded-full
@@ -116,12 +155,12 @@ function ProductDetails() {
                       mx-2.5
                   "
                   >
-                    1
+                    {toCart?.quantity}
                   </span>
                   <FaPlus
                     className="cursor-pointer"
                     style={ { color: '#B0B3BB' } }
-                    // onClick={ () => toAdd.quantity += 1 }
+                    onClick={ () => manipulateQuantity(true) }
                   />
                   <button
                     className="
@@ -137,7 +176,7 @@ function ProductDetails() {
                       duration-300
                       ml-5
                     "
-                    // onClick={ () => addCart(toAdd) }
+                    onClick={ () => addCart(toCart!) }
                   >
                     Adicionar ao carrinho
                   </button>

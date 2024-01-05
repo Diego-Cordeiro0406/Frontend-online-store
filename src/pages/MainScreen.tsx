@@ -47,7 +47,16 @@ function MainScreen() {
           {
             data.length === 0 && !isTrue && !isLoading && (
               <p
-                className="flex items-center"
+                className="
+                  flex
+                  items-center
+                  text-xl
+                  font-semibold
+                  uppercase
+                  text-green-500
+                  w-96
+                  text-center
+                  "
                 data-testid="home-initial-message"
               >
                 Digite algum termo de pesquisa ou escolha uma categoria.

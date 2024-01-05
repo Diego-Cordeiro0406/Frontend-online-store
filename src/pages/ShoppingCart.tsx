@@ -1,11 +1,15 @@
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import { AiOutlineDelete } from 'react-icons/ai';
+import { TiArrowBack } from 'react-icons/ti';
+
 import Context from '../context/Context';
 import Header from '../components/Header';
 
 function ShoppingCart() {
   const context = useContext(Context);
+  const navigate = useNavigate();
 
   if (!context) return null;
   const { cart, getQuantity, addQuantity, sutractQuantity, removeProduct } = context;
@@ -20,6 +24,23 @@ function ShoppingCart() {
               className="flex justify-center items-center w-screen h-screen"
               data-testid="shopping-cart-empty-message"
             >
+
+              <button
+                className="
+                  absolute
+                  top-32
+                  left-10
+                  flex
+                  items-center
+                  font-semibold
+                  text-lg
+                  text-[#2FC18C]
+                "
+                onClick={ () => navigate(-1) }
+              >
+                <TiArrowBack size="1.5em" style={ { color: '#2FC18C' } } />
+                Voltar
+              </button>
               <h3
                 className="text-3xl font-semibold uppercase text-green-500"
               >
@@ -29,6 +50,22 @@ function ShoppingCart() {
           )
           : (
             <main className="flex justify-center h-screen">
+              <button
+                className="
+                  absolute
+                  top-32
+                  left-10
+                  flex
+                  items-center
+                  font-semibold
+                  text-lg
+                  text-[#2FC18C]
+                "
+                onClick={ () => navigate(-1) }
+              >
+                <TiArrowBack size="1.5em" style={ { color: '#2FC18C' } } />
+                Voltar
+              </button>
               <section
                 className="
                 flex

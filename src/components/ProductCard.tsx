@@ -19,9 +19,9 @@ function ProductCard({ id, title, img, price }: ProdcutCardProps) {
     <section
       data-testid="product"
       className="
-      w-64
-      h-96
-      my-8
+      w-60
+      h-80
+      my-6
       mx-2
       bg-white
       rounded-md
@@ -40,7 +40,7 @@ function ProductCard({ id, title, img, price }: ProdcutCardProps) {
       duration-300
       "
     >
-      <div className="flex flex-col justify-center items-center w-52 h-72">
+      <div className="flex flex-col justify-center items-center w-52 h-56">
         <Link
           key={ id }
           data-testid="product-detail-link"
@@ -48,7 +48,7 @@ function ProductCard({ id, title, img, price }: ProdcutCardProps) {
           className="flex flex-col justify-center items-center w-52 h-72"
         >
           <img
-            className="w-32 h-40"
+            className="w-24 h-32"
             src={ img }
             alt={ title }
           />
