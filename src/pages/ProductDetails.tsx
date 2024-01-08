@@ -11,21 +11,7 @@ import { ProductCart } from '../types/typesApi';
 function ProductDetails() {
   const { id } = useParams();
   const [toCart, setCart] = useState<ProductCart>();
-
-  useEffect(() => {
-    getProductById(id);
-    setToCart();
-  }, []);
-  const navigate = useNavigate();
-  const context = useContext(Context);
-
-  if (!context) return null;
-  const {
-    getProductById,
-    isLoading,
-    productData,
-    addCart,
-  } = context;
+  const [productDataLoaded, setProductDataLoaded] = useState(false);
 
   const setToCart = () => {
     if (productData) {
@@ -40,9 +26,37 @@ function ProductDetails() {
     }
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await getProductById(id);
+        setProductDataLoaded(true);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (productDataLoaded) {
+      setToCart();
+    }
+  }, [productDataLoaded]);
+
+  const navigate = useNavigate();
+  const context = useContext(Context);
+
+  if (!context) return null;
+  const {
+    getProductById,
+    isLoading,
+    productData,
+    addCart,
+  } = context;
+
   const manipulateQuantity = (manipulate: boolean) => {
     if (toCart && manipulate) {
-      console.log('clicou');
       const updatedQuantity = { ...toCart, quantity: toCart.quantity + 1 };
       setCart(updatedQuantity);
     } else if (toCart && manipulate === false && toCart.quantity > 1) {

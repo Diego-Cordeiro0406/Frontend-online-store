@@ -7,26 +7,18 @@ import { TiArrowBack } from 'react-icons/ti';
 import Context from '../context/Context';
 import Header from '../components/Header';
 
-function ShoppingCart() {
+function CheckoutScreen() {
   const context = useContext(Context);
   const navigate = useNavigate();
 
   if (!context) return null;
   const { cart, getQuantity, addQuantity, sutractQuantity, removeProduct } = context;
-
   return (
     <>
       <Header />
-      {
-        cart.length === 0
-          ? (
-            <span
-              className="flex justify-center items-center w-screen h-screen"
-              data-testid="shopping-cart-empty-message"
-            >
-
-              <button
-                className="
+      <main className="flex justify-center h-screen">
+        <button
+          className="
                   absolute
                   top-32
                   left-10
@@ -36,60 +28,35 @@ function ShoppingCart() {
                   text-lg
                   text-[#2FC18C]
                 "
-                onClick={ () => navigate(-1) }
-              >
-                <TiArrowBack size="1.5em" style={ { color: '#2FC18C' } } />
-                Voltar
-              </button>
-              <h3
-                className="text-3xl font-semibold uppercase text-green-500"
-              >
-                Seu carrinho está vazio
-              </h3>
-            </span>
-          )
-          : (
-            <main className="flex justify-center h-screen">
-              <button
-                className="
-                  absolute
-                  top-32
-                  left-10
-                  flex
-                  items-center
-                  font-semibold
-                  text-lg
-                  text-[#2FC18C]
-                "
-                onClick={ () => navigate(-1) }
-              >
-                <TiArrowBack size="1.5em" style={ { color: '#2FC18C' } } />
-                Voltar
-              </button>
-              <section
-                className="
+          onClick={ () => navigate(-1) }
+        >
+          <TiArrowBack size="1.5em" style={ { color: '#2FC18C' } } />
+          Voltar
+        </button>
+        <section
+          className="
                 flex
-                w-4/6
+                w-3/6
                 justify-center
                 items-center
                 bg-slate-100
               "
-              >
-                <section
-                  className="
+        >
+          <section
+            className="
                     flex flex-col
                     items-center
                     bg-white
                     product-container
                     shadow-2xl
-                    w-[48rem]
-                    h-[40rem]
+                    w-[40rem]
+                    h-[32rem]
                     overflow-auto
                     overscroll-contain
                     "
-                >
-                  <h2
-                    className="
+          >
+            <h2
+              className="
                       text-center
                       font-mono
                       text-base
@@ -99,10 +66,10 @@ function ShoppingCart() {
                       overflow-hidden
                       my-8
                       "
-                  >
-                    Carrinho de compras
-                  </h2>
-                  {
+            >
+              Carrinho de compras
+            </h2>
+            {
               cart
                 .map((product) => (
                   <div
@@ -166,55 +133,75 @@ function ShoppingCart() {
                   </div>
                 ))
             }
-                </section>
-              </section>
-              <section
-                className="
+          </section>
+        </section>
+        <section
+          className="
                   flex
-                  w-2/6
+                  w-3/6
                   flex-col
                   justify-center
                   items-center
                   h-full
                 "
-              >
-                <h3
-                  className="
-                    w-80
-                    h-12
-                    font-bold
-                    text-center
-                    text-2xl
-                    "
-                >
-                  Valor total da compra:
-                </h3>
-                <p className="font-bold text-2xl">{`R$ ${getQuantity()}`}</p>
-                <button
-                  className="
-                  bg-green-400
-                  text-white
-                  font-mono
-                  h-10
-                  p-2
-                  mt-4
-                  rounded
-                  hover:-translate-y-1
-                  hover:scale-110
-                  hover:bg-green-700
-                  duration-300
-                "
-                  onClick={ () => navigate('/checkout') }
-                >
-                  Finalizar compra
-                </button>
-              </section>
-            </main>
-          )
-      }
+        >
+          <h3>Informações do comprador</h3>
+          <div className="flex flex-wrap justify-center items-center h-24 max-w-[40rem]">
+            <input
+              placeholder="Nome Completo"
+              className="w-72 h-8 border border-[#94979D] pl-1"
+              type="text"
+            />
+            <input
+              placeholder="CPF"
+              className="w-72 h-8 border border-[#94979D] pl-1 ml-2"
+              type="text"
+            />
+            <input
+              placeholder="Email"
+              className="w-72 h-8 border border-[#94979D] pl-1"
+              type="text"
+            />
+            <input
+              placeholder="Telefone"
+              className="w-72 h-8 border border-[#94979D] pl-1 ml-2"
+              type="text"
+            />
+          </div>
+          <div className="flex justify-evenly items-center h-8 w-[36.438rem]">
+            <input
+              placeholder="CEP"
+              className="w-2/6 h-8 border border-[#94979D] pl-1"
+              type="text"
+            />
+            <input
+              placeholder="Endereço"
+              className="w-4/6 h-8 border border-[#94979D] pl-1 ml-2"
+              type="text"
+            />
+          </div>
+          <div className="flex justify-evenly items-center h-8 w-[36.438rem] mt-2">
+            <input
+              placeholder="Complemento"
+              className="w-4/6 h-8 border border-[#94979D] pl-1"
+              type="text"
+            />
+            <input
+              placeholder="Número"
+              className="w-2/6 h-8 border border-[#94979D] pl-1  ml-2"
+              type="text"
+            />
+          </div>
+          {/* <div>
+            <input placeholder="Cidade" className="border-solid" type="text" />
+          <select>
+            <option value="batata">teste</option>
+          </select>
+          </div> */}
+        </section>
+      </main>
     </>
-
   );
 }
 
-export default ShoppingCart;
+export default CheckoutScreen;
