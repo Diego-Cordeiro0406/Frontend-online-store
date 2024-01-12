@@ -28,7 +28,7 @@
 }
 
 .width {
-  border: 1px solid rgb(151, 135, 135);
+  border-bottom: 1px solid rgb(151, 135, 135);
 }
 
 .product-container {
@@ -38,4 +38,8 @@
 
 .picture-size {
   max-height: 400px;
+}
+
+.x {
+  border: none;
 }

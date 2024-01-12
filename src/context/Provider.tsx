@@ -1,5 +1,5 @@
 import { ReactNode, useState } from 'react';
-import { Categories, Product } from '../types/typesApi';
+import { Categories, Product, ProductCart } from '../types/typesApi';
 import Context, { MyContextProps } from './Context';
 
 interface MyProviderProps {
@@ -8,12 +8,14 @@ interface MyProviderProps {
 
 function Provider({ children }: MyProviderProps) {
   const [categories, setCategories] = useState([]);
-  const [batata, setBatata] = useState(false);
+  const [route, setRoute] = useState(false);
   const [search, setSearch] = useState('');
   const [valueInput, setValueInput] = useState('');
   const [isTrue, setTrue] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [data, setData] = useState<Product[]>([]);
+  const [productData, setProduct] = useState<Product | null>(null);
+  const [cart, setCart] = useState<ProductCart[]>([]);
 
   const URL_DATABASE = 'https://api.mercadolibre.com/';
 
@@ -29,7 +31,7 @@ function Provider({ children }: MyProviderProps) {
       setLoading(true);
       const response = await fetch(`${URL_DATABASE}items/${id}`);
       const jsonData = await response.json();
-      return jsonData;
+      setProduct(jsonData);
     } catch (error) {
       console.log(error);
     } finally {
@@ -82,13 +84,54 @@ function Provider({ children }: MyProviderProps) {
     setSearch('');
   };
 
+  const addCart = (obj: ProductCart) => {
+    const updatedCart = [...cart, obj];
+    setCart(updatedCart);
+  };
+
+  const getQuantity = (): number => {
+    const total = cart.reduce((acc, curr) => {
+      return acc + (curr.price * curr.quantity);
+    }, 0);
+    return Number(total.toFixed(2));
+  };
+
+  // const addQuantityInTheProductDetails = () => {
+
+  // };
+
+  const addQuantity = (id: string): void => {
+    const updateQuantity = cart.map((product) => {
+      if (product.id === id) {
+        return { ...product, quantity: product.quantity + 1 };
+      }
+      return product;
+    });
+    setCart(updateQuantity);
+  };
+
+  const sutractQuantity = (id: string): void => {
+    const updateQuantity = cart.map((product) => {
+      if (product.id === id && product.quantity > 1) {
+        return { ...product, quantity: product.quantity - 1 };
+      }
+      return product;
+    });
+    setCart(updateQuantity);
+  };
+
+  const removeProduct = (id: string): void => {
+    const newCart = cart.filter((product) => product.id !== id);
+    setCart(newCart);
+  };
+
   const value:MyContextProps = {
     getCategories,
     getProductById,
     getProductsFromCategoryAndQuery,
     categories,
-    batata,
-    setBatata,
+    route,
+    setRoute,
     search,
     setSearch,
     valueInput,
@@ -97,7 +140,15 @@ function Provider({ children }: MyProviderProps) {
     isTrue,
     isLoading,
     data,
+    productData,
+    setProduct,
     sendProductsRequest,
+    cart,
+    addCart,
+    getQuantity,
+    removeProduct,
+    addQuantity,
+    sutractQuantity,
   };
   return (
     <Context.Provider value={ value }>

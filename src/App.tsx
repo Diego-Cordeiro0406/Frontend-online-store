@@ -7,6 +7,7 @@ import ProductDetails from './pages/ProductDetails';
 import Context from './context/Context';
 
 import './App.css';
+import CheckoutScreen from './pages/CheckoutScreen';
 
 function App() {
   const context = useContext(Context);
@@ -19,7 +20,7 @@ function App() {
 
       fetchData();
     }
-  }, [context]);
+  }, []);
 
   if (!context) return null;
 
@@ -31,6 +32,7 @@ function App() {
         path="/product/:id"
         element={ <ProductDetails /> }
       />
+      <Route path="checkout" element={ <CheckoutScreen /> } />
     </Routes>
   );
 }

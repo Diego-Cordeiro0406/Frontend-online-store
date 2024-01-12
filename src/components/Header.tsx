@@ -3,12 +3,8 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa';
 
 import logo from '../images/logo.png';
-import cart from '../images/Vector.svg';
+import cartLogo from '../images/Vector.svg';
 import Context from '../context/Context';
-
-// interface HeaderProps {
-//   sendProductsRequest?: (data: string) => Promise<void>
-// }
 
 function Header() {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,13 +18,13 @@ function Header() {
   const context = useContext(Context);
 
   if (!context) return null;
-  const { setBatata, search, setSearch, sendProductsRequest } = context;
+  const { setRoute, search, setSearch, sendProductsRequest, cart } = context;
 
   const handleClick = async () => {
     try {
       if (location.pathname !== '/') {
         navigate('/');
-        setBatata(true);
+        setRoute(true);
       } else {
         await sendProductsRequest(search);
       }
@@ -75,13 +71,32 @@ function Header() {
       <Link data-testid="shopping-cart-button" to="/cart">
         <button
           aria-label="Carrinho"
-          className="h-10 w-10 mr-5"
+          className="h-10 w-10 mr-5 relative"
         >
           <img
-            src={ cart }
+            src={ cartLogo }
             alt="cart-logo"
             className="h-10 w-10"
           />
+          <div
+            className="
+              flex
+              justify-center
+              items-center
+              rounded-full
+              bg-green-400
+              font-mono
+              w-6
+              h-6
+              text-white
+              absolute
+              bottom-4
+              left-5
+              font-bold
+            "
+          >
+            <p className="w-6 h-6 absolute top-px">{cart.length}</p>
+          </div>
         </button>
       </Link>
     </header>

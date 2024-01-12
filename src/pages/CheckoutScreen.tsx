@@ -6,27 +6,20 @@ import { TiArrowBack } from 'react-icons/ti';
 
 import Context from '../context/Context';
 import Header from '../components/Header';
+import CheckoutForm from '../components/CheckoutForm';
 
-function ShoppingCart() {
+function CheckoutScreen() {
   const context = useContext(Context);
   const navigate = useNavigate();
 
   if (!context) return null;
   const { cart, getQuantity, addQuantity, sutractQuantity, removeProduct } = context;
-
   return (
     <>
       <Header />
-      {
-        cart.length === 0
-          ? (
-            <span
-              className="flex justify-center items-center w-screen h-screen"
-              data-testid="shopping-cart-empty-message"
-            >
-
-              <button
-                className="
+      <main className="flex justify-center h-screen">
+        <button
+          className="
                   absolute
                   top-32
                   left-10
@@ -36,81 +29,57 @@ function ShoppingCart() {
                   text-lg
                   text-[#2FC18C]
                 "
-                onClick={ () => navigate(-1) }
-              >
-                <TiArrowBack size="1.5em" style={ { color: '#2FC18C' } } />
-                Voltar
-              </button>
-              <h3
-                className="text-3xl font-semibold uppercase text-green-500"
-              >
-                Seu carrinho está vazio
-              </h3>
-            </span>
-          )
-          : (
-            <main className="flex justify-center h-screen">
-              <button
-                className="
-                  absolute
-                  top-32
-                  left-10
-                  flex
-                  items-center
-                  font-semibold
-                  text-lg
-                  text-[#2FC18C]
-                "
-                onClick={ () => navigate(-1) }
-              >
-                <TiArrowBack size="1.5em" style={ { color: '#2FC18C' } } />
-                Voltar
-              </button>
-              <section
-                className="
+          onClick={ () => navigate(-1) }
+        >
+          <TiArrowBack size="1.5em" style={ { color: '#2FC18C' } } />
+          Voltar
+        </button>
+        <section
+          className="
                 flex
-                w-4/6
+                flex-col
+                w-3/6
                 justify-center
                 items-center
                 bg-slate-100
               "
-              >
-                <section
-                  className="
+        >
+          <section
+            className="
                     flex flex-col
                     items-center
                     bg-white
                     product-container
                     shadow-2xl
-                    w-[48rem]
-                    h-[40rem]
+                    w-[36rem]
+                    h-[32rem]
                     overflow-auto
                     overscroll-contain
                     "
-                >
-                  <h2
-                    className="
+          >
+            <h2
+              className="
                       text-center
                       font-mono
                       text-base
                       font-bold
                       w-80
                       max-h-12
-                      overflow-hidden
-                      my-8
+                      mt-8
+                      mb-6
                       "
-                  >
-                    Carrinho de compras
-                  </h2>
-                  {
+            >
+              Revise seus Produtos
+            </h2>
+            {
               cart
                 .map((product) => (
                   <div
-                    className="flex flex-col items-center justify-evenly w-[36rem] h-28"
+                    className="flex flex-col items-center justify-evenly w-[32rem] h-28"
                     key={ product.id }
                   >
-                    <span className="w-[36rem] width" />
-                    <div className="flex items-center justify-evenly w-[36rem]">
+                    <span className="w-[32rem] width" />
+                    <div className="flex items-center justify-evenly w-[32rem]">
                       <button
                         aria-label="delete"
                         onClick={ () => removeProduct(product.id) }
@@ -166,55 +135,15 @@ function ShoppingCart() {
                   </div>
                 ))
             }
-                </section>
-              </section>
-              <section
-                className="
-                  flex
-                  w-2/6
-                  flex-col
-                  justify-center
-                  items-center
-                  h-full
-                "
-              >
-                <h3
-                  className="
-                    w-80
-                    h-12
-                    font-bold
-                    text-center
-                    text-2xl
-                    "
-                >
-                  Valor total da compra:
-                </h3>
-                <p className="font-bold text-2xl">{`R$ ${getQuantity()}`}</p>
-                <button
-                  className="
-                  bg-green-400
-                  text-white
-                  font-mono
-                  h-10
-                  p-2
-                  mt-4
-                  rounded
-                  hover:-translate-y-1
-                  hover:scale-110
-                  hover:bg-green-700
-                  duration-300
-                "
-                  onClick={ () => navigate('/checkout') }
-                >
-                  Finalizar compra
-                </button>
-              </section>
-            </main>
-          )
-      }
+          </section>
+          <div className="flex justify-center items-center w-[36rem] h-[4rem] bg-white">
+            <h3 className="text-xl font-bold">{`Total: R$ ${getQuantity()}`}</h3>
+          </div>
+        </section>
+        <CheckoutForm />
+      </main>
     </>
-
   );
 }
 
-export default ShoppingCart;
+export default CheckoutScreen;

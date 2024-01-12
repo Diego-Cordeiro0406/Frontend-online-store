@@ -1,17 +1,27 @@
+import { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import Context from '../context/Context';
+
 interface ProdcutCardProps {
+  id: string
   title: string
   img: string
   price: number
 }
 
-function ProductCard({ title, img, price }: ProdcutCardProps) {
+function ProductCard({ id, title, img, price }: ProdcutCardProps) {
+  const context = useContext(Context);
+
+  if (!context) return null;
+  const { addCart } = context;
+  const quantity = 1;
   return (
     <section
       data-testid="product"
       className="
-      w-64
-      h-96
-      my-8
+      w-60
+      h-80
+      my-6
       mx-2
       bg-white
       rounded-md
@@ -30,24 +40,32 @@ function ProductCard({ title, img, price }: ProdcutCardProps) {
       duration-300
       "
     >
-      <div className="flex flex-col justify-center items-center w-52 h-72">
-        <img
-          className="w-32 h-40"
-          src={ img }
-          alt={ title }
-        />
-        <h3
-          className="text-center font-mono text-base font-bold max-h-12 overflow-hidden"
+      <div className="flex flex-col justify-center items-center w-52 h-56">
+        <Link
+          key={ id }
+          data-testid="product-detail-link"
+          to={ `/product/${id}` }
+          className="flex flex-col justify-center items-center w-52 h-72"
         >
-          {title}
-        </h3>
-        <div className="flex items-end h-7 justify-center">
-          <p className="text-end font-normal mr-1">R$</p>
-          <p className="font-medium text-2xl h-7">{`${price}`}</p>
-        </div>
+          <img
+            className="w-24 h-32"
+            src={ img }
+            alt={ title }
+          />
+          <h3
+            className="text-center font-mono text-base font-bold max-h-12 overflow-hidden"
+          >
+            {title}
+          </h3>
+          <div className="flex items-end h-7 justify-center">
+            <p className="text-end font-normal mr-1">R$</p>
+            <p className="font-medium text-2xl h-7">{`${price}`}</p>
+          </div>
+        </Link>
       </div>
       <div className="mt-10">
         <button
+          onClick={ () => addCart({ id, title, img, price, quantity }) }
           className="
           bg-green-400
           text-white
