@@ -65,6 +65,7 @@ function ProductCard({ id, title, img, price }: ProdcutCardProps) {
       </div>
       <div className="mt-10">
         <button
+          id={ id }
           onClick={ () => addCart({ id, title, img, price, quantity }) }
           className="
           bg-green-400

@@ -18,72 +18,86 @@ function MainScreen() {
   }, [location]);
 
   if (!context) return null;
-  const { sendProductsRequest, search, isLoading, isTrue, data } = context;
+  const {
+    sendProductsRequest,
+    search,
+    isLoading,
+    isTrue,
+    data,
+    categories,
+  } = context;
 
   return (
     <>
       <Header />
-      <main
-        className="
+      { categories.length === 0 ? <ScaleLoader
+        data-testid="loading"
+        color="#36d7b7"
+      />
+        : (
+          <main
+            className="
+      flex
+      flex-row
+      overflow-auto
+      overscroll-contain
+      "
+          >
+            <CategoriesBar />
+            <section
+              className="
+        bg-slate-200
         flex
-        flex-row
-        overflow-auto
-        overscroll-contain
+        w-full
+        justify-evenly
+        items-center
+        flex-wrap
+        overflow-y-scroll
+        section-container
         "
-      >
-        <CategoriesBar />
-        <section
-          className="
-          bg-slate-200
-          flex
-          w-full
-          justify-evenly
-          items-center
-          flex-wrap
-          overflow-y-scroll
-          section-container
-          "
-        >
-          {
-            data.length === 0 && !isTrue && !isLoading && (
-              <p
-                className="
-                  flex
-                  items-center
-                  text-xl
-                  font-semibold
-                  uppercase
-                  text-green-500
-                  w-96
-                  text-center
-                  "
-                data-testid="home-initial-message"
-              >
-                Digite algum termo de pesquisa ou escolha uma categoria.
-              </p>
-            )
-          }
-          {
-            data.length === 0 && isTrue && (
-              <p data-testid="not-found-product">
-                Nenhum produto foi encontrado
-              </p>
-            )
-          }
-          { isLoading ? <ScaleLoader data-testid="loading" color="#36d7b7" /> : data
-            .map((product) => (
-              <ProductCard
-                key={ product.id }
-                id={ product.id }
-                title={ product.title }
-                img={ product.thumbnail }
-                price={ product.price }
-              />
-            ))}
-        </section>
-      </main>
+            >
+              {
+          data.length === 0 && !isTrue && !isLoading && (
+            <p
+              className="
+                flex
+                items-center
+                text-xl
+                font-semibold
+                uppercase
+                text-green-500
+                w-96
+                text-center
+                "
+              data-testid="home-initial-message"
+            >
+              Digite algum termo de pesquisa ou escolha uma categoria.
+            </p>
+          )
+        }
+              {
+          data.length === 0 && isTrue && (
+            <p data-testid="not-found-product">
+              Nenhum produto foi encontrado
+            </p>
+          )
+        }
+              { isLoading ? <ScaleLoader
+                data-testid="loading"
+                color="#36d7b7"
+              /> : data
+                .map((product) => (
+                  <ProductCard
+                    key={ product.id }
+                    id={ product.id }
+                    title={ product.title }
+                    img={ product.thumbnail }
+                    price={ product.price }
+                  />
+                ))}
+            </section>
+          </main>)}
     </>
-
   );
 }
 

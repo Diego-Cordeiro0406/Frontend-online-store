@@ -86,7 +86,12 @@ function Provider({ children }: MyProviderProps) {
 
   const addCart = (obj: ProductCart) => {
     const updatedCart = [...cart, obj];
+    const toSet = document.getElementById(obj.id);
     setCart(updatedCart);
+    toSet!.classList.add('bg-green-700');
+    toSet!.innerHTML = 'Adicionado ao carrinho';
+    setTimeout(() => toSet!.classList.remove('bg-green-700'), 3000);
+    setTimeout(() => { toSet!.innerHTML = 'Adicionar ao carrinho'; }, 3000);
   };
 
   const getQuantity = (): number => {
