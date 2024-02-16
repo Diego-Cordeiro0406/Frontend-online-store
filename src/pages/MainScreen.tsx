@@ -37,24 +37,24 @@ function MainScreen() {
         : (
           <main
             className="
-      flex
-      flex-row
-      overflow-auto
-      overscroll-contain
-      "
+              flex
+              flex-row
+              overflow-auto
+              overscroll-contain
+            "
           >
             <CategoriesBar />
             <section
               className="
-        bg-slate-200
-        flex
-        w-full
-        justify-evenly
-        items-center
-        flex-wrap
-        overflow-y-scroll
-        section-container
-        "
+                bg-slate-200
+                flex
+                w-full
+                justify-evenly
+                items-center
+                flex-wrap
+                overflow-y-scroll
+                section-container
+              "
             >
               {
           data.length === 0 && !isTrue && !isLoading && (

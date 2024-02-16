@@ -49,7 +49,8 @@ function CategoriesBar() {
       className="
       flex
       flex-col
-      w-1/5
+      lg:w-1/5
+      phone:w-2
       justify-start
       items-center
       max-h-screen

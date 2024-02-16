@@ -19,6 +19,7 @@ function Provider({ children }: MyProviderProps) {
 
   const URL_DATABASE = 'https://api.mercadolibre.com/';
 
+  // função responsável por fazer uma requisição a api e retornar as categorias existentes.
   async function getCategories(): Promise<Categories[]> {
     const response = await fetch(`${URL_DATABASE}sites/MLB/categories`);
     const dataCategory = await response.json();
@@ -26,6 +27,7 @@ function Provider({ children }: MyProviderProps) {
     return dataCategory;
   }
 
+  // função responsável por fazer uma requisição a api com base em um id especifico.
   async function getProductById(id: string | undefined) {
     try {
       setLoading(true);
@@ -39,6 +41,7 @@ function Provider({ children }: MyProviderProps) {
     }
   }
 
+  // função responsável por fazer uma requisição a api com base em uma query ou categoria.
   async function getProductsFromCategoryAndQuery(
     query: string,
     categoryId?: string,
@@ -60,12 +63,14 @@ function Provider({ children }: MyProviderProps) {
     return dataQuery.results;
   }
 
+  // função responsável por popular o estado dos produtos com base na função getProductsFromCategoryAndQuery.
   async function sendProductsRequest(query: string) {
     try {
       setLoading(true);
       if (valueInput) {
         const returned = await getProductsFromCategoryAndQuery(query, valueInput);
         setData(returned);
+        setValueInput('');
       } else {
         const returned = await getProductsFromCategoryAndQuery(query);
         setData(returned);
@@ -78,12 +83,14 @@ function Provider({ children }: MyProviderProps) {
     }
   }
 
+  // Função responsável por lidar com a alteração de estado dos inputs de categoria.
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
     setValueInput(newValue);
     setSearch('');
   };
 
+  // Função responsável por adicionar um produto ao carrinho.
   const addCart = (obj: ProductCart) => {
     const updatedCart = [...cart, obj];
     const toSet = document.getElementById(obj.id);
@@ -94,6 +101,7 @@ function Provider({ children }: MyProviderProps) {
     setTimeout(() => { toSet!.innerHTML = 'Adicionar ao carrinho'; }, 3000);
   };
 
+  // Função responsável por retornar a quantidade de itens no carrinho.
   const getQuantity = (): number => {
     const total = cart.reduce((acc, curr) => {
       return acc + (curr.price * curr.quantity);
@@ -101,10 +109,7 @@ function Provider({ children }: MyProviderProps) {
     return Number(total.toFixed(2));
   };
 
-  // const addQuantityInTheProductDetails = () => {
-
-  // };
-
+  // Função responsável por aumentar em 1 a quantidade de um produto antes de adiciona-lo ao carrinho.
   const addQuantity = (id: string): void => {
     const updateQuantity = cart.map((product) => {
       if (product.id === id) {
@@ -115,6 +120,7 @@ function Provider({ children }: MyProviderProps) {
     setCart(updateQuantity);
   };
 
+  // Função responsável por diminuir em 1 a quantidade de um produto antes de adiciona-lo ao carrinho.
   const sutractQuantity = (id: string): void => {
     const updateQuantity = cart.map((product) => {
       if (product.id === id && product.quantity > 1) {
@@ -125,11 +131,13 @@ function Provider({ children }: MyProviderProps) {
     setCart(updateQuantity);
   };
 
+  // Função responsável por remover um produto do carrinho.
   const removeProduct = (id: string): void => {
     const newCart = cart.filter((product) => product.id !== id);
     setCart(newCart);
   };
 
+  // Estados e funções a serem compartilhados entre os componentes.
   const value:MyContextProps = {
     getCategories,
     getProductById,
