@@ -29,6 +29,7 @@ function MainScreen() {
 
   return (
     <>
+      <CategoriesBar />
       <Header />
       { categories.length === 0 ? <ScaleLoader
         data-testid="loading"
@@ -41,9 +42,9 @@ function MainScreen() {
               flex-row
               overflow-auto
               overscroll-contain
+              h-screen
             "
           >
-            <CategoriesBar />
             <section
               className="
                 bg-slate-200

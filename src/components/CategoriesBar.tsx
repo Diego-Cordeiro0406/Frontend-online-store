@@ -1,4 +1,5 @@
 import { useContext, useState, useEffect } from 'react';
+import { FaArrowLeft } from 'react-icons/fa6';
 import Context from '../context/Context';
 
 function CategoriesBar() {
@@ -11,13 +12,20 @@ function CategoriesBar() {
       setLastValorInput(context.valueInput);
       if (context.valueInput) {
         context.sendProductsRequest(context.valueInput);
+        context.toggleCategories();
       }
     }
   }, [context, lastValorInput]);
 
   if (!context) return null;
 
-  const { categories, valueInput, handleRadioChange } = context;
+  const {
+    categories,
+    valueInput,
+    handleRadioChange,
+    toggleCategories,
+    sidebarOpen,
+  } = context;
 
   const categoriesList = categories.map((category) => (
     <span
@@ -46,20 +54,30 @@ function CategoriesBar() {
 
   return (
     <aside
-      className="
+      id="categories"
+      className={ `
       flex
       flex-col
       lg:w-1/5
-      phone:w-2
+      bg-white
       justify-start
       items-center
       max-h-screen
       overflow-auto
       overscroll-contain
       shadow-xl
-      "
+      toggle
+      ${sidebarOpen ? 'open' : ''}
+      ` }
     >
-      <p className="w-full mt-6 text-xl font-bold">Categorias</p>
+      <div className="flex w-full pt-6 items-center justify-center">
+        <p className="w-full text-xl font-bold">Categorias</p>
+        <FaArrowLeft
+          size="1.5em"
+          className="mr-5 cursor-pointer"
+          onClick={ () => toggleCategories() }
+        />
+      </div>
       <div className="w-full flex justify-start my-6">
         <span className="w-60 width" />
       </div>

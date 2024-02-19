@@ -33,6 +33,8 @@ export interface MyContextProps {
   removeProduct: (id: string) => void,
   addQuantity: (id: string) => void,
   sutractQuantity: (id: string) => void,
+  toggleCategories: () => void,
+  sidebarOpen: boolean
 }
 
 const Context = createContext<MyContextProps | undefined>(undefined);

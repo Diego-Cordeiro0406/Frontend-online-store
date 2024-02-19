@@ -16,6 +16,7 @@ function Provider({ children }: MyProviderProps) {
   const [data, setData] = useState<Product[]>([]);
   const [productData, setProduct] = useState<Product | null>(null);
   const [cart, setCart] = useState<ProductCart[]>([]);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const URL_DATABASE = 'https://api.mercadolibre.com/';
 
@@ -137,6 +138,10 @@ function Provider({ children }: MyProviderProps) {
     setCart(newCart);
   };
 
+  const toggleCategories = async () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
   // Estados e funções a serem compartilhados entre os componentes.
   const value:MyContextProps = {
     getCategories,
@@ -162,6 +167,8 @@ function Provider({ children }: MyProviderProps) {
     removeProduct,
     addQuantity,
     sutractQuantity,
+    toggleCategories,
+    sidebarOpen,
   };
   return (
     <Context.Provider value={ value }>

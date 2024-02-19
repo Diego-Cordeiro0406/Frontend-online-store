@@ -21,12 +21,11 @@ function ProductCard({ id, title, img, price }: ProdcutCardProps) {
       className="
       laptop:w-60
       laptop:h-80
-      phone:w-44
-      phone:h-64
+      phone:w-40
+      phone:h-60
       my-6
       mx-2
       bg-white
-      rounded-md
       shadow-lg
       flex
       flex-col
@@ -38,7 +37,7 @@ function ProductCard({ id, title, img, price }: ProdcutCardProps) {
       ease-in-out
       delay-150
       hover:-translate-y-1
-      hover:scale-110
+      hover:scale-100
       duration-300
       "
     >
@@ -122,11 +121,13 @@ function ProductCard({ id, title, img, price }: ProdcutCardProps) {
           text-white
           font-sans
           phone: w-36
+          laptop:w-48
           h-10
           p-2
           rounded
           mb-4
           hover:-translate-y-1
+          phone:hover:scale-100
           hover:scale-110
           hover:bg-green-700
           duration-300
