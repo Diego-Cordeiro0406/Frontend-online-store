@@ -74,12 +74,22 @@ function ProductDetails() {
               data-testid="loading"
               color="#36d7b7"
           /> : (
-            <main className="flex justify-center h-screen">
+            <main
+              className="
+                flex
+                justify-center
+                h-screen
+                laptop:flex-row
+                phone:flex-col
+                phone:overflow-auto
+              "
+            >
               <button
                 className="
                   absolute
-                  top-32
-                  left-10
+                  laptop:top-40
+                  laptop:left-10
+                  phone:top-36
                   flex
                   items-center
                   font-semibold
@@ -94,7 +104,10 @@ function ProductDetails() {
               <section
                 className="
                   flex
-                  w-3/6
+                  laptop:w-3/6
+                  phone:w-full
+                  phone:h-3/6
+                  laptop:h-full
                   justify-center
                   items-center
                   bg-slate-100
@@ -107,31 +120,64 @@ function ProductDetails() {
                     justify-evenly
                     items-center
                     bg-white
-                    product-container
+                    laptop:h-[32.25rem]
+                    laptop:w-[30.5rem]
                     shadow-2xl
             "
                 >
                   <h3
-                    className="text-xl text-center"
+                    className="phone:text-base laptop:text-xl text-center"
                     data-testid="product-detail-name"
                   >
                     {productData?.title}
                   </h3>
                   <img
-                    className="picture-size"
+                    className="
+                      picture-size
+                      laptop:h-auto
+                      laptop:w-auto
+                      phone:h-60
+                      phone:w-60
+                    "
                     data-testid="product-detail-image"
                     src={ productData?.pictures[0].url }
                     alt={ productData?.title }
                   />
                 </span>
               </section>
-              <section className="flex w-3/6 flex-col justify-center h-full pl-16">
+              <section
+                className="
+                  flex
+                  laptop:w-3/6
+                  flex-col
+                  justify-start
+                  laptop:h-full
+                  phone:h-3/6
+                  laptop:pl-16
+                  phone:items-center
+                "
+              >
                 <h3
-                  className="font-bold text-2xl font-mono pb-10"
+                  className="
+                    font-bold
+                    phone:text-lg
+                    laptop:text-2xl
+                    font-mono
+                    laptop:pb-10
+                    phone:pt-4
+                  "
                 >
                   Especificações tecnicas
                 </h3>
-                <ul className="max-h-96 overflow-y-scroll text-slate-700 max-w-lg">
+                <ul
+                  className="
+                    phone:max-h-52
+                    laptop:max-h-96
+                    overflow-y-scroll
+                    text-slate-700
+                    bg-slate-100
+                    max-w-lg"
+                >
                   {
             productData?.attributes.slice(1).map((attribute) => (
               <li
@@ -143,7 +189,11 @@ function ProductDetails() {
             ))
           }
                 </ul>
-                <div className="flex h-7 justify-start pt-20 items-center">
+                <div
+                  className="flex h-7 justify-start phone:pt-6
+                  laptop:pt-20
+                  items-center"
+                >
                   <p className="text-end font-normal mr-1">R$</p>
                   <p
                     className="font-medium text-2xl h-7 mr-5"
@@ -157,12 +207,7 @@ function ProductDetails() {
                     onClick={ () => manipulateQuantity(false) }
                   />
                   <span
-                    className="
-                      rounded-full
-                      bg-gray-400
-                      w-5
-                      h-5
-                      text-white
+                    className="rounded-full bg-gray-400 w-5 h-5 text-white
                       flex
                       justify-center
                       items-center
@@ -178,19 +223,13 @@ function ProductDetails() {
                   />
                   <button
                     id={ productData?.id }
-                    className="
-                      bg-green-400
-                      text-white
-                      font-mono
-                      h-10
-                      p-2
+                    className="bg-green-400 text-white font-mono h-10 p-2
                       rounded
                       hover:-translate-y-1
                       hover:scale-110
                       hover:bg-green-700
                       duration-300
-                      ml-5
-                    "
+                      ml-5"
                     onClick={ () => addCart(toCart!) }
                   >
                     Adicionar ao carrinho
