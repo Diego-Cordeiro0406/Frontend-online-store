@@ -2,8 +2,14 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  max-height: 100vh;
+  /* max-height: 100vh; */
   font-family: Epilogue;
+}
+
+@media (min-width: 1024px) {
+    #root {
+      max-height: 100vh;
+    }
 }
 
 .section-container {

@@ -105,7 +105,7 @@ function Header() {
               laptop:top-0
               laptop:left-5
               phone:right-4
-              phone:top-4
+              phone:top-6
               font-bold
             "
           >

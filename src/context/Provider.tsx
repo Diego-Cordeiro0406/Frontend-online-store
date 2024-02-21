@@ -17,6 +17,7 @@ function Provider({ children }: MyProviderProps) {
   const [productData, setProduct] = useState<Product | null>(null);
   const [cart, setCart] = useState<ProductCart[]>([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [productDataLoaded, setProductDataLoaded] = useState(false);
 
   const URL_DATABASE = 'https://api.mercadolibre.com/';
 
@@ -169,6 +170,8 @@ function Provider({ children }: MyProviderProps) {
     sutractQuantity,
     toggleCategories,
     sidebarOpen,
+    productDataLoaded,
+    setProductDataLoaded,
   };
   return (
     <Context.Provider value={ value }>
