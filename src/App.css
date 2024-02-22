@@ -71,3 +71,7 @@
 .toggle.open {
   left: 0;
 }
+
+.cart-width {
+  width: 90%;
+}

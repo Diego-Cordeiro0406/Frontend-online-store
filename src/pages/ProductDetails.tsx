@@ -51,7 +51,7 @@ function ProductDetails() {
               className="
                 flex
                 justify-center
-                h-screen
+                h-full
                 laptop:flex-row
                 phone:flex-col
                 phone:overflow-auto
