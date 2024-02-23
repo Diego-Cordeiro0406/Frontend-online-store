@@ -7,6 +7,7 @@ import Context from '../context/Context';
 import Header from '../components/Header';
 import CartDesktop from '../components/CartDesktop';
 import CartMobile from '../components/CartMobile';
+import CategoriesBar from '../components/CategoriesBar';
 
 function ShoppingCart() {
   const context = useContext(Context);
@@ -19,11 +20,12 @@ function ShoppingCart() {
 
   return (
     <>
+      <CategoriesBar />
       <Header />
       {
         cart.length === 0
           ? (
-            <span
+            <div
               className="
                 flex
                 flex-col
@@ -31,7 +33,8 @@ function ShoppingCart() {
                 items-center
                 laptop:w-screen
                 laptop:h-screen
-                phone:h-full
+                phone:h-96
+                phone:overflow-hidden
               "
               data-testid="shopping-cart-empty-message"
             >
@@ -65,7 +68,7 @@ function ShoppingCart() {
               >
                 Seu carrinho está vazio
               </h3>
-            </span>
+            </div>
           )
           : (
             <main className="flex justify-center h-full phone:flex-col laptop:flex-row">

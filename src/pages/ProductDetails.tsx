@@ -8,6 +8,7 @@ import Header from '../components/Header';
 import Context from '../context/Context';
 import DetailsDesktop from '../components/detailsDesktop';
 import DetailsMobile from '../components/detailsMobile';
+import CategoriesBar from '../components/CategoriesBar';
 
 function ProductDetails() {
   const { id } = useParams();
@@ -39,6 +40,7 @@ function ProductDetails() {
 
   return (
     <>
+      <CategoriesBar />
       <Header />
       {
         isLoading

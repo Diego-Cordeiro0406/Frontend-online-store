@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaPlus, FaMinus } from 'react-icons/fa';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { TiArrowBack } from 'react-icons/ti';
 
@@ -13,61 +12,68 @@ function CheckoutScreen() {
   const navigate = useNavigate();
 
   if (!context) return null;
-  const { cart, getQuantity, addQuantity, sutractQuantity, removeProduct } = context;
+  const { cart, getQuantity, removeProduct } = context;
   return (
     <>
       <Header />
-      <main className="flex justify-center h-screen">
-        <button
-          className="
-                  absolute
-                  top-32
-                  left-10
-                  flex
-                  items-center
-                  font-semibold
-                  text-lg
-                  text-[#2FC18C]
-                "
-          onClick={ () => navigate(-1) }
-        >
-          <TiArrowBack size="1.5em" style={ { color: '#2FC18C' } } />
-          Voltar
-        </button>
+      <main
+        className="
+          flex
+          justify-center
+          h-full
+          laptop:flex-row
+          phone:flex-col
+          phone:overflow-y-scroll
+        "
+      >
         <section
           className="
-                flex
-                flex-col
-                w-3/6
-                justify-center
-                items-center
-                bg-slate-100
-              "
+            flex
+            flex-col
+            laptop:w-3/6
+            items-center
+            bg-slate-100
+          "
         >
+          <button
+            className="
+              flex
+              phone:w-full
+              items-center
+              font-semibold
+              text-lg
+              text-[#2FC18C]
+            "
+            onClick={ () => navigate(-1) }
+          >
+            <TiArrowBack size="1.5em" style={ { color: '#2FC18C' } } />
+            Voltar
+          </button>
           <section
             className="
-                    flex flex-col
-                    items-center
-                    bg-white
-                    product-container
-                    shadow-2xl
-                    w-[36rem]
-                    h-[32rem]
-                    overflow-auto
-                    overscroll-contain
-                    "
+              flex flex-col
+              items-center
+              bg-white
+              shadow-2xl
+              w-11/12
+              laptop:h-[32rem]
+              phone:h-5/6
+              phone:max-height-96
+              overflow-auto
+              overscroll-y-scroll
+            "
           >
             <h2
               className="
-                      text-center
-                      font-mono
-                      text-base
-                      font-bold
-                      w-80
-                      max-h-12
-                      mt-8
-                      mb-6
-                      "
+                text-center
+                font-mono
+                text-base
+                font-bold
+                w-80
+                max-h-12
+                mt-8
+                mb-6
+              "
             >
               Revise seus Produtos
             </h2>
@@ -75,11 +81,11 @@ function CheckoutScreen() {
               cart
                 .map((product) => (
                   <div
-                    className="flex flex-col items-center justify-evenly w-[32rem] h-28"
+                    className="flex flex-col items-center justify-evenly w-full h-28"
                     key={ product.id }
                   >
-                    <span className="w-[32rem] width" />
-                    <div className="flex items-center justify-evenly w-[32rem]">
+                    <span className="w-11/12 width" />
+                    <div className="flex items-center justify-evenly w-full">
                       <button
                         aria-label="delete"
                         onClick={ () => removeProduct(product.id) }
@@ -93,50 +99,37 @@ function CheckoutScreen() {
                           font-mono
                           text-base
                           font-bold
-                          w-48
+                          w-32
                           max-h-12
                           overflow-hidden
                         "
                       >
                         {product.title}
                       </h3>
-                      <FaMinus
-                        className="cursor-pointer ml-6"
-                        style={ { color: '#B0B3BB' } }
-                        onClick={ () => sutractQuantity(product.id) }
-                      />
-                      <span
-                        className="
-                          rounded-full
-                          bg-gray-400
-                          w-5
-                          h-5
-                          text-white
-                          flex
-                          justify-center
-                          items-center
-                          mx-2.5
-                          "
-                      >
-                        {product.quantity}
+                      <span className="flex">
+                        <p className="laptop:pl-6 pr-2">R$</p>
+                        <p
+                          className="w-12"
+                        >
+                          {Number((product.price * product.quantity).toFixed(2))}
+                        </p>
                       </span>
-                      <FaPlus
-                        className="cursor-pointer"
-                        style={ { color: '#B0B3BB' } }
-                        onClick={ () => addQuantity(product.id) }
-                      />
-                      <p className="pl-6 pr-2">R$</p>
-                      <p
-                        className="w-12"
-                      >
-                        {Number((product.price * product.quantity).toFixed(2))}
-                      </p>
                     </div>
                   </div>
                 ))
             }
           </section>
-          <div className="flex justify-center items-center w-[36rem] h-[4rem] bg-white">
+          <div
+            className="
+              flex
+              justify-center
+              items-center
+              w-11/12
+              h-[4rem]
+              bg-white
+              phone:mb-4
+            "
+          >
             <h3 className="text-xl font-bold">{`Total: R$ ${getQuantity()}`}</h3>
           </div>
         </section>
