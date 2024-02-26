@@ -92,22 +92,28 @@ function CheckoutScreen() {
                       >
                         <AiOutlineDelete size="1.5rem" />
                       </button>
-                      <img src={ product.img } alt={ product.title } />
+                      <img
+                        className="phone:w-20 phone:h-20"
+                        src={ product.img }
+                        alt={ product.title }
+                      />
                       <h3
                         className="
                           text-center
                           font-mono
                           text-base
                           font-bold
-                          w-32
-                          max-h-12
+                          phone:w-24
+                          laptop:h-32
+                          desktop:h-32
+                          max-h-16
                           overflow-hidden
                         "
                       >
                         {product.title}
                       </h3>
                       <span className="flex">
-                        <p className="laptop:pl-6 pr-2">R$</p>
+                        <p className="laptop:pl-6 pr-1">R$</p>
                         <p
                           className="w-12"
                         >
