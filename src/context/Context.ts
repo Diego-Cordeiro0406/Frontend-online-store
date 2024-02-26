@@ -5,6 +5,8 @@ type BatataState = boolean;
 type SearchState = string;
 type InputState = string;
 type ProductState = Product;
+type ProductDataLoaded = boolean;
+type Open = boolean;
 
 export interface MyContextProps {
   getCategories: () => Promise<Categories[]>;
@@ -33,6 +35,11 @@ export interface MyContextProps {
   removeProduct: (id: string) => void,
   addQuantity: (id: string) => void,
   sutractQuantity: (id: string) => void,
+  toggleCategories: () => void,
+  sidebarOpen: boolean,
+  productDataLoaded:boolean,
+  setProductDataLoaded: Dispatch<SetStateAction<ProductDataLoaded>>,
+  setSidebarOpen: Dispatch<SetStateAction<Open>>,
 }
 
 const Context = createContext<MyContextProps | undefined>(undefined);
