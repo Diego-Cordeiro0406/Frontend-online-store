@@ -49,7 +49,7 @@ function DetailsMobile() {
       flex-col
       justify-start
       h-96
-      items-start
+      items-center
     "
     >
       <div
@@ -120,7 +120,7 @@ function DetailsMobile() {
           Adicionar ao carrinho
         </button>
       </div>
-      <div className="flex w-full justify-start mt-6">
+      <div className="flex w-full justify-center mt-6">
         <h3
           className="
             font-bold

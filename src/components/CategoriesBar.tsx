@@ -1,18 +1,20 @@
 import { useContext, useState, useEffect } from 'react';
 import { FaArrowLeft } from 'react-icons/fa6';
+import { useNavigate } from 'react-router-dom';
 import Context from '../context/Context';
 
 function CategoriesBar() {
   const [lastValorInput, setLastValorInput] = useState('');
 
   const context = useContext(Context);
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (context && context.valueInput !== lastValorInput) {
       setLastValorInput(context.valueInput);
       if (context.valueInput) {
+        navigate('/');
+        context.setSidebarOpen(false);
         context.sendProductsRequest(context.valueInput);
-        context.toggleCategories();
       }
     }
   }, [context, lastValorInput]);

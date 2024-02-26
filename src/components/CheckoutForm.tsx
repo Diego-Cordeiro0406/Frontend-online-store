@@ -35,25 +35,45 @@ function CheckoutForm() {
         <div className="flex flex-wrap justify-center items-center h-24 w-11/12">
           <input
             placeholder="Nome Completo"
-            className="laptop:w-52 phone:w-40 h-8 border border-[#94979D] pl-1"
+            className="
+              laptop:w-52
+              phone:w-40
+              tablet:w-64
+              desktop:w-[18.75rem]
+              h-8 border border-[#94979D] pl-1"
             type="text"
             required
           />
           <input
             placeholder="CPF"
-            className="laptop:w-52 phone:w-40 h-8 border border-[#94979D] pl-1 ml-2"
+            className="
+              laptop:w-52
+              phone:w-40
+              tablet:w-64
+              desktop:w-[18.75rem]
+              h-8 border border-[#94979D] pl-1 ml-2"
             type="text"
             required
           />
           <input
             placeholder="Email"
-            className="laptop:w-52 phone:w-40 h-8 border border-[#94979D] pl-1"
+            className="
+              laptop:w-52
+              phone:w-40
+              tablet:w-64
+              desktop:w-[18.75rem]
+              h-8 border border-[#94979D] pl-1"
             type="text"
             required
           />
           <input
             placeholder="Telefone"
-            className="laptop:w-52 phone:w-40 h-8 border border-[#94979D] pl-1 ml-2"
+            className="
+              laptop:w-52
+              phone:w-40
+              tablet:w-64
+              desktop:w-[18.75rem]
+              h-8 border border-[#94979D] pl-1 ml-2"
             type="text"
             required
           />
@@ -66,6 +86,8 @@ function CheckoutForm() {
             h-8
             laptop:w-[26.5rem]
             phone:w-[20.568rem]
+            tablet:w-[32.5rem]
+            desktop:w-[38rem]
             mt-2
           "
         >
@@ -90,6 +112,8 @@ function CheckoutForm() {
             h-8
             laptop:w-[26.5rem]
             phone:w-[20.568rem]
+            tablet:w-[32.5rem]
+            desktop:w-[38rem]
             mt-4
           "
         >
@@ -111,9 +135,11 @@ function CheckoutForm() {
             justify-evenly
             items-center
             h-8
-            laptop:w-[26.5rem]
             mt-4
+            laptop:w-[26.5rem]
             phone:w-[20.568rem]
+            tablet:w-[32.5rem]
+            desktop:w-[38rem]
           "
         >
           <input

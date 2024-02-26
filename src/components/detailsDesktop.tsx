@@ -124,7 +124,7 @@ productData?.attributes.slice(1).map((attribute) => (
           className="bg-green-400 text-white font-mono h-10 p-2
           rounded
           hover:-translate-y-1
-          hover:scale-110
+          hover:scale-100
           hover:bg-green-700
           duration-300
           ml-5"

@@ -12,7 +12,7 @@ import CategoriesBar from '../components/CategoriesBar';
 
 function ProductDetails() {
   const { id } = useParams();
-  const isMobile = useMediaQuery({ maxWidth: 1024 });
+  const isMobile = useMediaQuery({ maxWidth: 1023 });
 
   const context = useContext(Context);
 
@@ -98,6 +98,7 @@ function ProductDetails() {
                     laptop:mb-8
                     laptop:h-[32.25rem]
                     laptop:w-[30.5rem]
+                    tablet:w-4/5
                     phone:h-[22rem]
                     shadow-2xl
             "

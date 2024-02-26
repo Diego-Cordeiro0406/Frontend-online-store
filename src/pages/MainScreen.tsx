@@ -42,7 +42,7 @@ function MainScreen() {
               flex-row
               overflow-auto
               overscroll-contain
-              h-screen
+              h-[37.5rem]
             "
           >
             <section

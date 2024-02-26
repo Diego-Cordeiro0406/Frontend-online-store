@@ -13,7 +13,7 @@ function ShoppingCart() {
   const context = useContext(Context);
   const navigate = useNavigate();
 
-  const isMobile = useMediaQuery({ maxWidth: 1024 });
+  const isMobile = useMediaQuery({ maxWidth: 1023 });
 
   if (!context) return null;
   const { cart } = context;

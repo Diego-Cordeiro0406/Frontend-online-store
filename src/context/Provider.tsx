@@ -140,6 +140,7 @@ function Provider({ children }: MyProviderProps) {
   };
 
   const toggleCategories = async () => {
+    console.log('fui chamado');
     setSidebarOpen(!sidebarOpen);
   };
 
@@ -170,6 +171,7 @@ function Provider({ children }: MyProviderProps) {
     sutractQuantity,
     toggleCategories,
     sidebarOpen,
+    setSidebarOpen,
     productDataLoaded,
     setProductDataLoaded,
   };
