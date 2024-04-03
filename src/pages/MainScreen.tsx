@@ -42,6 +42,7 @@ function MainScreen() {
               flex-row
               overflow-auto
               overscroll-contain
+              h-4/5
               phone:h-screen
               tablet:h-screen
               laptop:h-full

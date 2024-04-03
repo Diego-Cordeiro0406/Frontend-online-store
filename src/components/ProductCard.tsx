@@ -23,7 +23,7 @@ function ProductCard({ id, title, img, price }: ProdcutCardProps) {
       laptop:h-80
       phone:w-40
       phone:h-60
-      my-6
+      mt-6
       mx-2
       bg-white
       shadow-lg

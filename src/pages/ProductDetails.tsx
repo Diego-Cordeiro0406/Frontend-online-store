@@ -52,11 +52,12 @@ function ProductDetails() {
             <main
               className="
                 flex
-                justify-center
-                h-full
+                phone:justify-center
+                laptop:justify-center
+                h-4/5
                 laptop:flex-row
                 phone:flex-col
-                phone:overflow-auto
+                phone:overflow-y-scroll
               "
             >
               <section
@@ -67,7 +68,7 @@ function ProductDetails() {
                   laptop:w-3/6
                   phone:w-full
                   phone:h-3/6
-                  phone:pb-6
+
                   laptop:h-full
                   justify-center
                   items-center

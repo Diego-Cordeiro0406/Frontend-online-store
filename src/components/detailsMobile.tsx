@@ -1,5 +1,7 @@
 import { FaPlus, FaMinus } from 'react-icons/fa';
+import { IoIosArrowForward } from 'react-icons/io';
 import { useContext, useEffect, useState } from 'react';
+
 import Context from '../context/Context';
 import { ProductCart } from '../types/typesApi';
 
@@ -47,8 +49,8 @@ function DetailsMobile() {
       className="
       flex
       flex-col
+      h-3/6
       justify-start
-      h-96
       items-center
     "
     >
@@ -121,7 +123,7 @@ function DetailsMobile() {
         </button>
       </div>
       <div className="flex w-full justify-center mt-6">
-        <h3
+        {/* <h3
           className="
             font-bold
             phone:text-lg
@@ -129,10 +131,28 @@ function DetailsMobile() {
           "
         >
           Especificações tecnicas
-        </h3>
+        </h3> */}
       </div>
-
-      <ul
+      <div
+        className="
+          flex
+          justify-between
+          items-center
+          font-mono
+          font-bold
+          w-11/12
+          h-10
+          border
+          border-solid
+          border-[#d6d6d6]
+          rounded-md
+          cursor-pointer
+        "
+      >
+        <h3 className="ml-1">Conferir Especificações</h3>
+        <IoIosArrowForward className="mr-1" />
+      </div>
+      {/* <ul
         className="
           text-slate-700
           bg-slate-100
@@ -150,7 +170,7 @@ productData?.attributes.slice(1).map((attribute) => (
   </li>
 ))
 }
-      </ul>
+      </ul> */}
     </section>
   );
 }
