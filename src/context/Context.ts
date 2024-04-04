@@ -36,10 +36,13 @@ export interface MyContextProps {
   addQuantity: (id: string) => void,
   sutractQuantity: (id: string) => void,
   toggleCategories: () => void,
+  toggleAttributes: () => void,
   sidebarOpen: boolean,
+  attributesOpen: boolean,
   productDataLoaded:boolean,
   setProductDataLoaded: Dispatch<SetStateAction<ProductDataLoaded>>,
   setSidebarOpen: Dispatch<SetStateAction<Open>>,
+  setAttributesOpen: Dispatch<SetStateAction<Open>>,
 }
 
 const Context = createContext<MyContextProps | undefined>(undefined);

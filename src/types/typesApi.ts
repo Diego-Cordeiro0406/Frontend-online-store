@@ -98,7 +98,7 @@ type Location = {
   name: string;
 };
 
-type Attribute = {
+export type Attribute = {
   id: string;
   name: string;
   value_id: string | null;

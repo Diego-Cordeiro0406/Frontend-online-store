@@ -6,8 +6,8 @@ import { TiArrowBack } from 'react-icons/ti';
 
 import Header from '../components/Header';
 import Context from '../context/Context';
-import DetailsDesktop from '../components/detailsDesktop';
-import DetailsMobile from '../components/detailsMobile';
+import DetailsDesktop from '../components/DetailsDesktop';
+import DetailsMobile from '../components/DetailsMobile';
 import CategoriesBar from '../components/CategoriesBar';
 
 function ProductDetails() {
@@ -68,7 +68,6 @@ function ProductDetails() {
                   laptop:w-3/6
                   phone:w-full
                   phone:h-3/6
-
                   laptop:h-full
                   justify-center
                   items-center

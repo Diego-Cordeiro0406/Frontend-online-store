@@ -17,6 +17,7 @@ function Provider({ children }: MyProviderProps) {
   const [productData, setProduct] = useState<Product | null>(null);
   const [cart, setCart] = useState<ProductCart[]>([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [attributesOpen, setAttributesOpen] = useState(false);
   const [productDataLoaded, setProductDataLoaded] = useState(false);
 
   const URL_DATABASE = 'https://api.mercadolibre.com/';
@@ -140,8 +141,12 @@ function Provider({ children }: MyProviderProps) {
   };
 
   const toggleCategories = async () => {
-    console.log('fui chamado');
     setSidebarOpen(!sidebarOpen);
+  };
+
+  const toggleAttributes = async () => {
+    console.log('fui chamado');
+    setAttributesOpen(!attributesOpen);
   };
 
   // Estados e funções a serem compartilhados entre os componentes.
@@ -170,8 +175,11 @@ function Provider({ children }: MyProviderProps) {
     addQuantity,
     sutractQuantity,
     toggleCategories,
+    toggleAttributes,
     sidebarOpen,
+    attributesOpen,
     setSidebarOpen,
+    setAttributesOpen,
     productDataLoaded,
     setProductDataLoaded,
   };

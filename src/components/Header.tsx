@@ -61,6 +61,7 @@ function Header() {
         bg-blue-700
         flex
         h-1/5
+        min-h-[8.75rem]
         max-h-[8.75rem]
         flex-col
         justify-between

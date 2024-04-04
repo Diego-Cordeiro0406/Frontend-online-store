@@ -1,9 +1,10 @@
-import { FaPlus, FaMinus } from 'react-icons/fa';
+import { FaPlus, FaMinus } from 'react-icons/fa6';
 import { IoIosArrowForward } from 'react-icons/io';
 import { useContext, useEffect, useState } from 'react';
 
 import Context from '../context/Context';
 import { ProductCart } from '../types/typesApi';
+import ProductAttributes from './ProductAttributes';
 
 function DetailsMobile() {
   const [toCart, setCart] = useState<ProductCart>();
@@ -43,7 +44,9 @@ function DetailsMobile() {
   const {
     productData,
     addCart,
+    toggleAttributes,
   } = context;
+
   return (
     <section
       className="
@@ -122,18 +125,7 @@ function DetailsMobile() {
           Adicionar ao carrinho
         </button>
       </div>
-      <div className="flex w-full justify-center mt-6">
-        {/* <h3
-          className="
-            font-bold
-            phone:text-lg
-            font-mono
-          "
-        >
-          Especificações tecnicas
-        </h3> */}
-      </div>
-      <div
+      <button
         className="
           flex
           justify-between
@@ -148,29 +140,14 @@ function DetailsMobile() {
           rounded-md
           cursor-pointer
         "
+        onClick={ toggleAttributes }
       >
         <h3 className="ml-1">Conferir Especificações</h3>
         <IoIosArrowForward className="mr-1" />
-      </div>
-      {/* <ul
-        className="
-          text-slate-700
-          bg-slate-100
-          max-w-lg
-          mt-6
-        "
-      >
-        {
-productData?.attributes.slice(1).map((attribute) => (
-  <li
-    className="ml-5 font-sans"
-    key={ attribute.id }
-  >
-    {`${attribute.name}: ${attribute.value_name}`}
-  </li>
-))
-}
-      </ul> */}
+      </button>
+      {
+        productData && (<ProductAttributes data={ productData.attributes } />)
+      }
     </section>
   );
 }
