@@ -87,10 +87,14 @@ function MainScreen() {
             </p>
           )
         }
-              { isLoading ? <ScaleLoader
-                data-testid="loading"
-                color="#36d7b7"
-              /> : data
+              { isLoading ? (
+                <section className="flex justify-center items-center w-full h-full">
+                  <ScaleLoader
+                    data-testid="loading"
+                    color="#36d7b7"
+                  />
+                </section>
+              ) : data
                 .map((product) => (
                   <ProductCard
                     key={ product.id }

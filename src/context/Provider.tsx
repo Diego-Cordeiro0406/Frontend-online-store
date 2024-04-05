@@ -1,5 +1,5 @@
 import { ReactNode, useState } from 'react';
-import { Categories, Product, ProductCart } from '../types/typesApi';
+import { Attribute, Categories, Product, ProductCart } from '../types/typesApi';
 import Context, { MyContextProps } from './Context';
 
 interface MyProviderProps {
@@ -17,7 +17,7 @@ function Provider({ children }: MyProviderProps) {
   const [productData, setProduct] = useState<Product | null>(null);
   const [cart, setCart] = useState<ProductCart[]>([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [attributesOpen, setAttributesOpen] = useState(false);
+  const [attributesData, setAttributesData] = useState<Attribute[] | null>(null);
   const [productDataLoaded, setProductDataLoaded] = useState(false);
 
   const URL_DATABASE = 'https://api.mercadolibre.com/';
@@ -37,6 +37,7 @@ function Provider({ children }: MyProviderProps) {
       const response = await fetch(`${URL_DATABASE}items/${id}`);
       const jsonData = await response.json();
       setProduct(jsonData);
+      setAttributesData(jsonData.attributes);
     } catch (error) {
       console.log(error);
     } finally {
@@ -140,14 +141,14 @@ function Provider({ children }: MyProviderProps) {
     setCart(newCart);
   };
 
-  const toggleCategories = async () => {
+  const toggleCategories = async ():Promise<void> => {
     setSidebarOpen(!sidebarOpen);
   };
 
-  const toggleAttributes = async () => {
-    console.log('fui chamado');
-    setAttributesOpen(!attributesOpen);
-  };
+  // const toggleAttributes = async () => {
+  //   console.log('fui chamado');
+  //   setAttributesOpen(!attributesOpen);
+  // };
 
   // Estados e funções a serem compartilhados entre os componentes.
   const value:MyContextProps = {
@@ -175,11 +176,9 @@ function Provider({ children }: MyProviderProps) {
     addQuantity,
     sutractQuantity,
     toggleCategories,
-    toggleAttributes,
     sidebarOpen,
-    attributesOpen,
+    attributesData,
     setSidebarOpen,
-    setAttributesOpen,
     productDataLoaded,
     setProductDataLoaded,
   };

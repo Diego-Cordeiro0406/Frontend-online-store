@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, createContext } from 'react';
-import { Categories, Product, ProductCart } from '../types/typesApi';
+import { Attribute, Categories, Product, ProductCart } from '../types/typesApi';
 
 type BatataState = boolean;
 type SearchState = string;
@@ -36,13 +36,11 @@ export interface MyContextProps {
   addQuantity: (id: string) => void,
   sutractQuantity: (id: string) => void,
   toggleCategories: () => void,
-  toggleAttributes: () => void,
   sidebarOpen: boolean,
-  attributesOpen: boolean,
+  attributesData: Attribute[] | null,
   productDataLoaded:boolean,
   setProductDataLoaded: Dispatch<SetStateAction<ProductDataLoaded>>,
   setSidebarOpen: Dispatch<SetStateAction<Open>>,
-  setAttributesOpen: Dispatch<SetStateAction<Open>>,
 }
 
 const Context = createContext<MyContextProps | undefined>(undefined);

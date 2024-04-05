@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  /* width: 100vw; */
   height: 100dvh;
-  /* max-height: 100vh; */
   font-family: 'Source Sans Pro', sans-serif;
 }
 
@@ -77,19 +77,6 @@
   position: absolute;
   top: 0;
   transition: left 0.3s ease;
-}
-
-.toggle-attributes {
-  width: 100%;
-  height: 100%;
-  left: 0%;
-  position: absolute;
-  top: 0;
-  transition: left 0.3s ease;
-}
-
-.toggle-attributes.open-attr {
-  left: 100%;
 }
 
 .toggle.open {

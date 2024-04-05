@@ -2,9 +2,9 @@ import { FaPlus, FaMinus } from 'react-icons/fa6';
 import { IoIosArrowForward } from 'react-icons/io';
 import { useContext, useEffect, useState } from 'react';
 
+import { Link } from 'react-router-dom';
 import Context from '../context/Context';
 import { ProductCart } from '../types/typesApi';
-import ProductAttributes from './ProductAttributes';
 
 function DetailsMobile() {
   const [toCart, setCart] = useState<ProductCart>();
@@ -44,7 +44,6 @@ function DetailsMobile() {
   const {
     productData,
     addCart,
-    toggleAttributes,
   } = context;
 
   return (
@@ -125,7 +124,7 @@ function DetailsMobile() {
           Adicionar ao carrinho
         </button>
       </div>
-      <button
+      <Link
         className="
           flex
           justify-between
@@ -140,14 +139,11 @@ function DetailsMobile() {
           rounded-md
           cursor-pointer
         "
-        onClick={ toggleAttributes }
+        to={ `/attributes/${productData?.id}` }
       >
         <h3 className="ml-1">Conferir Especificações</h3>
         <IoIosArrowForward className="mr-1" />
-      </button>
-      {
-        productData && (<ProductAttributes data={ productData.attributes } />)
-      }
+      </Link>
     </section>
   );
 }
