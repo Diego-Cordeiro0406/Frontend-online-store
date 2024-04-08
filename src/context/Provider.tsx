@@ -1,5 +1,5 @@
 import { ReactNode, useState } from 'react';
-import { Attribute, Categories, Product, ProductCart } from '../types/typesApi';
+import { Categories, Product, ProductCart } from '../types/typesApi';
 import Context, { MyContextProps } from './Context';
 
 interface MyProviderProps {
@@ -17,7 +17,6 @@ function Provider({ children }: MyProviderProps) {
   const [productData, setProduct] = useState<Product | null>(null);
   const [cart, setCart] = useState<ProductCart[]>([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [attributesData, setAttributesData] = useState<Attribute[] | null>(null);
   const [productDataLoaded, setProductDataLoaded] = useState(false);
 
   const URL_DATABASE = 'https://api.mercadolibre.com/';
@@ -37,7 +36,6 @@ function Provider({ children }: MyProviderProps) {
       const response = await fetch(`${URL_DATABASE}items/${id}`);
       const jsonData = await response.json();
       setProduct(jsonData);
-      setAttributesData(jsonData.attributes);
     } catch (error) {
       console.log(error);
     } finally {
@@ -177,7 +175,6 @@ function Provider({ children }: MyProviderProps) {
     sutractQuantity,
     toggleCategories,
     sidebarOpen,
-    attributesData,
     setSidebarOpen,
     productDataLoaded,
     setProductDataLoaded,

@@ -129,6 +129,7 @@ function DetailsMobile() {
           flex
           justify-between
           items-center
+          mt-4
           font-mono
           font-bold
           w-11/12
