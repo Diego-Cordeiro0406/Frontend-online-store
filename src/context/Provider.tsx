@@ -143,11 +143,6 @@ function Provider({ children }: MyProviderProps) {
     setSidebarOpen(!sidebarOpen);
   };
 
-  // const toggleAttributes = async () => {
-  //   console.log('fui chamado');
-  //   setAttributesOpen(!attributesOpen);
-  // };
-
   // Estados e funções a serem compartilhados entre os componentes.
   const value:MyContextProps = {
     getCategories,
