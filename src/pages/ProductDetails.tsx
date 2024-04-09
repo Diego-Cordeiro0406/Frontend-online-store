@@ -52,9 +52,9 @@ function ProductDetails() {
             <main
               className="
                 flex
-                phone:justify-center
+                phone:justify-start
                 laptop:justify-center
-                h-4/5
+                h-5/6
                 laptop:flex-row
                 phone:flex-col
                 phone:overflow-y-scroll
@@ -65,11 +65,11 @@ function ProductDetails() {
                   flex
                   flex-col
                   laptop:justify-evenly
-                  laptop:w-3/6
+                  laptop:w-3/5
                   phone:w-full
                   phone:h-3/6
                   laptop:h-full
-                  justify-center
+                  phone:justify-start
                   items-center
                   bg-slate-100
                 "

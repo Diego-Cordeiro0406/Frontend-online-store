@@ -63,7 +63,7 @@ function ProductAttributes() {
           />
           <h3 className="text-lg ml-10">Características do produto</h3>
         </div>
-        <section className="w-full h-4/5 pt-4">
+        <section className="w-full h-4/5 py-4 pl-2">
           {
             isLoading && (
               <section className="flex justify-center items-center w-full h-full">
@@ -76,12 +76,28 @@ function ProductAttributes() {
           }
           {
           !isLoading && productData?.attributes.map((attribute: Attribute) => (
-            <p
-              className="ml-5 my-2 font-sans w-11/12 text-base"
-              key={ attribute.id }
-            >
-              {`${attribute.name}: ${attribute.value_name}`}
-            </p>
+            <section className="flex flex-col" key={ attribute.id }>
+              <div className="flex">
+                <h3
+                  className="
+                    flex
+                    items-center
+                    w-3/6
+                    pl-1
+                    bg-gray-100
+                    text-sm"
+                >
+                  {`${attribute.name}`}
+                </h3>
+                <p
+                  className="ml-5 my-2 font-sans w-3/5 text-sm"
+                >
+                  {`${attribute.value_name}`}
+                </p>
+              </div>
+              <div className="width border-gray-300 w-11/12" />
+            </section>
+
           ))
         }
         </section>

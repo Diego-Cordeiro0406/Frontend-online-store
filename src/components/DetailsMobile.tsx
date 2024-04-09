@@ -51,7 +51,7 @@ function DetailsMobile() {
       className="
       flex
       flex-col
-      h-3/6
+      h-2/5
       justify-start
       items-center
     "
