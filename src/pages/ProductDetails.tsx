@@ -6,8 +6,8 @@ import { TiArrowBack } from 'react-icons/ti';
 
 import Header from '../components/Header';
 import Context from '../context/Context';
-import DetailsDesktop from '../components/detailsDesktop';
-import DetailsMobile from '../components/detailsMobile';
+import DetailsDesktop from '../components/DetailsDesktop';
+import DetailsMobile from '../components/DetailsMobile';
 import CategoriesBar from '../components/CategoriesBar';
 
 function ProductDetails() {
@@ -52,11 +52,12 @@ function ProductDetails() {
             <main
               className="
                 flex
-                justify-center
-                h-full
+                phone:justify-start
+                laptop:justify-center
+                h-5/6
                 laptop:flex-row
                 phone:flex-col
-                phone:overflow-auto
+                phone:overflow-y-scroll
               "
             >
               <section
@@ -64,12 +65,11 @@ function ProductDetails() {
                   flex
                   flex-col
                   laptop:justify-evenly
-                  laptop:w-3/6
+                  laptop:w-3/5
                   phone:w-full
                   phone:h-3/6
-                  phone:pb-6
                   laptop:h-full
-                  justify-center
+                  phone:justify-start
                   items-center
                   bg-slate-100
                 "

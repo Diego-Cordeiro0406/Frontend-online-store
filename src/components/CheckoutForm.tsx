@@ -9,6 +9,7 @@ function CheckoutForm() {
       className="
         flex
         laptop:w-3/6
+        phone:h-3/6
         flex-col
         justify-start
         items-center

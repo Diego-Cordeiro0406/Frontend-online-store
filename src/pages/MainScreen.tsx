@@ -42,6 +42,7 @@ function MainScreen() {
               flex-row
               overflow-auto
               overscroll-contain
+              h-4/5
               phone:h-screen
               tablet:h-screen
               laptop:h-full
@@ -86,10 +87,14 @@ function MainScreen() {
             </p>
           )
         }
-              { isLoading ? <ScaleLoader
-                data-testid="loading"
-                color="#36d7b7"
-              /> : data
+              { isLoading ? (
+                <section className="flex justify-center items-center w-full h-full">
+                  <ScaleLoader
+                    data-testid="loading"
+                    color="#36d7b7"
+                  />
+                </section>
+              ) : data
                 .map((product) => (
                   <ProductCard
                     key={ product.id }

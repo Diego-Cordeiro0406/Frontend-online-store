@@ -20,7 +20,7 @@ function CheckoutScreen() {
         className="
           flex
           justify-center
-          h-full
+          h-4/5
           laptop:flex-row
           phone:flex-col
           phone:overflow-y-scroll
@@ -30,7 +30,8 @@ function CheckoutScreen() {
           className="
             flex
             flex-col
-            laptop:w-3/6
+            laptop:w-1/5
+            phone:h-3/6
             items-center
             bg-slate-100
           "

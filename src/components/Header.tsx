@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa';
 import { GiHamburgerMenu } from 'react-icons/gi';
@@ -13,6 +13,8 @@ function Header() {
     const novoValor = event.target.value;
     setSearch(novoValor);
   };
+
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -45,13 +47,22 @@ function Header() {
     }
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Previne o comportamento padrão do Enter (por exemplo, enviar um formulário)
+      handleClick(); // Aciona a função de envio
+      inputRef.current?.blur();
+    }
+  };
+
   return (
     <header
       className="
         bg-blue-700
         flex
-        h-52
-        phone:h-44
+        h-1/5
+        min-h-[8.75rem]
+        max-h-[8.75rem]
         flex-col
         justify-between
         items-center
@@ -64,16 +75,18 @@ function Header() {
           style={ { color: '#FFFFFF' } }
           className="ml-5 laptop:w-10 laptop:h-10 phone:w-9 phone:h-9 cursor-pointer"
         />
-        <img
-          className="
+        <Link to="/">
+          <img
+            className="
           laptop:w-40
           laptop:h-12
           phone:w-36
           phone:h-10
         "
-          src={ logo }
-          alt="logo"
-        />
+            src={ logo }
+            alt="logo"
+          />
+        </Link>
         <Link
           className="
             h-10
@@ -105,7 +118,7 @@ function Header() {
               laptop:top-0
               laptop:left-5
               phone:right-4
-              phone:top-6
+              phone:top-4
               font-bold
             "
           >
@@ -149,6 +162,7 @@ function Header() {
           data-testid="query-input"
           value={ search }
           onChange={ handleInputChange }
+          onKeyDown={ handleKeyDown }
         />
         <button
           data-testid="query-button"

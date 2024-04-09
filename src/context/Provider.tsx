@@ -139,8 +139,7 @@ function Provider({ children }: MyProviderProps) {
     setCart(newCart);
   };
 
-  const toggleCategories = async () => {
-    console.log('fui chamado');
+  const toggleCategories = async ():Promise<void> => {
     setSidebarOpen(!sidebarOpen);
   };
 

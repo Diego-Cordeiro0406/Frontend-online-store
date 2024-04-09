@@ -1,5 +1,8 @@
-import { FaPlus, FaMinus } from 'react-icons/fa';
+import { FaPlus, FaMinus } from 'react-icons/fa6';
+import { IoIosArrowForward } from 'react-icons/io';
 import { useContext, useEffect, useState } from 'react';
+
+import { Link } from 'react-router-dom';
 import Context from '../context/Context';
 import { ProductCart } from '../types/typesApi';
 
@@ -42,13 +45,14 @@ function DetailsMobile() {
     productData,
     addCart,
   } = context;
+
   return (
     <section
       className="
       flex
       flex-col
+      h-2/5
       justify-start
-      h-96
       items-center
     "
     >
@@ -120,37 +124,27 @@ function DetailsMobile() {
           Adicionar ao carrinho
         </button>
       </div>
-      <div className="flex w-full justify-center mt-6">
-        <h3
-          className="
-            font-bold
-            phone:text-lg
-            font-mono
-          "
-        >
-          Especificações tecnicas
-        </h3>
-      </div>
-
-      <ul
+      <Link
         className="
-          text-slate-700
-          bg-slate-100
-          max-w-lg
-          mt-6
+          flex
+          justify-between
+          items-center
+          mt-4
+          font-mono
+          font-bold
+          w-11/12
+          h-10
+          border
+          border-solid
+          border-[#d6d6d6]
+          rounded-md
+          cursor-pointer
         "
+        to={ `/attributes/${productData?.id}` }
       >
-        {
-productData?.attributes.slice(1).map((attribute) => (
-  <li
-    className="ml-5 font-sans"
-    key={ attribute.id }
-  >
-    {`${attribute.name}: ${attribute.value_name}`}
-  </li>
-))
-}
-      </ul>
+        <h3 className="ml-1">Conferir Especificações</h3>
+        <IoIosArrowForward className="mr-1" />
+      </Link>
     </section>
   );
 }
