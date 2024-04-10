@@ -19,6 +19,7 @@ function CartMobile() {
         className="
                 flex
                 flex-col
+                h-3/5
                 justify-evenly
                 items-center
                 bg-slate-100
@@ -50,7 +51,7 @@ function CartMobile() {
             font-bold
             h-20
             max-h-12
-            mt-4
+            mt-2
             cart-width
           "
         >
@@ -151,7 +152,7 @@ function CartMobile() {
           flex-col
           justify-center
           items-center
-          h-full
+          h-2/5
           p-4
         "
       >

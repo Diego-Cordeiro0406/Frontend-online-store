@@ -32,7 +32,7 @@ function CheckoutScreen() {
             flex-col
             laptop:w-3/6
             laptop:h-full
-            phone:h-3/6
+            phone:h-3/5
             items-center
             bg-slate-100
           "

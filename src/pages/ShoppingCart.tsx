@@ -75,7 +75,8 @@ function ShoppingCart() {
               className="
                 flex
                 justify-center
-                h-full
+                laptop:full
+                phone:h-4/5
                 phone:flex-col
                 laptop:flex-row
                 phone:overflow-y-scroll"
