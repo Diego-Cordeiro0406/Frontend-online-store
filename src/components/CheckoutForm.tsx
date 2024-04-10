@@ -9,14 +9,12 @@ function CheckoutForm() {
       className="
         flex
         laptop:w-3/6
-        phone:h-3/6
+        phone:h-2/5
         flex-col
         justify-start
         items-center
         laptop:h-full
         laptop:pt-6
-        laptop:mt-0
-        phone:mt-2
         "
     >
       <section className="flex flex-col justify-center items-center phone:w-full">
@@ -205,11 +203,10 @@ function CheckoutForm() {
           h-10
           p-2
           rounded
-          hover:-translate-y-1
-          hover:scale-110
-          hover:bg-green-700
-          duration-300
-          phone:mb-4
+          laptop:hover:-translate-y-1
+          laptop:hover:scale-110
+          laptop:hover:bg-green-700
+          laptop:duration-300
           "
         onClick={ () => navigate('/') }
       >

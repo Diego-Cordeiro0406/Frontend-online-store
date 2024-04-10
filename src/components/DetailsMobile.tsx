@@ -61,7 +61,7 @@ function DetailsMobile() {
           flex
           h-20
           justify-start
-          mt-6
+          mt-4
           items-center
           flex-col
           w-full

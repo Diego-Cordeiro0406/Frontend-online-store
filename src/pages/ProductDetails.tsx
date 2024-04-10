@@ -67,8 +67,9 @@ function ProductDetails() {
                   laptop:justify-evenly
                   laptop:w-3/5
                   phone:w-full
-                  phone:h-3/6
-                  phone:mb-10
+                  phone:h-3/5
+                  phone:mb-6
+                  laptop:mb-0
                   laptop:h-full
                   phone:justify-start
                   items-center

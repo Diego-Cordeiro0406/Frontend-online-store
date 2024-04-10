@@ -51,7 +51,7 @@ function DetailsDesktop() {
       justify-start
       laptop:h-full
       phone:h-3/6
-      laptop:pl-16
+      laptop:pl-12
       phone:items-center
     "
     >
