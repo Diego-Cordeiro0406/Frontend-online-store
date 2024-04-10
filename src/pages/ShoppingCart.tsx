@@ -71,7 +71,15 @@ function ShoppingCart() {
             </div>
           )
           : (
-            <main className="flex justify-center h-full phone:flex-col laptop:flex-row">
+            <main
+              className="
+                flex
+                justify-center
+                h-full
+                phone:flex-col
+                laptop:flex-row
+                phone:overflow-y-scroll"
+            >
               {
               isMobile ? <CartMobile /> : <CartDesktop />
             }
