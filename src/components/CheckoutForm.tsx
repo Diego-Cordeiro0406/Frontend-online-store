@@ -15,6 +15,7 @@ function CheckoutForm() {
         items-center
         laptop:h-full
         laptop:pt-6
+        laptop:mt-0
         phone:mt-2
         "
     >
@@ -177,7 +178,6 @@ function CheckoutForm() {
           justify-evenly
           phone:items-center
           laptop:mt-8
-          phone:mt-4
         "
       >
         <div className="flex items-center">

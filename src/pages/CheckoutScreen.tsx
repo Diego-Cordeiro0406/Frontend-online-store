@@ -30,7 +30,8 @@ function CheckoutScreen() {
           className="
             flex
             flex-col
-            laptop:w-1/5
+            laptop:w-3/6
+            laptop:h-full
             phone:h-3/6
             items-center
             bg-slate-100
