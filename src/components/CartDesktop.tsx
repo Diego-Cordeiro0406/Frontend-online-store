@@ -15,66 +15,24 @@ function CartDesktop() {
 
   return (
     <>
-      <section
-        className="
-          flex
-          flex-col
-          w-4/6
-          justify-evenly
-          items-center
-          bg-slate-100
-        "
-      >
-        <button
-          className="
-            flex
-            w-full
-            items-center
-            font-semibold
-            text-lg
-            text-[#2FC18C]
-          "
-          onClick={ () => navigate(-1) }
-        >
+      <section className="">
+        <button className="" onClick={ () => navigate(-1) }>
           <TiArrowBack size="1.5em" style={ { color: '#2FC18C' } } />
           Voltar
         </button>
-        <section
-          className="
-            flex flex-col
-            items-center
-            bg-white
-            product-container
-            shadow-2xl
-            w-[40rem]
-            h-[36rem]
-            overflow-auto
-            overscroll-contain
-          "
-        >
-          <h2
-            className="
-              text-center
-              font-mono
-              text-base
-              font-bold
-              w-80
-              max-h-12
-              overflow-hidden
-              my-8
-            "
-          >
+        <section className="">
+          <h2 className="">
             Carrinho de compras
           </h2>
           {
               cart
                 .map((product) => (
                   <div
-                    className="flex flex-col items-center justify-evenly w-[36rem] h-28"
+                    className=""
                     key={ product.id }
                   >
-                    <span className="w-[36rem] width" />
-                    <div className="flex items-center justify-evenly w-[36rem]">
+                    <span className="" />
+                    <div className="">
                       <button
                         aria-label="delete"
                         onClick={ () => removeProduct(product.id) }
@@ -82,37 +40,15 @@ function CartDesktop() {
                         <AiOutlineDelete size="1.5rem" />
                       </button>
                       <img src={ product.img } alt={ product.title } />
-                      <h3
-                        className="
-                          text-center
-                          font-mono
-                          text-base
-                          font-bold
-                          w-48
-                          max-h-12
-                          overflow-hidden
-                        "
-                      >
+                      <h3 className="">
                         {product.title}
                       </h3>
                       <FaMinus
-                        className="cursor-pointer ml-6"
+                        className=""
                         style={ { color: '#B0B3BB' } }
                         onClick={ () => sutractQuantity(product.id) }
                       />
-                      <span
-                        className="
-                          rounded-full
-                          bg-gray-400
-                          w-5
-                          h-5
-                          text-white
-                          flex
-                          justify-center
-                          items-center
-                          mx-2.5
-                          "
-                      >
+                      <span className="">
                         {product.quantity}
                       </span>
                       <FaPlus
@@ -120,9 +56,9 @@ function CartDesktop() {
                         style={ { color: '#B0B3BB' } }
                         onClick={ () => addQuantity(product.id) }
                       />
-                      <p className="pl-6 pr-2">R$</p>
+                      <p className="">R$</p>
                       <p
-                        className="w-12"
+                        className=""
                       >
                         {Number((product.price * product.quantity).toFixed(2))}
                       </p>
@@ -132,41 +68,13 @@ function CartDesktop() {
             }
         </section>
       </section>
-      <section
-        className="
-          flex
-          w-2/6
-          flex-col
-          justify-center
-          items-center
-        "
-      >
-        <h3
-          className="
-            w-80
-            h-12
-            font-bold
-            text-center
-            text-2xl
-          "
-        >
+      <section className="">
+        <h3 className="">
           Valor total da compra:
         </h3>
-        <p className="font-bold text-2xl">{`R$ ${getQuantity()}`}</p>
+        <p className="">{`R$ ${getQuantity()}`}</p>
         <button
-          className="
-            bg-green-400
-            text-white
-            font-mono
-            h-10
-            p-2
-            mt-4
-            rounded
-            hover:-translate-y-1
-            hover:scale-110
-            hover:bg-green-700
-            duration-300
-          "
+          className=""
           onClick={ () => navigate('/checkout') }
         >
           Finalizar compra

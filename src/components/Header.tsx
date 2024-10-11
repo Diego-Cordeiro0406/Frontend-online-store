@@ -56,108 +56,44 @@ function Header() {
   };
 
   return (
-    <header
-      className="
-        bg-blue-700
-        flex
-        h-1/5
-        min-h-[8.75rem]
-        max-h-[8.75rem]
-        flex-col
-        justify-between
-        items-center
-        shadow-xl
-        "
-    >
-      <div className="flex w-full h-2/4 justify-between items-center">
+    <header className="">
+      <div className="">
         <GiHamburgerMenu
           onClick={ () => toggleCategories() }
           style={ { color: '#FFFFFF' } }
-          className="ml-5 laptop:w-10 laptop:h-10 phone:w-9 phone:h-9 cursor-pointer"
+          className=""
         />
         <Link to="/">
           <img
-            className="
-          laptop:w-40
-          laptop:h-12
-          phone:w-36
-          phone:h-10
-        "
+            className=""
             src={ logo }
             alt="logo"
           />
         </Link>
         <Link
-          className="
-            h-10
-            w-10
-            mr-5
-            laptop:top-0
-            laptop:relative
-          "
+          className=""
           data-testid="shopping-cart-button"
           to="/cart"
         >
           <img
             src={ cartLogo }
             alt="cart-logo"
-            className="h-10 w-10"
+            className=""
           />
           <div
-            className="
-              flex
-              justify-center
-              items-center
-              rounded-full
-              bg-green-400
-              font-mono
-              w-6
-              h-6
-              text-white
-              absolute
-              laptop:top-0
-              laptop:left-5
-              phone:right-4
-              phone:top-4
-              font-bold
-            "
+            className=""
           >
-            <p
-              className="
-                flex
-                justify-center
-                w-6
-                h-6
-                absolute
-                phone:top-px
-                laptop:top-px
-              "
-            >
+            <p className="">
               {cart.length}
             </p>
           </div>
         </Link>
       </div>
       <div
-        className="
-          w-full
-          h-2/4
-          flex
-          items-center
-          justify-center
-        "
+        className=""
       >
         <input
-          className="
-            rounded-xl
-            h-10
-            laptop:w-96
-            phone:w-80
-            p-2
-            font-sans
-            focus:outline-none
-            focus:ring
-            focus:ring-emerald-500"
+          className=""
           placeholder="Digite o que você procura"
           data-testid="query-input"
           value={ search }
@@ -168,7 +104,7 @@ function Header() {
           data-testid="query-button"
           onClick={ handleClick }
           aria-label="Pesquisar"
-          className="absolute p-2 phone:ml-80 laptop:ml-96 mr-8"
+          className=""
         >
           <FaSearch className="w-5 h-5" />
         </button>

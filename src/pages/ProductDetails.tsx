@@ -50,61 +50,20 @@ function ProductDetails() {
               color="#36d7b7"
           /> : (
             <main
-              className="
-                flex
-                phone:justify-evenly
-                laptop:justify-center
-                h-5/6
-                laptop:flex-row
-                phone:flex-col
-                phone:overflow-y-scroll
-              "
+              className=""
             >
               <section
-                className="
-                  flex
-                  flex-col
-                  laptop:justify-evenly
-                  laptop:w-3/5
-                  phone:w-full
-                  phone:h-3/5
-                  phone:mb-6
-                  laptop:mb-0
-                  laptop:h-full
-                  phone:justify-start
-                  items-center
-                  bg-slate-100
-                "
+                className=""
                 data-testid="product"
               >
                 <button
-                  className="
-                  flex
-                  w-full
-                  items-center
-                  font-semibold
-                  text-lg
-                  text-[#2FC18C]
-                "
+                  className=""
                   onClick={ () => navigate(-1) }
                 >
                   <TiArrowBack size="1.5em" style={ { color: '#2FC18C' } } />
                   Voltar
                 </button>
-                <span
-                  className="
-                    flex flex-col
-                    justify-evenly
-                    items-center
-                    bg-white
-                    laptop:mb-8
-                    laptop:h-[32.25rem]
-                    laptop:w-[30.5rem]
-                    tablet:w-4/5
-                    phone:h-[22rem]
-                    shadow-2xl
-            "
-                >
+                <span className="">
                   <h3
                     className="phone:text-base laptop:text-xl text-center"
                     data-testid="product-detail-name"
@@ -112,13 +71,7 @@ function ProductDetails() {
                     {productData?.title}
                   </h3>
                   <img
-                    className="
-                      picture-size
-                      laptop:h-auto
-                      laptop:w-auto
-                      phone:h-60
-                      phone:max-w-60
-                    "
+                    className=""
                     data-testid="product-detail-image"
                     src={ productData?.pictures[0].url }
                     alt={ productData?.title }

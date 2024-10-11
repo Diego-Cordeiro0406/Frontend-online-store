@@ -26,61 +26,26 @@ function ShoppingCart() {
         cart.length === 0
           ? (
             <div
-              className="
-                flex
-                flex-col
-                justify-evenly
-                items-center
-                laptop:w-screen
-                laptop:h-screen
-                phone:h-96
-                phone:overflow-hidden
-              "
+              className=""
               data-testid="shopping-cart-empty-message"
             >
 
               <button
-                className="
-                  flex
-                  items-center
-                  w-full
-                  font-semibold
-                  text-lg
-                  text-[#2FC18C]
-                "
+                className=""
                 onClick={ () => navigate(-1) }
               >
                 <TiArrowBack size="1.5em" style={ { color: '#2FC18C' } } />
                 Voltar
               </button>
               <h3
-                className="
-                  flex
-                  justify-center
-                  items-center
-                  laptop:text-3xl
-                  font-semibold
-                  uppercase
-                  text-green-500
-                  w-full
-                  h-full
-                "
+                className=""
               >
                 Seu carrinho está vazio
               </h3>
             </div>
           )
           : (
-            <main
-              className="
-                flex
-                justify-center
-                laptop:full
-                phone:h-4/5
-                phone:flex-col
-                laptop:flex-row
-                phone:overflow-y-scroll"
-            >
+            <main className="">
               {
               isMobile ? <CartMobile /> : <CartDesktop />
             }

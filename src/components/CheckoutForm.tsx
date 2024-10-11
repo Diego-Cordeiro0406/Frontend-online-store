@@ -5,211 +5,105 @@ import logo from '../images/elo.svg';
 function CheckoutForm() {
   const navigate = useNavigate();
   return (
-    <section
-      className="
-        flex
-        laptop:w-3/6
-        phone:h-2/5
-        flex-col
-        justify-start
-        items-center
-        laptop:h-full
-        laptop:pt-6
-        "
-    >
-      <section className="flex flex-col justify-center items-center phone:w-full">
-        <span className="w-80 h-8 my-4">
+    <section className="">
+      <section className="">
+        <span className="">
           <h3
-            className="
-            text-center
-            font-mono
-            text-base
-            font-bold
-            w-80
-            text-lg
-            "
+            className=""
           >
             Informações do comprador
           </h3>
         </span>
-        <div className="flex flex-wrap justify-center items-center h-24 w-11/12">
+        <div className="">
           <input
             placeholder="Nome Completo"
-            className="
-              laptop:w-52
-              phone:w-40
-              tablet:w-64
-              desktop:w-[18.75rem]
-              h-8 border border-[#94979D] pl-1"
+            className=""
             type="text"
             required
           />
           <input
             placeholder="CPF"
-            className="
-              laptop:w-52
-              phone:w-40
-              tablet:w-64
-              desktop:w-[18.75rem]
-              h-8 border border-[#94979D] pl-1 ml-2"
+            className=""
             type="text"
             required
           />
           <input
             placeholder="Email"
-            className="
-              laptop:w-52
-              phone:w-40
-              tablet:w-64
-              desktop:w-[18.75rem]
-              h-8 border border-[#94979D] pl-1"
+            className=""
             type="text"
             required
           />
           <input
             placeholder="Telefone"
-            className="
-              laptop:w-52
-              phone:w-40
-              tablet:w-64
-              desktop:w-[18.75rem]
-              h-8 border border-[#94979D] pl-1 ml-2"
+            className=""
             type="text"
             required
           />
         </div>
-        <div
-          className="
-            flex
-            justify-evenly
-            items-center
-            h-8
-            laptop:w-[26.5rem]
-            phone:w-[20.568rem]
-            tablet:w-[32.5rem]
-            desktop:w-[38rem]
-            mt-2
-          "
-        >
+        <div className="">
           <input
             placeholder="CEP"
-            className="w-2/6 h-8 border border-[#94979D] pl-1"
+            className=""
             type="text"
             required
           />
           <input
             placeholder="Endereço"
-            className="w-4/6 h-8 border border-[#94979D] pl-1 ml-2"
+            className=""
             type="text"
             required
           />
         </div>
         <div
-          className="
-            flex
-            justify-evenly
-            items-center
-            h-8
-            laptop:w-[26.5rem]
-            phone:w-[20.568rem]
-            tablet:w-[32.5rem]
-            desktop:w-[38rem]
-            mt-4
-          "
+          className=""
         >
           <input
             placeholder="Complemento"
-            className="w-4/6 h-8 border border-[#94979D] pl-1"
+            className=""
             type="text"
           />
           <input
             placeholder="Número"
-            className="w-2/6 h-8 border border-[#94979D] pl-1  ml-2"
+            className=""
             type="text"
             required
           />
         </div>
-        <div
-          className="
-            flex
-            justify-evenly
-            items-center
-            h-8
-            mt-4
-            laptop:w-[26.5rem]
-            phone:w-[20.568rem]
-            tablet:w-[32.5rem]
-            desktop:w-[38rem]
-          "
-        >
+        <div className="">
           <input
             placeholder="Cidade"
-            className="w-4/6 h-8 border border-[#94979D] pl-1"
+            className=""
             type="text"
             required
           />
-          <select className="w-2/6 h-8 border border-[#94979D] pl-1  ml-2">
+          <select className="">
             <option value="batata">teste</option>
           </select>
         </div>
       </section>
-      <span className="w-80 h-8 my-4 laptop:mt-10">
-        <h3
-          className="
-            text-center
-            font-mono
-            text-base
-            font-bold
-            w-80
-            text-lg
-            "
-        >
+      <span className="">
+        <h3 className="">
           Método de pagamento
         </h3>
       </span>
-      <section
-        className="
-          flex
-          laptop:w-11/12
-          phone:w-full
-          phone:flex-col
-          justify-evenly
-          phone:items-center
-          laptop:mt-8
-        "
-      >
-        <div className="flex items-center">
+      <section className="">
+        <div className="">
           <p>Boleto</p>
-          <input className="w-4 h-4 mx-2" type="radio" />
+          <input className="" type="radio" />
           <FaBarcode size="2em" />
         </div>
-        <div className="flex items-center">
+        <div className="">
           <p>Cartão de Crédito</p>
-          <input className="w-4 h-4 mx-2" type="radio" />
+          <input className="" type="radio" />
           <FaCcVisa size="2em" />
-          <input className="w-4 h-4 mx-2" type="radio" />
+          <input className="" type="radio" />
           <FaCcMastercard size="2em" />
-          <input className="w-4 h-4 mx-2" type="radio" />
-          <img className="w-10 h-10" src={ logo } alt="elo logo" />
+          <input className="" type="radio" />
+          <img className="" src={ logo } alt="elo logo" />
         </div>
       </section>
-      <span className="w-11/12 width laptop:my-4 phone:my-2" />
-      <button
-        className="
-          bg-green-400
-          text-white
-          font-mono
-          w-44
-          h-10
-          p-2
-          rounded
-          laptop:hover:-translate-y-1
-          laptop:hover:scale-110
-          laptop:hover:bg-green-700
-          laptop:duration-300
-          "
-        onClick={ () => navigate('/') }
-      >
+      <span className="" />
+      <button className="" onClick={ () => navigate('/') }>
         Comprar
       </button>
     </section>
