@@ -36,46 +36,11 @@ function MainScreen() {
         color="#36d7b7"
       />
         : (
-          <main
-            className="
-              flex
-              flex-row
-              overflow-auto
-              overscroll-contain
-              h-4/5
-              phone:h-screen
-              tablet:h-screen
-              laptop:h-full
-              desktop:h-full
-            "
-          >
-            <section
-              className="
-                bg-slate-200
-                flex
-                w-full
-                justify-evenly
-                items-center
-                flex-wrap
-                overflow-y-scroll
-                section-container
-              "
-            >
+          <main className="">
+            <section className="">
               {
           data.length === 0 && !isTrue && !isLoading && (
-            <p
-              className="
-                flex
-                items-center
-                text-xl
-                font-semibold
-                uppercase
-                text-green-500
-                w-96
-                text-center
-                "
-              data-testid="home-initial-message"
-            >
+            <p className="" data-testid="home-initial-message">
               Digite algum termo de pesquisa ou escolha uma categoria.
             </p>
           )

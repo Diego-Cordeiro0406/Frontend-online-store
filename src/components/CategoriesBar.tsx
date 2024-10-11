@@ -33,7 +33,7 @@ function CategoriesBar() {
     <span
       key={ category.id }
       id="categories-list"
-      className="flex justify-start w-full my-1"
+      className=""
     >
       <input
         className="appearance-none"
@@ -46,7 +46,7 @@ function CategoriesBar() {
         onChange={ handleRadioChange }
       />
       <label
-        className="hover:font-bold hover:underline text-lg font-medium"
+        className=""
         htmlFor={ category.name }
       >
         {category.name}
@@ -57,31 +57,18 @@ function CategoriesBar() {
   return (
     <aside
       id="categories"
-      className={ `
-      flex
-      flex-col
-      lg:w-1/5
-      bg-white
-      justify-start
-      items-center
-      max-h-screen
-      overflow-auto
-      overscroll-contain
-      shadow-xl
-      toggle
-      ${sidebarOpen ? 'open' : ''}
-      ` }
+      className=""
     >
-      <div className="flex w-full pt-6 items-center justify-center">
-        <p className="w-full text-xl font-bold">Categorias</p>
+      <div className="">
+        <p className="">Categorias</p>
         <FaArrowLeft
           size="1.5em"
-          className="mr-5 cursor-pointer"
+          className=""
           onClick={ () => toggleCategories() }
         />
       </div>
-      <div className="w-full flex justify-start my-6">
-        <span className="w-60 width" />
+      <div className="">
+        <span className="" />
       </div>
       {categoriesList}
     </aside>

@@ -47,53 +47,23 @@ function DetailsMobile() {
   } = context;
 
   return (
-    <section
-      className="
-      flex
-      flex-col
-      h-2/5
-      justify-start
-      items-center
-    "
-    >
-      <div
-        className="
-          flex
-          h-20
-          justify-start
-          mt-4
-          items-center
-          flex-col
-          w-full
-        "
-      >
-        <section className="flex justify-center items-center w-full">
-          <p className="text-end font-normal mr-1">R$</p>
+    <section className="">
+      <div className="">
+        <section className="">
+          <p className="">R$</p>
           <p
-            className="font-medium text-2xl h-7 mr-5"
-            data-testid="product-detail-price"
+            className=""
+            data-testid=""
           >
             {`${productData?.price}`}
           </p>
           <FaMinus
-            className="cursor-pointer"
+            className=""
             size="1.5em"
             style={ { color: '#B0B3BB' } }
             onClick={ () => manipulateQuantity(false) }
           />
-          <span
-            className="
-            rounded-full
-            bg-gray-400
-            w-6
-            h-6
-            text-white
-            flex
-            justify-center
-            items-center
-            mx-2.5
-          "
-          >
+          <span className="">
             {toCart?.quantity}
           </span>
           <FaPlus
@@ -106,40 +76,14 @@ function DetailsMobile() {
 
         <button
           id={ productData?.id }
-          className="
-            bg-green-400
-            text-white
-            font-mono
-            h-10
-            p-2
-            mt-2
-            rounded
-            hover:-translate-y-1
-            hover:scale-110
-            hover:bg-green-700
-            duration-3005
-          "
+          className=""
           onClick={ () => addCart(toCart!) }
         >
           Adicionar ao carrinho
         </button>
       </div>
       <Link
-        className="
-          flex
-          justify-between
-          items-center
-          mt-4
-          font-mono
-          font-bold
-          w-11/12
-          h-10
-          border
-          border-solid
-          border-[#d6d6d6]
-          rounded-md
-          cursor-pointer
-        "
+        className=""
         to={ `/attributes/${productData?.id}` }
       >
         <h3 className="ml-1">Conferir Especificações</h3>

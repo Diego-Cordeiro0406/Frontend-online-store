@@ -43,43 +43,13 @@ function DetailsDesktop() {
     addCart,
   } = context;
   return (
-    <section
-      className="
-      flex
-      laptop:w-3/6
-      flex-col
-      justify-start
-      laptop:h-full
-      phone:h-3/6
-      laptop:pl-12
-      phone:items-center
-    "
-    >
-      <h3
-        className="
-        font-bold
-        phone:text-lg
-        laptop:text-2xl
-        font-mono
-        laptop:pb-10
-        phone:pt-4
-      "
-      >
-        Especificações tecnicas
-      </h3>
-      <ul
-        className="
-        phone:max-h-52
-        laptop:max-h-96
-        overflow-y-scroll
-        text-slate-700
-        bg-slate-100
-        max-w-lg"
-      >
+    <section className="">
+      <h3 className="">Especificações tecnicas</h3>
+      <ul className="">
         {
 productData?.attributes.slice(1).map((attribute) => (
   <li
-    className="ml-5 font-sans"
+    className=""
     key={ attribute.id }
   >
     {`${attribute.name}: ${attribute.value_name}`}
@@ -87,15 +57,11 @@ productData?.attributes.slice(1).map((attribute) => (
 ))
 }
       </ul>
-      <div
-        className="flex h-7 justify-start phone:pt-6
-      laptop:pt-20
-      items-center"
-      >
-        <p className="text-end font-normal mr-1">R$</p>
+      <div className="">
+        <p className="">R$</p>
         <p
-          className="font-medium text-2xl h-7 mr-5"
-          data-testid="product-detail-price"
+          className=""
+          data-testid=""
         >
           {`${productData?.price}`}
         </p>
@@ -104,14 +70,7 @@ productData?.attributes.slice(1).map((attribute) => (
           style={ { color: '#B0B3BB' } }
           onClick={ () => manipulateQuantity(false) }
         />
-        <span
-          className="rounded-full bg-gray-400 w-5 h-5 text-white
-          flex
-          justify-center
-          items-center
-          mx-2.5
-      "
-        >
+        <span className="">
           {toCart?.quantity}
         </span>
         <FaPlus
@@ -121,13 +80,7 @@ productData?.attributes.slice(1).map((attribute) => (
         />
         <button
           id={ productData?.id }
-          className="bg-green-400 text-white font-mono h-10 p-2
-          rounded
-          hover:-translate-y-1
-          hover:scale-100
-          hover:bg-green-700
-          duration-300
-          ml-5"
+          className=""
           onClick={ () => addCart(toCart!) }
         >
           Adicionar ao carrinho

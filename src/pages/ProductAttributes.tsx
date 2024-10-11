@@ -35,38 +35,21 @@ function ProductAttributes() {
 
   return (
     <section
-      className="w-screen h-screen overflow-y-scroll"
+      className=""
     >
-      <span
-        className="
-          h-full
-          toggle-attributes
-          text-slate-700
-          bg-slate-100
-        "
-      >
-        <div
-          className="
-            flex
-            justify-start
-            items-center
-            w-full
-            h-16
-            bg-blue-700
-            text-white
-          "
-        >
+      <span className="">
+        <div className="">
           <FaArrowLeft
             size="1.5em"
             className="ml-2 cursor-pointer"
             onClick={ () => navigate(`/product/${productData?.id}`) }
           />
-          <h3 className="text-lg ml-10">Características do produto</h3>
+          <h3 className="">Características do produto</h3>
         </div>
-        <section className="w-full h-4/5 py-4 pl-2">
+        <section className="">
           {
             isLoading && (
-              <section className="flex justify-center items-center w-full h-full">
+              <section className="">
                 <ScaleLoader
                   data-testid="loading"
                   color="#36d7b7"
@@ -76,26 +59,16 @@ function ProductAttributes() {
           }
           {
           !isLoading && productData?.attributes.map((attribute: Attribute) => (
-            <section className="flex flex-col" key={ attribute.id }>
+            <section className="" key={ attribute.id }>
               <div className="flex">
-                <h3
-                  className="
-                    flex
-                    items-center
-                    w-3/6
-                    pl-1
-                    bg-gray-100
-                    text-sm"
-                >
+                <h3 className="">
                   {`${attribute.name}`}
                 </h3>
-                <p
-                  className="ml-5 my-2 font-sans w-3/5 text-sm"
-                >
+                <p className="">
                   {`${attribute.value_name}`}
                 </p>
               </div>
-              <div className="width border-gray-300 w-11/12" />
+              <div className="" />
             </section>
 
           ))
