@@ -1,7 +1,7 @@
 #root {
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow-x: hidden;
   height: 100dvh;
   font-family: 'Source Sans Pro', sans-serif;
 }
@@ -70,16 +70,17 @@
 }
 
 .toggle {
-  width: 300px;
+  width: 0px;
   height: 100%;
-  left: -300px;
+  right: -300px;
   position: absolute;
   top: 0;
-  transition: left 0.3s ease;
+  transition: right 0.3s ease;
 }
 
 .toggle.open {
-  left: 0;
+  right: 0;
+  width: 100%;
 }
 
 .cart-width {

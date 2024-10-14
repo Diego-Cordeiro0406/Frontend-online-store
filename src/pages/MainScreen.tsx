@@ -29,9 +29,9 @@ function MainScreen() {
 
   return (
     <>
-      <CategoriesBar />
+      {/* <CategoriesBar /> */}
       <Header />
-      { categories.length === 0 ? <ScaleLoader
+      {/* { categories.length === 0 ? <ScaleLoader
         data-testid="loading"
         color="#36d7b7"
       />
@@ -70,7 +70,7 @@ function MainScreen() {
                   />
                 ))}
             </section>
-          </main>)}
+          </main>)} */}
     </>
   );
 }

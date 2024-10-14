@@ -1,13 +1,18 @@
 import { useContext, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { FaSearch } from 'react-icons/fa';
 import { GiHamburgerMenu } from 'react-icons/gi';
 
+import { useMediaQuery } from 'react-responsive';
 import logo from '../images/logo.png';
-import cartLogo from '../images/Vector.svg';
+import cartICon from '../images/Cart.svg';
+import userIcon from '../images/User.svg';
+import favoritesIcon from '../images/Favorites.svg';
+import searchIcon from '../images/Search.svg';
 import Context from '../context/Context';
+import SideBar from './CategoriesBar';
 
 function Header() {
+  const isMobile = useMediaQuery({ maxWidth: 1023 });
   // Função responsável por lidar com a alteração de estado do input de pesquisa.
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const novoValor = event.target.value;
@@ -56,8 +61,16 @@ function Header() {
   };
 
   return (
-    <header className="">
-      <div className="">
+    <header
+      className="
+        flex
+        w-screen
+        h-[5.5rem]
+        justify-evenly
+        items-center
+        overflow-x-hidden"
+    >
+      {/* <div className="">
         <GiHamburgerMenu
           onClick={ () => toggleCategories() }
           style={ { color: '#FFFFFF' } }
@@ -88,27 +101,79 @@ function Header() {
             </p>
           </div>
         </Link>
-      </div>
-      <div
-        className=""
+      </div> */}
+      <section
+        className="
+          flex
+          items-center
+          h-full
+          w-full
+          phone:justify-between
+          laptop:justify-evenly"
       >
-        <input
-          className=""
-          placeholder="Digite o que você procura"
-          data-testid="query-input"
-          value={ search }
-          onChange={ handleInputChange }
-          onKeyDown={ handleKeyDown }
+        <img
+          className="phone:w-32 phone:h-10 laptop:w-40 laptop:h-12 laptop:mr-4"
+          src={ logo }
+          alt="logo"
         />
-        <button
-          data-testid="query-button"
-          onClick={ handleClick }
-          aria-label="Pesquisar"
-          className=""
-        >
-          <FaSearch className="w-5 h-5" />
-        </button>
-      </div>
+        {
+          !isMobile && (
+            <div
+              className="h-14 w-[27.063rem]"
+            >
+              <input
+                className="h-full w-full rounded-[8px] bg-[#F5F5F5] pl-10"
+                placeholder="Procurar"
+                data-testid="query-input"
+                value={ search }
+                onChange={ handleInputChange }
+                onKeyDown={ handleKeyDown }
+              />
+              <button
+                data-testid="query-button"
+                onClick={ handleClick }
+                aria-label="Pesquisar"
+                className=""
+              >
+                <img
+                  className="absolute top-8 left-[282px]"
+                  src={ searchIcon }
+                  alt="search-icon"
+                />
+              </button>
+            </div>
+
+          )
+      }
+        {
+        !isMobile && (
+          <>
+            <div className="flex justify-between w-[18.75rem] h-[1.188rem]">
+              <a className="font-medium text-gray-500" href="zs">Home</a>
+              <a className="font-medium text-gray-500" href="ss">Sobre</a>
+              <a className="font-medium text-gray-500" href="ss">Contate-nos</a>
+            </div>
+            <div className="w-36 flex justify-between h-8">
+              <img src={ favoritesIcon } alt="favorites-icon" />
+              <Link to="/cart">
+                <img src={ cartICon } alt="cart-icon" />
+              </Link>
+              <img src={ userIcon } alt="user-icon" />
+            </div>
+          </>
+        )
+      }
+        {
+        isMobile && (
+          <GiHamburgerMenu
+            onClick={ () => toggleCategories() }
+            style={ { color: '#080341' } }
+            className="w-10 h-10"
+          />
+        )
+      }
+        <SideBar />
+      </section>
     </header>
   );
 }
