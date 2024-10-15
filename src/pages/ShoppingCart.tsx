@@ -7,7 +7,7 @@ import Context from '../context/Context';
 import Header from '../components/Header';
 import CartDesktop from '../components/CartDesktop';
 import CartMobile from '../components/CartMobile';
-import CategoriesBar from '../components/CategoriesBar';
+import CategoriesBar from '../components/SideBar';
 
 function ShoppingCart() {
   const context = useContext(Context);

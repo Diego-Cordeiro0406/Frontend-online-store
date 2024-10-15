@@ -8,7 +8,7 @@ import Header from '../components/Header';
 import Context from '../context/Context';
 import DetailsDesktop from '../components/DetailsDesktop';
 import DetailsMobile from '../components/DetailsMobile';
-import CategoriesBar from '../components/CategoriesBar';
+import CategoriesBar from '../components/SideBar';
 
 function ProductDetails() {
   const { id } = useParams();

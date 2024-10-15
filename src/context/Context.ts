@@ -35,7 +35,7 @@ export interface MyContextProps {
   removeProduct: (id: string) => void,
   addQuantity: (id: string) => void,
   sutractQuantity: (id: string) => void,
-  toggleCategories: () => void,
+  toggleSideBar: () => void,
   sidebarOpen: boolean,
   productDataLoaded:boolean,
   setProductDataLoaded: Dispatch<SetStateAction<ProductDataLoaded>>,

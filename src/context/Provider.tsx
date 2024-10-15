@@ -139,7 +139,7 @@ function Provider({ children }: MyProviderProps) {
     setCart(newCart);
   };
 
-  const toggleCategories = async ():Promise<void> => {
+  const toggleSideBar = async ():Promise<void> => {
     setSidebarOpen(!sidebarOpen);
   };
 
@@ -168,7 +168,7 @@ function Provider({ children }: MyProviderProps) {
     removeProduct,
     addQuantity,
     sutractQuantity,
-    toggleCategories,
+    toggleSideBar,
     sidebarOpen,
     setSidebarOpen,
     productDataLoaded,

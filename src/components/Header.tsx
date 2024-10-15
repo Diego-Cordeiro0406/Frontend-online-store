@@ -9,7 +9,7 @@ import userIcon from '../images/User.svg';
 import favoritesIcon from '../images/Favorites.svg';
 import searchIcon from '../images/Search.svg';
 import Context from '../context/Context';
-import SideBar from './CategoriesBar';
+import SideBar from './SideBar';
 
 function Header() {
   const isMobile = useMediaQuery({ maxWidth: 1023 });
@@ -33,7 +33,7 @@ function Header() {
     setSearch,
     sendProductsRequest,
     cart,
-    toggleCategories,
+    toggleSideBar,
   } = context;
 
   // Função responsável por fazer a requisição a api ao clicar no botão de pesquisa.
@@ -68,7 +68,10 @@ function Header() {
         h-[5.5rem]
         justify-evenly
         items-center
-        overflow-x-hidden"
+        overflow-x-hidden
+        h-1/6
+        max-h-[5.5rem]
+        bg-white"
     >
       {/* <div className="">
         <GiHamburgerMenu
@@ -166,7 +169,7 @@ function Header() {
         {
         isMobile && (
           <GiHamburgerMenu
-            onClick={ () => toggleCategories() }
+            onClick={ () => toggleSideBar() }
             style={ { color: '#080341' } }
             className="w-10 h-10"
           />
