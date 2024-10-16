@@ -71,6 +71,7 @@ function Header() {
         overflow-x-hidden
         h-1/6
         max-h-[5.5rem]
+        px-1
         bg-white"
     >
       {/* <div className="">

@@ -89,3 +89,11 @@
 .cart-width {
   width: 90%;
 }
+
+.heart-icon {
+  color: rgb((144,144,144, 0.7));
+}
+
+.filter-dropdown-container {
+  width: 77%;
+}

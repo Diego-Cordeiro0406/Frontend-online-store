@@ -25,30 +25,45 @@ function ProductCard({ id, title, img, price }: ProdcutCardProps) {
         laptop:w-[16.75rem]
         laptop:h-[27rem]
         rounded-[9px]
-        bg-[#F6F6F6]
-        mr-4
+        bg-white
+        laptop:mr-4
         mb-4
+        flex
+        flex-col
+        justify-around
+        border
+        border-px
+        border-[#D4D4D4]
       "
     >
-      <div className="flex flex-col items-center">
-        <span className="flex w-11/12 justify-end">
-          <CiHeart size="2em" />
-        </span>
-        <div
-          key={ id }
-          data-testid="product-detail-link"
-          className="flex flex-col items-center"
-        >
-          <img className="laptop:w-40 laptop:h-40" src={ img } alt={ title } />
-        </div>
+      {/* <div className="flex flex-col items-center"> */}
+      <span className="flex w-11/12 justify-end">
+        <CiHeart style={ { color: '#909090' } } size="2em" />
+      </span>
+      <div
+        key={ id }
+        data-testid="product-detail-link"
+        className="flex flex-col items-center"
+      >
+        <img className="laptop:w-40 laptop:h-40" src={ img } alt={ title } />
       </div>
-      <div className="phone:mt-5 mt-10 h-40 flex flex-col items-center justify-evenly">
+      {/* </div> */}
+      <div
+        className="
+          phone:mt-5
+          laptop:mt-0
+          h-40
+          flex
+          flex-col
+          items-center
+          justify-evenly"
+      >
         <h3
           className="
             max-w-[14.75rem]
             max-h-12
             overflow-hidden
-            font-semibold
+            font-medium
             text-center"
         >
           {title}
@@ -62,7 +77,7 @@ function ProductCard({ id, title, img, price }: ProdcutCardProps) {
         <button
           id={ id }
           onClick={ () => navigate(`/product/${id}`) }
-          className="w-[11.438rem] h-12 text-white bg-black rounded-[8px]"
+          className="w-[11.438rem] h-12 text-white bg-black rounded-[8px] font-semibold"
         >
           Compre agora
         </button>
