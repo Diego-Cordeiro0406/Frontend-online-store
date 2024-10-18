@@ -8,7 +8,6 @@ import Context from './context/Context';
 
 import './App.css';
 import CheckoutScreen from './pages/CheckoutScreen';
-import ProductAttributes from './pages/ProductAttributes';
 
 function App() {
   const context = useContext(Context);
@@ -33,7 +32,6 @@ function App() {
         path="/product/:id"
         element={ <ProductDetails /> }
       />
-      <Route path="/attributes/:id" element={ <ProductAttributes /> } />
       <Route path="checkout" element={ <CheckoutScreen /> } />
     </Routes>
   );
