@@ -47,10 +47,13 @@ function ProductDetails() {
       }
     };
     fetchData();
+  }, []);
+
+  useEffect(() => {
     if (context!.productDataLoaded) {
       setToCart();
     }
-  }, []);
+  }, [context!.productDataLoaded]);
 
   const navigate = useNavigate();
 
@@ -82,10 +85,25 @@ function ProductDetails() {
               data-testid="loading"
               color="#36d7b7"
           /> : (
-            <main className="w-full h-screen overflow-scroll">
-              <section className="flex w-full h-full items-center">
+            <main className="w-full phone:h-full laptop:h-screen overflow-scroll">
+              <section
+                className="
+                  flex
+                  phone:flex-col
+                  laptop:flex-row
+                  w-full
+                  laptop:h-full
+                  items-center"
+              >
                 <section
-                  className="flex flex-col justify-evenly w-3/6 h-full"
+                  className="
+                    flex
+                    flex-col
+                    justify-evenly
+                    phone:w-full
+                    laptop:w-3/6
+                    h-full
+                    "
                   data-testid="product"
                 >
                   <button
@@ -95,9 +113,35 @@ function ProductDetails() {
                     <TiArrowBack size="1.5em" style={ { color: '#2FC18C' } } />
                     Voltar
                   </button>
-                  <span className="flex items-center justify-center">
-                    <div className="flex flex-col items-center justify-around h-full">
-                      {
+                  <span
+                    className="
+                      flex
+                      items-center
+                      justify-center
+                      laptop:flex-row
+                      phone:flex-col
+                      "
+                  >
+                    {
+                      isMobile ? (
+                        <>
+                          <img
+                            className=""
+                            data-testid="product-detail-image"
+                            src={ productData?.pictures[0].url }
+                            alt={ productData?.title }
+                          />
+                          <div
+                            className="
+                              flex
+                              laptop:flex-col
+                              phone:w-full
+                              items-center
+                              justify-around
+                              overflow-scroll
+                              h-full"
+                          >
+                            {
                         productData?.pictures
                           .slice(2)
                           .map((picture, index) => (
@@ -109,13 +153,40 @@ function ProductDetails() {
                             />
                           ))
                       }
-                    </div>
-                    <img
-                      className=""
-                      data-testid="product-detail-image"
-                      src={ productData?.pictures[0].url }
-                      alt={ productData?.title }
-                    />
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div
+                            className="
+                              flex
+                              laptop:flex-col
+                              items-center
+                              justify-around
+                              h-full"
+                          >
+                            {
+                        productData?.pictures
+                          .slice(2)
+                          .map((picture, index) => (
+                            <img
+                              className="h-20"
+                              key={ picture.id }
+                              src={ picture.url }
+                              alt={ `pic-${index}` }
+                            />
+                          ))
+                      }
+                          </div>
+                          <img
+                            className=""
+                            data-testid="product-detail-image"
+                            src={ productData?.pictures[0].url }
+                            alt={ productData?.title }
+                          />
+                        </>
+                      )
+                    }
                   </span>
                 </section>
                 <section
@@ -123,13 +194,23 @@ function ProductDetails() {
                     flex
                     items-center
                     justify-center
-                    w-3/6
+                    phone:w-full
+                    laptop:w-3/6
                     h-[35rem]
                   "
                 >
-                  <div className="flex flex-col justify-evenly w-[33.5rem] h-[33.5rem]">
+                  <div
+                    className="
+                      flex
+                      flex-col
+                      justify-evenly
+                      phone:w-4/5
+                      laptop:w-[33.5rem]
+                      h-[33.5rem]
+                    "
+                  >
                     <h3
-                      className="phone:text-base laptop:text-4xl text-left font-bold"
+                      className="phone:text-2xl laptop:text-4xl text-left font-bold"
                     >
                       {productData?.title}
                     </h3>
@@ -198,8 +279,15 @@ function ProductDetails() {
                         />
                       </button>
                     </div>
-                    {/* <img src={ productData?.pictures[1].url } alt="" /> */}
-                    <div className="flex justify-between">
+                    <div
+                      className="
+                        flex
+                        laptop:flex-row
+                        phone:flex-col
+                        justify-between
+                        phone:items-center
+                        "
+                    >
                       <button
                         id={ productData?.id }
                         className="
@@ -210,6 +298,8 @@ function ProductDetails() {
                         border
                         border-px
                         rounded-[6px]
+                        phone:mb-5
+                        laptop:mb-0
                       "
                       >
                         Adicionar a lista de desejos
@@ -229,7 +319,7 @@ function ProductDetails() {
                       </button>
                     </div>
                     <section className="flex w-full justify-between mt-8">
-                      <span className="flex items-center">
+                      <span className="flex phone:flex-col items-center">
                         <div
                           className="
                             flex
@@ -243,9 +333,17 @@ function ProductDetails() {
                         >
                           <img src={ truckIcon } alt="truck-icon" />
                         </div>
-                        <p className="ml-1 font-medium text-[#717171]">Entrega grátis</p>
+                        <p
+                          className="
+                            phone:text-center
+                            ml-1
+                            font-medium
+                            text-[#717171]"
+                        >
+                          Entrega grátis
+                        </p>
                       </span>
-                      <span className="flex items-center">
+                      <span className="flex phone:flex-col items-center">
                         <div
                           className="
                             flex
@@ -259,9 +357,18 @@ function ProductDetails() {
                         >
                           <img src={ shopIcon } alt="shop-icon" />
                         </div>
-                        <p className="ml-1 font-medium text-[#717171]">Em Estoque</p>
+                        <p
+                          className="
+                            ml-1
+                            phone:text-center
+                            font-medium
+                            text-[#717171]
+                          "
+                        >
+                          Em Estoque
+                        </p>
                       </span>
-                      <span className="flex items-center">
+                      <span className="flex phone:flex-col items-center">
                         <div
                           className="
                             flex
@@ -276,7 +383,7 @@ function ProductDetails() {
                           <img src={ verifyIcon } alt="verify-icon" />
                         </div>
                         <p
-                          className="ml-1 font-medium text-[#717171]"
+                          className="ml-1 phone:text-center font-medium text-[#717171]"
                         >
                           1 ano de garantia
                         </p>

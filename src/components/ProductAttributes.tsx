@@ -1,7 +1,5 @@
-import { FaPlus, FaMinus } from 'react-icons/fa';
 import { useContext, useEffect, useState } from 'react';
 import Context from '../context/Context';
-import { ProductCart } from '../types/typesApi';
 
 function ProductAttributes() {
   // const [toCart, setCart] = useState<ProductCart>();
@@ -40,9 +38,17 @@ function ProductAttributes() {
   if (!context) return null;
   const { productData } = context;
   return (
-    <section className="w-full flex flex-col items-center bg-[#FAFAFA] pt-20">
+    <section className="w-full flex flex-col items-center bg-[#FAFAFA] laptop:pt-20">
       <section
-        className="w-4/5 flex flex-col items-center bg-white rounded-[8px] pt-8"
+        className="
+          phone:w-full
+          laptop:w-4/5
+          flex
+          flex-col
+          items-center
+          bg-white
+          rounded-[8px]
+          pt-8"
       >
         <h3
           className="w-11/12 font-semibold laptop:text-2xl"
@@ -69,8 +75,8 @@ function ProductAttributes() {
                 }
                 key={ attribute.id }
               >
-                <p>{attribute.name}</p>
-                <p>{attribute.value_name}</p>
+                <p className="phone:text-xs laptop:text-base">{attribute.name}</p>
+                <p className="phone:text-xs laptop:text-base">{attribute.value_name}</p>
               </li>
             ))
           }
