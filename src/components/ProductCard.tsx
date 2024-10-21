@@ -1,5 +1,6 @@
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { CiHeart } from 'react-icons/ci';
 import Context from '../context/Context';
 
 interface ProdcutCardProps {
@@ -12,6 +13,8 @@ interface ProdcutCardProps {
 function ProductCard({ id, title, img, price }: ProdcutCardProps) {
   const context = useContext(Context);
 
+  const navigate = useNavigate();
+
   if (!context) return null;
   const { addCart } = context;
   const quantity = 1;
@@ -19,121 +22,64 @@ function ProductCard({ id, title, img, price }: ProdcutCardProps) {
     <section
       data-testid="product"
       className="
-      laptop:w-60
-      laptop:h-80
-      phone:w-40
-      phone:h-60
-      mt-6
-      mx-2
-      bg-white
-      shadow-lg
-      flex
-      flex-col
-      items-center
-      justify-center
-      py-0.5
-      px-7
-      transition
-      ease-in-out
-      delay-150
-      hover:-translate-y-1
-      hover:scale-100
-      duration-300
+        laptop:w-[16.75rem]
+        laptop:h-[27rem]
+        rounded-[9px]
+        bg-white
+        laptop:mr-4
+        mb-4
+        flex
+        flex-col
+        justify-around
+        border
+        border-px
+        border-[#D4D4D4]
       "
     >
+      {/* <div className="flex flex-col items-center"> */}
+      <span className="flex w-11/12 justify-end">
+        <CiHeart style={ { color: '#909090' } } size="2em" />
+      </span>
+      <div
+        key={ id }
+        data-testid="product-detail-link"
+        className="flex flex-col items-center"
+      >
+        <img className="laptop:w-40 laptop:h-40" src={ img } alt={ title } />
+      </div>
+      {/* </div> */}
       <div
         className="
+          phone:mt-5
+          laptop:mt-0
+          h-40
           flex
           flex-col
-          justify-center
           items-center
-          phone:w-32
-          phone:h-40
-          laptop:w-52
-          laptop:h-56
-        "
+          justify-evenly"
       >
-        <Link
-          key={ id }
-          data-testid="product-detail-link"
-          to={ `/product/${id}` }
+        <h3
           className="
-            flex
-            flex-col
-            justify-center
-            items-center
-            phone:w-32
-            phone:h-40
-            laptop:w-52
-            laptop:h-72
-            "
+            max-w-[14.75rem]
+            max-h-12
+            overflow-hidden
+            font-medium
+            text-center"
         >
-          <img
-            className="laptop:w-24 laptop:h-32 phone:w-20 phone:h-24"
-            src={ img }
-            alt={ title }
-          />
-          <h3
-            className="
-              text-center
-              font-mono
-              phone:text-xs
-              laptop:text-base
-              font-bold
-              phone:max-h-12
-              laptop:max-h-12
-              overflow-hidden
-            "
-          >
-            {title}
-          </h3>
-          <div
-            className="
-              flex
-              items-end
-              phone:h-5
-              laptop:h-7
-              phone:pt-1
-              justify-center
-              items-center
-              "
-          >
-            <p className="text-end font-normal mr-1">R$</p>
-            <p
-              className="
-                font-medium
-                laptop:text-2xl
-                laptop:h-7"
-            >
-              {`${price}`}
-            </p>
-          </div>
-        </Link>
-      </div>
-      <div className="phone:mt-5 mt-10">
+          {title}
+        </h3>
+        <div className="flex items-center">
+          <p className="font-semibold">R$</p>
+          <p className="font-semibold laptop:text-2xl laptop:h-7">
+            {`${price}`}
+          </p>
+        </div>
         <button
           id={ id }
-          onClick={ () => addCart({ id, title, img, price, quantity }) }
-          className="
-          bg-green-400
-          phone:text-xs
-          laptop:text-base
-          text-white
-          font-sans
-          phone: w-36
-          laptop:w-48
-          h-10
-          p-2
-          rounded
-          mb-4
-          hover:-translate-y-1
-          phone:hover:scale-100
-          hover:scale-110
-          hover:bg-green-700
-          duration-300
-          "
+          onClick={ () => navigate(`/product/${id}`) }
+          className="w-[11.438rem] h-12 text-white bg-black rounded-[8px] font-semibold"
         >
-          Adicionar ao carrinho
+          Compre agora
         </button>
       </div>
     </section>

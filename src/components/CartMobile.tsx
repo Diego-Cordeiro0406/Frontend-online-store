@@ -15,70 +15,26 @@ function CartMobile() {
 
   return (
     <>
-      <section
-        className="
-                flex
-                flex-col
-                h-3/5
-                justify-evenly
-                items-center
-                bg-slate-100
-              "
-      >
-        <button
-          className="
-                  flex
-                  w-full
-                  items-center
-                  font-semibold
-                  text-lg
-                  text-[#2FC18C]
-                "
-          onClick={ () => navigate(-1) }
-        >
+      <section className="">
+        <button className="" onClick={ () => navigate(-1) }>
           <TiArrowBack size="1.5em" style={ { color: '#2FC18C' } } />
           Voltar
         </button>
         <h2
-          className="
-            bg-white
-            flex
-            justify-center
-            items-center
-            text-center
-            font-mono
-            text-base
-            font-bold
-            h-20
-            max-h-12
-            mt-2
-            cart-width
-          "
+          className=""
         >
           Carrinho de compras
         </h2>
-        <section
-          className="
-            flex flex-col
-            items-center
-            bg-white
-            h-80
-            shadow-2xl
-            overflow-auto
-            overscroll-contain
-            cart-width
-            mb-2
-          "
-        >
+        <section className="">
           {
               cart
                 .map((product) => (
                   <div
-                    className="flex flex-col items-center justify-evenly cart-width"
+                    className=""
                     key={ product.id }
                   >
-                    <span className="w-[16rem] width" />
-                    <div className="flex items-center justify-center cart-width">
+                    <span className="" />
+                    <div className="">
                       <button
                         aria-label="delete"
                         onClick={ () => removeProduct(product.id) }
@@ -86,42 +42,20 @@ function CartMobile() {
                         <AiOutlineDelete size="1.5rem" />
                       </button>
                       <section>
-                        <div className="flex items-center">
+                        <div className="">
                           <img src={ product.img } alt={ product.title } />
-                          <h3
-                            className="
-                          text-center
-                          font-mono
-                          text-base
-                          font-bold
-                          w-40
-                          max-h-12
-                          overflow-hidden
-                        "
-                          >
+                          <h3 className="">
                             {product.title}
                           </h3>
                         </div>
-                        <div className="flex p-2">
+                        <div className="">
                           <FaMinus
                             className="cursor-pointer"
                             size="1.5em"
                             style={ { color: '#B0B3BB' } }
                             onClick={ () => sutractQuantity(product.id) }
                           />
-                          <span
-                            className="
-                          rounded-full
-                          bg-gray-400
-                          w-6
-                          h-6
-                          text-white
-                          flex
-                          justify-center
-                          items-center
-                          mx-2.5
-                          "
-                          >
+                          <span className="">
                             {product.quantity}
                           </span>
                           <FaPlus
@@ -130,58 +64,27 @@ function CartMobile() {
                             style={ { color: '#B0B3BB' } }
                             onClick={ () => addQuantity(product.id) }
                           />
-                          <p className="ml-6 pl-2 pr-2">R$</p>
+                          <p className="">R$</p>
                           <p
-                            className="w-12"
+                            className=""
                           >
                             {Number((product.price * product.quantity).toFixed(2))}
                           </p>
                         </div>
                       </section>
-
                     </div>
                   </div>
                 ))
             }
         </section>
       </section>
-      <section
-        className="
-          flex
-          w-full
-          flex-col
-          justify-center
-          items-center
-          h-2/5
-          p-4
-        "
-      >
-        <h3
-          className="
-            w-80
-            h-12
-            font-bold
-            text-center
-            text-2xl
-          "
-        >
+      <section className="">
+        <h3 className="">
           Valor total da compra:
         </h3>
-        <p className="font-bold text-2xl">{`R$ ${getQuantity()}`}</p>
+        <p className="">{`R$ ${getQuantity()}`}</p>
         <button
-          className="
-            bg-green-400
-            text-white
-            font-mono
-            h-10
-            p-2
-            mt-4
-            rounded
-            hover:-translate-y-1
-            hover:scale-110
-            hover:bg-green-700
-            duration-300
-          "
+          className=""
           onClick={ () => navigate('/checkout') }
         >
           Finalizar compra
