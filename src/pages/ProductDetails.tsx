@@ -1,15 +1,20 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable max-lines */
 /* eslint-disable react/jsx-max-depth */
 import { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useMediaQuery } from 'react-responsive';
+
 import { ScaleLoader } from 'react-spinners';
 import { TiArrowBack } from 'react-icons/ti';
 
 import { FaPlus, FaMinus } from 'react-icons/fa';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import { Navigation } from 'swiper/modules';
 import Header from '../components/Header';
 import Context from '../context/Context';
-// import DetailsMobile from '../components/DetailsMobile';
+
 import truckIcon from '../images/delivery-truck.svg';
 import shopIcon from '../images/shop.svg';
 import verifyIcon from '../images/verify.svg';
@@ -18,7 +23,6 @@ import ProductAttributes from '../components/ProductAttributes';
 
 function ProductDetails() {
   const { id } = useParams();
-  const isMobile = useMediaQuery({ maxWidth: 1023 });
 
   const [toCart, setCart] = useState<ProductCart>();
 
@@ -73,6 +77,7 @@ function ProductDetails() {
     isLoading,
     productData,
     setProductDataLoaded,
+    addCart,
   } = context;
 
   return (
@@ -120,73 +125,25 @@ function ProductDetails() {
                       justify-center
                       laptop:flex-row
                       phone:flex-col
+                      h-[33.5rem]
                       "
                   >
-                    {
-                      isMobile ? (
-                        <>
-                          <img
-                            className=""
-                            data-testid="product-detail-image"
-                            src={ productData?.pictures[0].url }
-                            alt={ productData?.title }
-                          />
-                          <div
-                            className="
-                              flex
-                              laptop:flex-col
-                              phone:w-full
-                              items-center
-                              justify-around
-                              overflow-scroll
-                              h-full"
-                          >
-                            {
+                    <Swiper className="swiper" navigation modules={ [Navigation] }>
+                      {
                         productData?.pictures
-                          .slice(2)
                           .map((picture, index) => (
-                            <img
-                              className="h-20"
-                              key={ picture.id }
-                              src={ picture.url }
-                              alt={ `pic-${index}` }
-                            />
+                            <SwiperSlide className="swiper-slide" key={ picture.id }>
+                              <img
+                                className=""
+                                key={ picture.id }
+                                src={ picture.url }
+                                alt={ `pic-${index}` }
+                              />
+                            </SwiperSlide>
+
                           ))
                       }
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <div
-                            className="
-                              flex
-                              laptop:flex-col
-                              items-center
-                              justify-around
-                              h-full"
-                          >
-                            {
-                        productData?.pictures
-                          .slice(2)
-                          .map((picture, index) => (
-                            <img
-                              className="h-20"
-                              key={ picture.id }
-                              src={ picture.url }
-                              alt={ `pic-${index}` }
-                            />
-                          ))
-                      }
-                          </div>
-                          <img
-                            className=""
-                            data-testid="product-detail-image"
-                            src={ productData?.pictures[0].url }
-                            alt={ productData?.title }
-                          />
-                        </>
-                      )
-                    }
+                    </Swiper>
                   </span>
                 </section>
                 <section
@@ -314,6 +271,7 @@ function ProductDetails() {
                         bg-black
                         rounded-[6px]
                       "
+                        onClick={ () => addCart(toCart!) }
                       >
                         Adicionar ao carrinho
                       </button>

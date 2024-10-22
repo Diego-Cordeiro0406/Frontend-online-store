@@ -1,39 +1,8 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import Context from '../context/Context';
 
 function ProductAttributes() {
-  // const [toCart, setCart] = useState<ProductCart>();
-
-  // const setToCart = () => {
-  //   if (productData) {
-  //     const toAdd = {
-  //       id: productData.id,
-  //       title: productData.title,
-  //       img: productData.thumbnail,
-  //       price: productData.price,
-  //       quantity: 1,
-  //     };
-  //     setCart(toAdd);
-  //   }
-  // };
-
   const context = useContext(Context);
-
-  // useEffect(() => {
-  //   if (context!.productDataLoaded) {
-  //     setToCart();
-  //   }
-  // }, [context!.productDataLoaded]);
-
-  // const manipulateQuantity = (manipulate: boolean) => {
-  //   if (toCart && manipulate) {
-  //     const updatedQuantity = { ...toCart, quantity: toCart.quantity + 1 };
-  //     setCart(updatedQuantity);
-  //   } else if (toCart && manipulate === false && toCart.quantity > 1) {
-  //     const updatedQuantity = { ...toCart, quantity: toCart.quantity - 1 };
-  //     setCart(updatedQuantity);
-  //   }
-  // };
 
   if (!context) return null;
   const { productData } = context;

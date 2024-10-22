@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-max-depth */
-import { useContext, useState, useEffect, useRef } from 'react';
+import { useContext, useRef } from 'react';
 import { FaArrowLeft } from 'react-icons/fa6';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Context from '../context/Context';
@@ -9,20 +9,9 @@ import userIcon from '../images/User.svg';
 import favoritesIcon from '../images/Favorites.svg';
 
 function SideBar() {
-  const [lastValorInput, setLastValorInput] = useState('');
-
   const context = useContext(Context);
   const navigate = useNavigate();
-  // useEffect(() => {
-  //   if (context && context.valueInput !== lastValorInput) {
-  //     setLastValorInput(context.valueInput);
-  //     if (context.valueInput) {
-  //       navigate('/');
-  //       context.setSidebarOpen(false);
-  //       context.sendProductsRequest(context.valueInput);
-  //     }
-  //   }
-  // }, [context, lastValorInput]);
+
   const location = useLocation();
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -30,9 +19,6 @@ function SideBar() {
   if (!context) return null;
 
   const {
-    categories,
-    valueInput,
-    handleRadioChange,
     toggleSideBar,
     sendProductsRequest,
     setSearch,
@@ -75,31 +61,6 @@ function SideBar() {
     }
   };
 
-  // const categoriesList = categories.map((category) => (
-  //   <span
-  //     key={ category.id }
-  //     id="categories-list"
-  //     className=""
-  //   >
-  //     <input
-  //       className="appearance-none"
-  //       name="categories"
-  //       data-testid="category"
-  //       value={ category.id }
-  //       type="radio"
-  //       id={ category.name }
-  //       checked={ valueInput === category.id }
-  //       onChange={ handleRadioChange }
-  //     />
-  //     <label
-  //       className=""
-  //       htmlFor={ category.name }
-  //     >
-  //       {category.name}
-  //     </label>
-  //   </span>
-  // ));
-
   return (
     <aside
       id="categories"
@@ -111,18 +72,6 @@ function SideBar() {
       }`
       }
     >
-      {/* <div className="">
-        <p className="">Categorias</p>
-        <FaArrowLeft
-          size="1.5em"
-          className=""
-          onClick={ () => toggleCategories() }
-        />
-      </div>
-      <div className="">
-        <span className="" />
-      </div>
-      {categoriesList} */}
       <section className="flex h-full flex-col items-center">
         {/* <div className="flex flex-col justify-between w-[1.188rem] h-[18.75rem]">
           <a className="font-medium text-gray-500" href="zs">Home</a>

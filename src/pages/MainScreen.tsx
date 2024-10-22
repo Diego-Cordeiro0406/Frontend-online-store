@@ -3,7 +3,6 @@ import { useContext, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ScaleLoader } from 'react-spinners';
 
-import CategoriesBar from '../components/SideBar';
 import arrowLeft from '../images/Arrow-left.svg';
 import arrowRight from '../images/Arrow.svg';
 import ProductCard from '../components/ProductCard';
@@ -27,7 +26,6 @@ function MainScreen() {
       setLastValorInput(context.valueInput);
       if (context.valueInput) {
         navigate('/');
-        // context.setSidebarOpen(false);
         context.sendProductsRequest(context.valueInput);
       }
     }
@@ -140,7 +138,7 @@ function MainScreen() {
               >
                 <div className="flex w-64">
                   <p>Produtos encontrados:</p>
-                  <p className="font-bold">85</p>
+                  <p className="font-bold">{data.length}</p>
                 </div>
                 <div>
                   <select
