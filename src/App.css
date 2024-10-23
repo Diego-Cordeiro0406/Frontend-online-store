@@ -113,3 +113,9 @@
   justify-content: center;
   align-items: center;
 }
+
+@media (max-width: 1023px) {
+  .cart-container {
+  height: 90%;
+  }
+}
