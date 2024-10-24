@@ -24,7 +24,6 @@ function ShoppingCart() {
 
   return (
     <>
-      {/* <CategoriesBar /> */}
       <Header />
       {
         cart.length === 0
@@ -269,7 +268,6 @@ function ShoppingCart() {
           )
       }
     </>
-
   );
 }
 
