@@ -257,7 +257,7 @@ function ShoppingCart() {
                         text-white
                         rounded-[6px]
                     "
-                      onClick={ () => navigate('/checkout') }
+                      onClick={ () => navigate('/checkout/address') }
                     >
                       Finalizar compra
                     </button>

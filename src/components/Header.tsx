@@ -1,9 +1,9 @@
 import { useContext, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { GiHamburgerMenu } from 'react-icons/gi';
 
 import { useMediaQuery } from 'react-responsive';
 import logo from '../images/logo.png';
+import burger from '../images/Burger.svg';
 import cartICon from '../images/Cart.svg';
 import userIcon from '../images/User.svg';
 import favoritesIcon from '../images/Favorites.svg';
@@ -32,7 +32,7 @@ function Header() {
     search,
     setSearch,
     sendProductsRequest,
-    cart,
+    // cart,
     toggleSideBar,
   } = context;
 
@@ -169,11 +169,18 @@ function Header() {
       }
         {
         isMobile && (
-          <GiHamburgerMenu
-            onClick={ () => toggleSideBar() }
-            style={ { color: '#080341' } }
+          <button
+            aria-label="burger-icon"
             className="w-10 h-10"
-          />
+            onClick={ () => toggleSideBar() }
+          >
+            <img
+              src={ burger }
+              alt="burger-icon"
+              className="w-10 h-10"
+            />
+          </button>
+
         )
       }
         <SideBar />
