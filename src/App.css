@@ -120,3 +120,11 @@
   }
 }
 
+.summary-container {
+  width: 45%;
+  height: 95%;
+}
+
+.cardInput {
+  width: 48%;
+}
