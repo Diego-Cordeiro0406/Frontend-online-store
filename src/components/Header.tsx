@@ -126,7 +126,16 @@ function Header() {
               className="h-14 w-[27.063rem]"
             >
               <input
-                className="h-full w-full rounded-[8px] bg-[#F5F5F5] pl-10"
+                className="
+                  h-full
+                  w-full
+                  rounded-[8px]
+                  bg-[#F5F5F5]
+                  pl-10
+                  focus:outline-none
+                  focus:ring
+                  focus:ring-1
+                  focus:ring-[#848484]"
                 placeholder="Procurar"
                 data-testid="query-input"
                 value={ search }

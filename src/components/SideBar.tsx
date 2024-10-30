@@ -89,7 +89,16 @@ function SideBar() {
           className="h-14 w-11/12 mt-6"
         >
           <input
-            className="h-full w-full rounded-[8px] bg-[#F5F5F5] pl-4"
+            className="
+              h-full
+              w-full
+              rounded-[8px]
+              bg-[#F5F5F5]
+              pl-4
+              focus:outline-none
+              focus:ring
+              focus:ring-1
+              focus:ring-[#848484]"
             placeholder="Digite o que você procura"
             data-testid="query-input"
             value={ search }
