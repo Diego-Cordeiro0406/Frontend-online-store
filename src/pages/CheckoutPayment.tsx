@@ -72,7 +72,8 @@ function CheckoutPayment() {
             laptop:items-start
             laptop:justify-between
             phone:justify-center
-            h-4/5
+            laptop:h-4/5
+            phone:h-full
             "
         >
           {

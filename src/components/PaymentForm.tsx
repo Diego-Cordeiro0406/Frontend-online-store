@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Cards from 'react-credit-cards-2';
 import 'react-credit-cards-2/dist/es/styles-compiled.css';
+import { useNavigate } from 'react-router-dom';
 import { formatExpirationDate, limitarCaracteres } from '../utils';
 
 interface FormData {
@@ -12,6 +13,7 @@ interface FormData {
 }
 
 function PaymentForm() {
+  const navigate = useNavigate();
   const [state, setState] = useState<FormData>({
     number: '',
     expiry: '',
@@ -52,7 +54,7 @@ function PaymentForm() {
         name={ state.name }
         focused={ state.focused }
       />
-      <form className="flex flex-col">
+      <form className="flex flex-col items-center">
         <input
           className="
             mt-10
@@ -60,7 +62,8 @@ function PaymentForm() {
             border-px
             border-[#CECECE]
             rounded-[7px]
-            w-full
+            laptop:w-full
+            phone:w-11/12
             h-12
             pl-3
             focus:outline-none
@@ -81,7 +84,8 @@ function PaymentForm() {
             border-px
             border-[#CECECE]
             rounded-[7px]
-            w-full
+            laptop:w-full
+            phone:w-11/12
             h-12
             pl-3
             focus:outline-none
@@ -95,7 +99,13 @@ function PaymentForm() {
           onChange={ handleInputChange }
           onFocus={ handleInputFocus }
         />
-        <div className="mt-4 flex w-full justify-between">
+        <div
+          className="mt-4
+          flex
+          laptop:w-full
+          phone:w-11/12
+          justify-between"
+        >
           <input
             className="
               cardInput
@@ -137,6 +147,45 @@ function PaymentForm() {
             onChange={ handleInputChange }
             onFocus={ handleInputFocus }
           />
+        </div>
+        <div
+          className="
+          mt-6
+          phone:w-11/12
+          laptop:w-full
+          flex
+          phone:justify-between
+          "
+        >
+          <button
+            onClick={ () => navigate(-1) }
+            className="
+            rounded-[6px]
+            border
+            border-px
+            border-black
+            cardInput
+            h-16"
+          >
+            Voltar
+          </button>
+          <a
+            className="cardInput h-16"
+            href="https://youtu.be/xvFZjo5PgG0?si=Poi0lsPiF-RUk5AL"
+          >
+            <button
+              onClick={ () => navigate('/checkout/payment') }
+              className="
+              rounded-[6px]
+              bg-black
+              text-white
+              w-full
+              h-16
+              "
+            >
+              Pagar
+            </button>
+          </a>
         </div>
       </form>
     </div>

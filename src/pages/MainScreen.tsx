@@ -8,9 +8,13 @@ import arrowRight from '../images/Arrow.svg';
 import ProductCard from '../components/ProductCard';
 import Header from '../components/Header';
 import Context from '../context/Context';
+import { Product } from '../types/typesApi';
+// import { Product } from '../types/typesApi';
 
 function MainScreen() {
   const [lastValorInput, setLastValorInput] = useState('');
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+  const [products, setProducts] = useState<Product[]>();
   const context = useContext(Context);
   const navigate = useNavigate();
 
@@ -21,6 +25,14 @@ function MainScreen() {
     }
   }, [location]);
 
+  // Função para ordenar os produtos
+  const sortProducts = (order: 'asc' | 'desc') => {
+    const sortedProducts = [...data].sort((a, b) => {
+      return order === 'asc' ? a.price - b.price : b.price - a.price;
+    });
+    setProducts(sortedProducts);
+  };
+
   useEffect(() => {
     if (context && context.valueInput !== lastValorInput) {
       setLastValorInput(context.valueInput);
@@ -29,7 +41,8 @@ function MainScreen() {
         context.sendProductsRequest(context.valueInput);
       }
     }
-  }, [context, lastValorInput]);
+    sortProducts(sortOrder);
+  }, [context, lastValorInput, sortOrder]);
 
   if (!context) return null;
   const {
@@ -45,14 +58,13 @@ function MainScreen() {
 
   return (
     <>
-      {/* <CategoriesBar /> */}
       <Header />
       { categories.length === 0 ? <ScaleLoader
         data-testid="loading"
         color="#36d7b7"
       />
         : (
-          <main className="w-full mt-6 h-5/6 flex flex-col items-center">
+          <main className="w-full h-[90%] flex flex-col items-center">
             <div className="w-4/5 flex items-center justify-between">
               <h3
                 className="
@@ -76,7 +88,7 @@ function MainScreen() {
               className="
                 flex
                 w-4/5
-                h-[6.75rem]
+                h-[5rem]
                 justify-evenly
                 items-center
                 overflow-scroll
@@ -108,7 +120,7 @@ function MainScreen() {
                     />
                     <label
                       className="flex w-52 h-10 items-center
-                      justify-center text-sm font-medium"
+                      justify-center text-sm font-medium cursor-pointer"
                       htmlFor={ category.name }
                     >
                       {category.name}
@@ -142,6 +154,7 @@ function MainScreen() {
                 </div>
                 <div>
                   <select
+                    onChange={ (e) => setSortOrder(e.target.value as 'asc' | 'desc') }
                     className="
                     w-64
                     h-10
@@ -151,12 +164,11 @@ function MainScreen() {
                     border-px
                     border-[#D4D4D4]
                     rounded-[8px]
-                    appearance-none"
-                    name=""
-                    id=""
+                    appearance-none
+                    "
                   >
-                    <option selected value="Maior preço">Maior preço</option>
-                    <option value="Menor preço">Menor preço</option>
+                    <option value="asc">Menor preço</option>
+                    <option value="desc">Maior preço</option>
                   </select>
                 </div>
               </section>
@@ -190,16 +202,15 @@ function MainScreen() {
                       color="#36d7b7"
                     />
                   </section>
-                ) : data
-                  .map((product) => (
-                    <ProductCard
-                      key={ product.id }
-                      id={ product.id }
-                      title={ product.title }
-                      img={ product.thumbnail }
-                      price={ product.price }
-                    />
-                  ))}
+                ) : products?.map((product) => (
+                  <ProductCard
+                    key={ product.id }
+                    id={ product.id }
+                    title={ product.title }
+                    img={ product.thumbnail }
+                    price={ product.price }
+                  />
+                ))}
               </section>
             </section>
           </main>)}

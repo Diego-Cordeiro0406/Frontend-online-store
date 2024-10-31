@@ -7,7 +7,7 @@ import burger from '../images/Burger.svg';
 import cartICon from '../images/Cart.svg';
 import userIcon from '../images/User.svg';
 import favoritesIcon from '../images/Favorites.svg';
-import searchIcon from '../images/Search.svg';
+// import searchIcon from '../images/Search.svg';
 import Context from '../context/Context';
 import SideBar from './SideBar';
 
@@ -74,38 +74,6 @@ function Header() {
         px-1
         bg-white"
     >
-      {/* <div className="">
-        <GiHamburgerMenu
-          onClick={ () => toggleCategories() }
-          style={ { color: '#FFFFFF' } }
-          className=""
-        />
-        <Link to="/">
-          <img
-            className=""
-            src={ logo }
-            alt="logo"
-          />
-        </Link>
-        <Link
-          className=""
-          data-testid="shopping-cart-button"
-          to="/cart"
-        >
-          <img
-            src={ cartLogo }
-            alt="cart-logo"
-            className=""
-          />
-          <div
-            className=""
-          >
-            <p className="">
-              {cart.length}
-            </p>
-          </div>
-        </Link>
-      </div> */}
       <section
         className="
           flex
@@ -142,22 +110,9 @@ function Header() {
                 onChange={ handleInputChange }
                 onKeyDown={ handleKeyDown }
               />
-              <button
-                data-testid="query-button"
-                onClick={ handleClick }
-                aria-label="Pesquisar"
-                className=""
-              >
-                <img
-                  className="absolute top-8 left-[282px]"
-                  src={ searchIcon }
-                  alt="search-icon"
-                />
-              </button>
             </div>
-
           )
-      }
+        }
         {
         !isMobile && (
           <>
