@@ -173,6 +173,7 @@ function Provider({ children }: MyProviderProps) {
     setSidebarOpen,
     productDataLoaded,
     setProductDataLoaded,
+    setLoading,
   };
   return (
     <Context.Provider value={ value }>

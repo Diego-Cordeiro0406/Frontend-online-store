@@ -16,8 +16,6 @@ function ProductCard({ id, title, img, price }: ProdcutCardProps) {
   const navigate = useNavigate();
 
   if (!context) return null;
-  const { addCart } = context;
-  const quantity = 1;
   return (
     <section
       data-testid="product"
@@ -36,7 +34,6 @@ function ProductCard({ id, title, img, price }: ProdcutCardProps) {
         border-[#D4D4D4]
       "
     >
-      {/* <div className="flex flex-col items-center"> */}
       <span className="flex w-11/12 justify-end">
         <CiHeart style={ { color: '#909090' } } size="2em" />
       </span>
@@ -45,9 +42,8 @@ function ProductCard({ id, title, img, price }: ProdcutCardProps) {
         data-testid="product-detail-link"
         className="flex flex-col items-center"
       >
-        <img className="laptop:w-40 laptop:h-40" src={ img } alt={ title } />
+        <img className="laptop:w-32 laptop:h-32" src={ img } alt={ title } />
       </div>
-      {/* </div> */}
       <div
         className="
           phone:mt-5

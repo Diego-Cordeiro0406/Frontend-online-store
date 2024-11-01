@@ -9,7 +9,7 @@ import ProductCard from '../components/ProductCard';
 import Header from '../components/Header';
 import Context from '../context/Context';
 import { Product } from '../types/typesApi';
-// import { Product } from '../types/typesApi';
+import RecomendedProducts from '../components/RecomendedProducts';
 
 function MainScreen() {
   const [lastValorInput, setLastValorInput] = useState('');
@@ -59,33 +59,28 @@ function MainScreen() {
   return (
     <>
       <Header />
-      { categories.length === 0 ? <ScaleLoader
-        data-testid="loading"
-        color="#36d7b7"
-      />
-        : (
-          <main className="w-full h-[90%] flex flex-col items-center">
-            <div className="w-4/5 flex items-center justify-between">
-              <h3
-                className="
-                  font-semibold
-                  laptop:text-xl
-                  w-4/5
-                "
-              >
-                Procure por categoria
-              </h3>
-              <span className="flex">
-                <img className="cursor-pointer" src={ arrowLeft } alt="arrow-left-icon" />
-                <img
-                  className="cursor-pointer"
-                  src={ arrowRight }
-                  alt="arrow-right-icon"
-                />
-              </span>
-            </div>
-            <section
-              className="
+      <main className="w-full h-[90%] flex flex-col items-center">
+        <div className="w-4/5 flex items-center justify-between">
+          <h3
+            className="
+              font-semibold
+              laptop:text-xl
+              w-4/5
+              "
+          >
+            Procure por categoria
+          </h3>
+          <span className="flex">
+            <img className="cursor-pointer" src={ arrowLeft } alt="arrow-left-icon" />
+            <img
+              className="cursor-pointer"
+              src={ arrowRight }
+              alt="arrow-right-icon"
+            />
+          </span>
+        </div>
+        <section
+          className="
                 flex
                 w-4/5
                 h-[5rem]
@@ -93,8 +88,8 @@ function MainScreen() {
                 items-center
                 overflow-scroll
                 mb-"
-            >
-              {
+        >
+          {
                 categories.map((category) => (
                   <span
                     key={ category.id }
@@ -128,25 +123,28 @@ function MainScreen() {
                   </span>
                 ))
               }
-            </section>
-            <section
-              className="flex
-                h-5/6
+        </section>
+        <section
+          className="
+                flex
+                h-[90%]
                 flex-wrap
                 justify-center
                 w-full
                 pt-5
                 overflow-scroll"
-            >
+        >
+          {
+            data.length > 0 && (
               <section
                 className="
-                w-4/5
-                flex
-                phone:flex-col
-                laptop:flex-row
-                items-center
-                justify-between
-                mb-1"
+                  w-4/5
+                  flex
+                  phone:flex-col
+                  laptop:flex-row
+                  items-center
+                  justify-between
+                  mb-1"
               >
                 <div className="flex w-64">
                   <p>Produtos encontrados:</p>
@@ -156,64 +154,70 @@ function MainScreen() {
                   <select
                     onChange={ (e) => setSortOrder(e.target.value as 'asc' | 'desc') }
                     className="
-                    w-64
-                    h-10
-                    px-4
-                    bg-white
-                    border
-                    border-px
-                    border-[#D4D4D4]
-                    rounded-[8px]
-                    appearance-none
-                    "
+                      w-64
+                      h-10
+                      px-4
+                      bg-white
+                      border
+                      border-px
+                      border-[#D4D4D4]
+                      rounded-[8px]
+                      appearance-none
+                      "
                   >
                     <option value="asc">Menor preço</option>
                     <option value="desc">Maior preço</option>
                   </select>
                 </div>
               </section>
-              <section
-                className="
-                flex
-                h-5/6
-                flex-wrap
-                justify-center
-                w-4/5
-                pt-5"
-              >
-                {
-                data.length === 0 && !isTrue && !isLoading && (
-                  <p className="" data-testid="home-initial-message">
-                    Digite algum termo de pesquisa ou escolha uma categoria.
-                  </p>
-                )
+            )
               }
-                {
-                 data.length === 0 && isTrue && (
-                   <p data-testid="not-found-product">
-                     Nenhum produto foi encontrado
-                   </p>
-                 )
+          <section
+            className="
+              flex
+              h-full
+              flex-wrap
+              justify-center
+              w-4/5"
+          >
+            {
+              data.length === 0 && !isTrue && !isLoading && (
+                <>
+                  <h3
+                    className="w-full text-xl font-semibold py-4"
+                  >
+                    Produtos recomendados
+                  </h3>
+                  <RecomendedProducts />
+                </>
+              )
               }
-                { isLoading ? (
-                  <section className="flex justify-center items-center w-full h-full">
-                    <ScaleLoader
-                      data-testid="loading"
-                      color="#36d7b7"
-                    />
-                  </section>
-                ) : products?.map((product) => (
-                  <ProductCard
-                    key={ product.id }
-                    id={ product.id }
-                    title={ product.title }
-                    img={ product.thumbnail }
-                    price={ product.price }
-                  />
-                ))}
+            {
+              data.length === 0 && isTrue && (
+                <p data-testid="not-found-product">
+                  Nenhum produto foi encontrado
+                </p>
+              )
+            }
+            { isLoading ? (
+              <section className="flex justify-center items-center w-full h-full">
+                <ScaleLoader
+                  data-testid="loading"
+                  color="#36d7b7"
+                />
               </section>
-            </section>
-          </main>)}
+            ) : products?.map((product) => (
+              <ProductCard
+                key={ product.id }
+                id={ product.id }
+                title={ product.title }
+                img={ product.thumbnail }
+                price={ product.price }
+              />
+            ))}
+          </section>
+        </section>
+      </main>
     </>
   );
 }
