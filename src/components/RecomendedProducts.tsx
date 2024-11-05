@@ -21,14 +21,15 @@ function RecomendedProducts() {
   } = context;
 
   const fetchRecomendedProducts = async () => {
-    const promises = categories.map(async (categorie) => {
-      const categoriesProducts = await getProductsFromCategoryAndQuery(categorie.name);
-      return categoriesProducts[0];
-    });
+    if (categories.length > 0) {
+      const promises = categories.map(async (categorie) => {
+        const categoriesProducts = await getProductsFromCategoryAndQuery(categorie.name);
+        return categoriesProducts[0];
+      });
 
-    const firstProducts = await Promise.all(promises);
-    console.log(firstProducts);
-    setRecomendedData(firstProducts);
+      const firstProducts = await Promise.all(promises);
+      setRecomendedData(firstProducts);
+    }
   };
 
   return (

@@ -5,7 +5,6 @@ import { useMediaQuery } from 'react-responsive';
 import logo from '../images/logo.png';
 import burger from '../images/Burger.svg';
 import cartICon from '../images/Cart.svg';
-import userIcon from '../images/User.svg';
 import favoritesIcon from '../images/Favorites.svg';
 // import searchIcon from '../images/Search.svg';
 import Context from '../context/Context';
@@ -115,38 +114,37 @@ function Header() {
         }
         {
         !isMobile && (
-          <>
-            <div className="flex justify-between w-[18.75rem] h-[1.188rem]">
-              <a className="font-medium text-gray-500" href="zs">Home</a>
-              <a className="font-medium text-gray-500" href="ss">Sobre</a>
-              <a className="font-medium text-gray-500" href="ss">Contate-nos</a>
-            </div>
-            <div className="w-36 flex justify-between h-8">
-              <img src={ favoritesIcon } alt="favorites-icon" />
-              <Link to="/cart">
-                <img src={ cartICon } alt="cart-icon" />
-              </Link>
-              <img src={ userIcon } alt="user-icon" />
-            </div>
-          </>
+          <div className="flex justify-between w-[18.75rem] h-[1.188rem]">
+            <a className="font-medium text-gray-500" href="zs">Home</a>
+            <a className="font-medium text-gray-500" href="ss">Sobre</a>
+            <a className="font-medium text-gray-500" href="ss">Contate-nos</a>
+          </div>
         )
       }
-        {
-        isMobile && (
+        <div className="laptop:w-36 flex justify-between h-8">
+          {
+            !isMobile && (
+              <>
+                <img src={ favoritesIcon } alt="favorites-icon" />
+                <Link to="/cart">
+                  <img src={ cartICon } alt="cart-icon" />
+                </Link>
+              </>
+            )
+          }
+
           <button
             aria-label="burger-icon"
-            className="w-10 h-10"
+            className="w-8 h-8"
             onClick={ () => toggleSideBar() }
           >
             <img
               src={ burger }
               alt="burger-icon"
-              className="w-10 h-10"
+              className="w-8 h-8"
             />
           </button>
-
-        )
-      }
+        </div>
         <SideBar />
       </section>
     </header>
