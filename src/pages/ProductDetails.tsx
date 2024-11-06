@@ -59,6 +59,14 @@ function ProductDetails() {
     }
   }, [context!.productDataLoaded]);
 
+  useEffect(() => {
+    return () => {
+      // Limpa o estado de productData no contexto ao desmontar o componente
+      context!.setProduct(null);
+      context!.setProductDataLoaded(false);
+    };
+  }, []);
+
   const navigate = useNavigate();
 
   const manipulateQuantity = (manipulate: boolean) => {

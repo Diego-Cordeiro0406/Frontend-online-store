@@ -1,26 +1,33 @@
 /* eslint-disable max-lines */
 /* eslint-disable react/jsx-max-depth */
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TiArrowBack } from 'react-icons/ti';
 
-// import { useMediaQuery } from 'react-responsive';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import { AiOutlineDelete } from 'react-icons/ai';
 import Context from '../context/Context';
 import Header from '../components/Header';
-// import CartDesktop from '../components/CartDesktop';
-// import CartMobile from '../components/CartMobile';
-// import CategoriesBar from '../components/SideBar';
 
 function ShoppingCart() {
   const context = useContext(Context);
   const navigate = useNavigate();
 
-  // const isMobile = useMediaQuery({ maxWidth: 1023 });
+  useEffect(() => {
+    const cartData = localStorage.getItem('cart');
+    if (cartData) {
+      setCart(JSON.parse(cartData));
+    }
+  }, []);
 
   if (!context) return null;
-  const { cart, getQuantity, addQuantity, sutractQuantity, removeProduct } = context;
+  const {
+    cart,
+    setCart,
+    getQuantity,
+    addQuantity,
+    sutractQuantity,
+    removeProduct } = context;
 
   return (
     <>

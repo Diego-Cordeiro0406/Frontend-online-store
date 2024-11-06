@@ -5,6 +5,7 @@ type BatataState = boolean;
 type SearchState = string;
 type InputState = string;
 type ProductState = Product;
+type ProductCartState = ProductCart;
 type ProductDataLoaded = boolean;
 type Open = boolean;
 type Loading = boolean;
@@ -42,6 +43,7 @@ export interface MyContextProps {
   setProductDataLoaded: Dispatch<SetStateAction<ProductDataLoaded>>,
   setSidebarOpen: Dispatch<SetStateAction<Open>>,
   setLoading: Dispatch<SetStateAction<Loading>>
+  setCart: Dispatch<SetStateAction<ProductCartState[]>>,
 }
 
 const Context = createContext<MyContextProps | undefined>(undefined);
