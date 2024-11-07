@@ -24,6 +24,7 @@ function SideBar() {
       if (context.valueInput) {
         navigate('/');
         context.sendProductsRequest(context.valueInput);
+        toggleSideBar();
       }
     }
   }, [context, lastValorInput]);
@@ -139,39 +140,44 @@ function SideBar() {
             </div>
           )
         }
-        <div
-          className="
+        {
+          isMobile && (
+            <div
+              className="
             flex
             justify-evenly
             items-start
             w-11/12
             py-4
             border-b border-px"
-        >
-          <button
-            onClick={ () => navigateTo('/favorites') }
-            className="flex justify-center items-center w-4/5"
-          >
-            <img src={ favoritesIcon } alt="favorites-icon" />
-            <p>Favoritos</p>
-          </button>
-          <button
-            onClick={ () => navigateTo('/cart') }
-            className="flex justify-center items-center w-4/5"
-          >
-            <img src={ cartICon } alt="cart-icon" />
-            <p>Carrinho</p>
-          </button>
-        </div>
+            >
+              <button
+                onClick={ () => navigateTo('/favorites') }
+                className="flex justify-center items-center w-4/5"
+              >
+                <img src={ favoritesIcon } alt="favorites-icon" />
+                <p>Favoritos</p>
+              </button>
+              <button
+                onClick={ () => navigateTo('/cart') }
+                className="flex justify-center items-center w-4/5"
+              >
+                <img src={ cartICon } alt="cart-icon" />
+                <p>Carrinho</p>
+              </button>
+            </div>
+          )
+        }
+
         <h3 className="w-11/12 font-semibold text-lg py-2 text-center">Categorias</h3>
         <section
           className="
-                flex
-                flex-col
-                w-11/12
-                justify-end
-                items-center
-                mb-"
+            flex
+            flex-col
+            w-11/12
+            justify-end
+            items-center
+            "
         >
           {
                 categories.map((category) => (

@@ -1,4 +1,4 @@
-import { useContext, useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { useMediaQuery } from 'react-responsive';
@@ -12,6 +12,14 @@ import SideBar from './SideBar';
 
 function Header() {
   const isMobile = useMediaQuery({ maxWidth: 1023 });
+
+  useEffect(() => {
+    const cartData = localStorage.getItem('cart');
+    if (cartData) {
+      setCart(JSON.parse(cartData));
+    }
+  }, []);
+
   // Função responsável por lidar com a alteração de estado do input de pesquisa.
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const novoValor = event.target.value;
@@ -31,7 +39,8 @@ function Header() {
     search,
     setSearch,
     sendProductsRequest,
-    // cart,
+    cart,
+    setCart,
     toggleSideBar,
   } = context;
 
@@ -115,9 +124,19 @@ function Header() {
         {
         !isMobile && (
           <div className="flex justify-between w-[18.75rem] h-[1.188rem]">
-            <a className="font-medium text-gray-500" href="zs">Home</a>
-            <a className="font-medium text-gray-500" href="ss">Sobre</a>
-            <a className="font-medium text-gray-500" href="ss">Contate-nos</a>
+            <button
+              className="font-medium text-gray-500 hover:underline"
+              onClick={ () => navigate('/') }
+            >
+              Home
+            </button>
+            <a className="font-medium text-gray-500 hover:underline" href="ss">Sobre</a>
+            <a
+              className="font-medium text-gray-500 hover:underline"
+              href="ss"
+            >
+              Contate-nos
+            </a>
           </div>
         )
       }
@@ -126,8 +145,39 @@ function Header() {
             !isMobile && (
               <>
                 <img src={ favoritesIcon } alt="favorites-icon" />
-                <Link to="/cart">
+                <Link className="h-8 w-8 laptop:relative" to="/cart">
                   <img src={ cartICon } alt="cart-icon" />
+                  <div
+                    className="
+                      flex
+                      justify-center
+                      items-center
+                      rounded-full
+                      bg-green-400
+                      font-mono
+                      w-4
+                      h-4
+                      text-white
+                      absolute
+                      laptop:top-0
+                      laptop:left-5
+                      font-bold
+                    "
+                  >
+                    <p
+                      className="
+                        flex
+                        justify-center
+                        w-4
+                        h-4
+                        text-xs
+                        absolute
+                        laptop:top-px
+                      "
+                    >
+                      {cart.length}
+                    </p>
+                  </div>
                 </Link>
               </>
             )

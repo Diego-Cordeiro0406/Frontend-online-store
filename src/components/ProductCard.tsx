@@ -73,7 +73,14 @@ function ProductCard({ id, title, img, price }: ProdcutCardProps) {
         <button
           id={ id }
           onClick={ () => navigate(`/product/${id}`) }
-          className="w-[11.438rem] h-12 text-white bg-black rounded-[8px] font-semibold"
+          className="
+            w-[11.438rem]
+            h-12
+            text-white
+            bg-black
+            rounded-[8px]
+            font-semibold
+            "
         >
           Compre agora
         </button>

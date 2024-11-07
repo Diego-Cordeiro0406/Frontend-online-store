@@ -1,6 +1,19 @@
-import productExample from '../images/product-example.png';
+import { useContext, useEffect } from 'react';
+
+import Context from '../context/Context';
 
 function Summary() {
+  const context = useContext(Context);
+  useEffect(() => {
+    const cartData = localStorage.getItem('cart');
+    if (cartData) {
+      setCart(JSON.parse(cartData));
+    }
+  }, []);
+
+  if (!context) return null;
+  const { cart, setCart, getQuantity } = context;
+  console.log(cart);
   return (
     <div
       className="
@@ -10,64 +23,38 @@ function Summary() {
         border-[#EBEBEB]
         rounded-[10px]
         flex
-          flex-col
+        flex-col
         items-center"
     >
       <h3 className="font-semibold w-11/12 py-6 text-xl">Resumo</h3>
-      <span
-        className="
-          flex
-          justify-between
-          w-11/12
-          h-[4.5rem]
-          bg-[#F6F6F6]
-          rounded-[13px]
-          items-center
-          px-5
-          mb-4"
-      >
-        <div className="flex items-center">
-          <img className="w-10 h-10" src={ productExample } alt="product-img" />
-          <p className="ml-2 font-medium">Product name</p>
-        </div>
-        <p className="font-bold">R$ 4999</p>
-      </span>
-      <span
-        className="
-          flex
-          justify-between
-          w-11/12
-          h-[4.5rem]
-          bg-[#F6F6F6]
-          rounded-[13px]
-          items-center
-          px-5
-          mb-4"
-      >
-        <div className="flex items-center">
-          <img className="w-10 h-10" src={ productExample } alt="product-img" />
-          <p className="ml-2 font-medium">Product name</p>
-        </div>
-        <p className="font-bold">R$ 4999</p>
-      </span>
-      <span
-        className="
-          flex
-          justify-between
-          w-11/12
-          h-[4.5rem]
-          bg-[#F6F6F6]
-          rounded-[13px]
-          items-center
-          px-5
-          mb-4"
-      >
-        <div className="flex items-center">
-          <img className="w-10 h-10" src={ productExample } alt="product-img" />
-          <p className="ml-2 font-medium">Product name</p>
-        </div>
-        <p className="font-bold">R$ 4999</p>
-      </span>
+      {
+        cart.map((product) => (
+          <span
+            key={ product.id }
+            className="
+              flex
+              justify-between
+              w-11/12
+              h-[4.5rem]
+              bg-[#F6F6F6]
+              rounded-[13px]
+              items-center
+              px-5
+              mb-4"
+          >
+            <div className="flex items-center">
+              <img className="w-10 h-10" src={ product.img } alt="product-img" />
+              <p
+                className="ml-2 text-sm font-medium w-52 overflow-hidden"
+              >
+                {product.title}
+              </p>
+            </div>
+            <p className="font-semibold">{`R$ ${product.price}`}</p>
+          </span>
+        ))
+      }
+
       <section className="w-11/12 h-3/6 flex flex-col justify-around">
         <span className="flex flex-col justify-evenly w-full h-3/6">
           <div>
@@ -82,7 +69,7 @@ function Summary() {
         <span className="flex flex-col justify-evenly w-full h-3/6">
           <div className="flex justify-between items-center w-full">
             <h3 className="font-medium">Subtotal</h3>
-            <p className="font-bold">5400</p>
+            <p className="font-bold">{getQuantity()}</p>
           </div>
           <div className="flex justify-between items-center w-full">
             <h3 className="text-[#545454]">Envio</h3>
@@ -90,7 +77,7 @@ function Summary() {
           </div>
           <div className="flex justify-between items-center w-full">
             <h3 className="font-medium">Total</h3>
-            <p className="font-bold">5400</p>
+            <p className="font-bold">{getQuantity()}</p>
           </div>
         </span>
       </section>

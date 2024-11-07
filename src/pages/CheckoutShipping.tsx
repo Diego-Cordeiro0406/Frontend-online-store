@@ -90,7 +90,7 @@ function CheckoutShipping() {
                   laptop:h-auto
                   phone:justify-evenly"
               >
-                <input className="w-5 h-5" type="radio" name="" id="" />
+                <input checked className="w-5 h-5" type="radio" name="" id="" />
                 <p className="font-medium laptop:pl-2 laptop:mr-5">Grátis</p>
                 <p className="text-[#A2A3B1]">envio padrão</p>
               </div>

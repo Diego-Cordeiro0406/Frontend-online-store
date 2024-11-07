@@ -85,7 +85,13 @@ function ShoppingCart() {
                   laptop:mt-0"
               >
                 <section
-                  className="phone:w-full laptop:w-3/6 h-full laptop:overflow-scroll"
+                  className="
+                    laptop:pr-5
+                    phone:w-full
+                    laptop:w-3/6
+                    h-full
+                    laptop:overflow-scroll
+                  "
                 >
                   <section className="">
                     <h2 className="font-semibold text-2xl">

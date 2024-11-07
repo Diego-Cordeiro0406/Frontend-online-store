@@ -9,7 +9,7 @@ import { Product } from '../types/typesApi';
 import RecomendedProducts from '../components/RecomendedProducts';
 
 function MainScreen() {
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
   const [products, setProducts] = useState<Product[]>();
   const context = useContext(Context);
 
@@ -86,8 +86,8 @@ function MainScreen() {
                       appearance-none
                       "
                   >
+                    <option selected value="desc">Maior preço</option>
                     <option value="asc">Menor preço</option>
-                    <option value="desc">Maior preço</option>
                   </select>
                 </div>
               </section>

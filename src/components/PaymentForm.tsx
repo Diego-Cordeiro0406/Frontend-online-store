@@ -174,7 +174,6 @@ function PaymentForm() {
             href="https://youtu.be/xvFZjo5PgG0?si=Poi0lsPiF-RUk5AL"
           >
             <button
-              onClick={ () => navigate('/checkout/payment') }
               className="
               rounded-[6px]
               bg-black
