@@ -110,6 +110,7 @@ function Provider({ children }: MyProviderProps) {
 
     // Atualiza o localStorage com o carrinho atualizado
     localStorage.setItem('cart', JSON.stringify(updatedCart));
+    setCart(updatedCart);
 
     // Alterações visuais no botão
     if (toSet) {

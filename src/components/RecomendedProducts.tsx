@@ -6,14 +6,14 @@ import ProductCard from './ProductCard';
 function RecomendedProducts() {
   const [recomendedData, setRecomendedData] = useState<Product[]>([]);
 
+  const context = useContext(Context);
   useEffect(() => {
     const fetchData = async () => {
       await fetchRecomendedProducts();
     };
     fetchData();
-  }, []);
+  }, [context?.categories]);
 
-  const context = useContext(Context);
   if (!context) return null;
   const {
     getProductsFromCategoryAndQuery,
@@ -26,7 +26,7 @@ function RecomendedProducts() {
         const categoriesProducts = await getProductsFromCategoryAndQuery(categorie.name);
         return categoriesProducts[0];
       });
-
+      console.log('fui chamado');
       const firstProducts = await Promise.all(promises);
       setRecomendedData(firstProducts);
     }
