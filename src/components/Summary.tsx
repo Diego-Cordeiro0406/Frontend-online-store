@@ -13,7 +13,7 @@ function Summary() {
 
   if (!context) return null;
   const { cart, setCart, getQuantity } = context;
-  console.log(cart);
+
   return (
     <div
       className="

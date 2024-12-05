@@ -112,7 +112,7 @@ function MainScreen() {
                   <RecomendedProducts />
                 </>
               )
-              }
+            }
             {
               data.length === 0 && isTrue && (
                 <p data-testid="not-found-product">
