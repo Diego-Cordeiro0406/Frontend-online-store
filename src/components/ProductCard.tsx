@@ -1,6 +1,8 @@
-import { useContext } from 'react';
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CiHeart } from 'react-icons/ci';
+import { GoHeart, GoHeartFill } from 'react-icons/go';
 import Context from '../context/Context';
 
 interface ProdcutCardProps {
@@ -11,6 +13,7 @@ interface ProdcutCardProps {
 }
 
 function ProductCard({ id, title, img, price }: ProdcutCardProps) {
+  const [check, setCheck] = useState(false);
   const context = useContext(Context);
 
   const navigate = useNavigate();
@@ -20,8 +23,8 @@ function ProductCard({ id, title, img, price }: ProdcutCardProps) {
     <section
       data-testid="product"
       className="
-        laptop:w-[16.75rem]
-        laptop:h-[27rem]
+        w-[16.75rem]
+        h-[27rem]
         rounded-[9px]
         bg-white
         laptop:mr-4
@@ -34,15 +37,32 @@ function ProductCard({ id, title, img, price }: ProdcutCardProps) {
         border-[#D4D4D4]
       "
     >
-      <span className="flex w-11/12 justify-end">
-        <CiHeart style={ { color: '#909090' } } size="2em" />
-      </span>
+      <label
+        aria-label={ `${id}` }
+        className="flex w-11/12 justify-end"
+        htmlFor={ `${id}` }
+      >
+        <input
+          onChange={ () => setCheck(!check) }
+          id={ `${id}` }
+          className="appearance-none"
+          checked={ check }
+          type="checkbox"
+        />
+        {
+          check ? (
+            <GoHeartFill style={ { color: '#FF0000' } } size="1.5em" />
+          ) : (
+            <GoHeart style={ { color: '#909090' } } size="1.5em" />
+          )
+        }
+      </label>
       <div
         key={ id }
         data-testid="product-detail-link"
         className="flex flex-col items-center"
       >
-        <img className="laptop:w-32 laptop:h-32" src={ img } alt={ title } />
+        <img className="w-32 h-32" src={ img } alt={ title } />
       </div>
       <div
         className="
