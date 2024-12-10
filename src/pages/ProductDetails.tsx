@@ -5,9 +5,8 @@ import { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import { ScaleLoader } from 'react-spinners';
-import { TiArrowBack } from 'react-icons/ti';
 
-import { FaPlus, FaMinus } from 'react-icons/fa';
+import { FaPlus, FaMinus, FaArrowLeft } from 'react-icons/fa';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -112,7 +111,8 @@ function ProductDetails() {
                   className="
                     flex
                     flex-col
-                    justify-evenly
+                    laptop:justify-around
+                    phone:justify-evenly
                     phone:w-full
                     laptop:w-3/6
                     h-full
@@ -120,11 +120,11 @@ function ProductDetails() {
                   data-testid="product"
                 >
                   <button
-                    className="w-full flex items-center"
+                    aria-label="voltar"
+                    className="w-full flex items-center pl-4"
                     onClick={ () => navigate(-1) }
                   >
-                    <TiArrowBack size="1.5em" style={ { color: '#2FC18C' } } />
-                    Voltar
+                    <FaArrowLeft size="1.5em" />
                   </button>
                   <span
                     className="

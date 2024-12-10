@@ -2,9 +2,8 @@
 /* eslint-disable react/jsx-max-depth */
 import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TiArrowBack } from 'react-icons/ti';
 
-import { FaPlus, FaMinus } from 'react-icons/fa';
+import { FaPlus, FaMinus, FaArrowLeft } from 'react-icons/fa';
 import { AiOutlineDelete } from 'react-icons/ai';
 import Context from '../context/Context';
 import Header from '../components/Header';
@@ -36,19 +35,26 @@ function ShoppingCart() {
         cart.length === 0
           ? (
             <div
-              className=""
+              className="w-full h-4/5"
               data-testid="shopping-cart-empty-message"
             >
 
               <button
-                className=""
+                aria-label="voltar"
+                className="w-full laptop:pl-5 phone:pl-2"
                 onClick={ () => navigate(-1) }
               >
-                <TiArrowBack size="1.5em" style={ { color: '#2FC18C' } } />
-                Voltar
+                <FaArrowLeft size="1.5em" />
               </button>
               <h3
-                className=""
+                className="
+                  w-full
+                  h-4/5
+                  flex
+                  items-center
+                  justify-center
+                  text-xl
+                  font-semibold"
               >
                 Seu carrinho está vazio
               </h3>
@@ -67,9 +73,12 @@ function ShoppingCart() {
                 phone:overflow-scroll"
             >
               <div className="w-full laptop:pl-5 phone:pl-2">
-                <button className="flex" onClick={ () => navigate(-1) }>
-                  <TiArrowBack size="1.5em" style={ { color: '#2FC18C' } } />
-                  Voltar
+                <button
+                  aria-label="voltar"
+                  className="flex"
+                  onClick={ () => navigate(-1) }
+                >
+                  <FaArrowLeft size="1.5em" />
                 </button>
               </div>
               <section

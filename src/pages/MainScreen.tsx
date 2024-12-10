@@ -115,7 +115,15 @@ function MainScreen() {
             }
             {
               data.length === 0 && isTrue && (
-                <p data-testid="not-found-product">
+                <p
+                  className="
+                    flex
+                    items-center
+                    justify-center
+                    text-xl
+                    font-semibold"
+                  data-testid="not-found-product"
+                >
                   Nenhum produto foi encontrado
                 </p>
               )
