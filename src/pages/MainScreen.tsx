@@ -1,13 +1,16 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { ScaleLoader } from 'react-spinners';
 
-import CategoriesBar from '../components/CategoriesBar';
 import ProductCard from '../components/ProductCard';
 import Header from '../components/Header';
 import Context from '../context/Context';
+import { Product } from '../types/typesApi';
+import RecomendedProducts from '../components/RecomendedProducts';
 
 function MainScreen() {
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
+  const [products, setProducts] = useState<Product[]>();
   const context = useContext(Context);
 
   const location = useLocation();
@@ -17,6 +20,18 @@ function MainScreen() {
     }
   }, [location]);
 
+  // Função para ordenar os produtos
+  const sortProducts = (order: 'asc' | 'desc') => {
+    const sortedProducts = [...data].sort((a, b) => {
+      return order === 'asc' ? a.price - b.price : b.price - a.price;
+    });
+    setProducts(sortedProducts);
+  };
+
+  useEffect(() => {
+    sortProducts(sortOrder);
+  }, [context, sortOrder]);
+
   if (!context) return null;
   const {
     sendProductsRequest,
@@ -24,88 +39,114 @@ function MainScreen() {
     isLoading,
     isTrue,
     data,
-    categories,
   } = context;
 
   return (
     <>
-      <CategoriesBar />
       <Header />
-      { categories.length === 0 ? <ScaleLoader
-        data-testid="loading"
-        color="#36d7b7"
-      />
-        : (
-          <main
+      <main className="w-full h-[90%] flex flex-col items-center">
+        <section
+          className="
+                flex
+                h-full
+                flex-wrap
+                justify-center
+                w-full
+                pt-5
+                overflow-scroll"
+        >
+          {
+            data.length > 0 && (
+              <section
+                className="
+                  w-4/5
+                  flex
+                  phone:flex-col
+                  laptop:flex-row
+                  items-center
+                  justify-between
+                  py-4"
+              >
+                <div className="flex w-64">
+                  <p>Produtos encontrados:</p>
+                  <p className="font-bold">{data.length}</p>
+                </div>
+                <div>
+                  <select
+                    onChange={ (e) => setSortOrder(e.target.value as 'asc' | 'desc') }
+                    className="
+                      w-64
+                      h-10
+                      px-4
+                      bg-white
+                      border
+                      border-px
+                      border-[#D4D4D4]
+                      rounded-[8px]
+                      appearance-none
+                      "
+                  >
+                    <option selected value="desc">Maior preço</option>
+                    <option value="asc">Menor preço</option>
+                  </select>
+                </div>
+              </section>
+            )
+              }
+          <section
             className="
               flex
-              flex-row
-              overflow-auto
-              overscroll-contain
-              h-4/5
-              phone:h-screen
-              tablet:h-screen
-              laptop:h-full
-              desktop:h-full
-            "
+              h-full
+              flex-wrap
+              justify-center
+              w-4/5"
           >
-            <section
-              className="
-                bg-slate-200
-                flex
-                w-full
-                justify-evenly
-                items-center
-                flex-wrap
-                overflow-y-scroll
-                section-container
-              "
-            >
-              {
-          data.length === 0 && !isTrue && !isLoading && (
-            <p
-              className="
-                flex
-                items-center
-                text-xl
-                font-semibold
-                uppercase
-                text-green-500
-                w-96
-                text-center
-                "
-              data-testid="home-initial-message"
-            >
-              Digite algum termo de pesquisa ou escolha uma categoria.
-            </p>
-          )
-        }
-              {
-          data.length === 0 && isTrue && (
-            <p data-testid="not-found-product">
-              Nenhum produto foi encontrado
-            </p>
-          )
-        }
-              { isLoading ? (
-                <section className="flex justify-center items-center w-full h-full">
-                  <ScaleLoader
-                    data-testid="loading"
-                    color="#36d7b7"
-                  />
-                </section>
-              ) : data
-                .map((product) => (
-                  <ProductCard
-                    key={ product.id }
-                    id={ product.id }
-                    title={ product.title }
-                    img={ product.thumbnail }
-                    price={ product.price }
-                  />
-                ))}
-            </section>
-          </main>)}
+            {
+              data.length === 0 && !isTrue && !isLoading && (
+                <>
+                  <h3
+                    className="w-full text-xl font-semibold py-4"
+                  >
+                    Produtos recomendados
+                  </h3>
+                  <RecomendedProducts />
+                </>
+              )
+            }
+            {
+              data.length === 0 && isTrue && (
+                <p
+                  className="
+                    flex
+                    items-center
+                    justify-center
+                    text-xl
+                    font-semibold"
+                  data-testid="not-found-product"
+                >
+                  Nenhum produto foi encontrado
+                </p>
+              )
+            }
+            { isLoading ? (
+              <section className="flex justify-center items-center w-full h-full">
+                <ScaleLoader
+                  data-testid="loading"
+                  color="#36d7b7"
+                />
+              </section>
+            ) : products?.map((product) => (
+              <ProductCard
+                key={ product.id }
+                id={ product.id }
+                title={ product.title }
+                img={ product.thumbnail }
+                price={ product.price }
+              />
+            ))}
+          </section>
+        </section>
+      </main>
     </>
   );
 }

@@ -92,23 +92,46 @@ function Provider({ children }: MyProviderProps) {
     setSearch('');
   };
 
-  // Função responsável por adicionar um produto ao carrinho.
   const addCart = (obj: ProductCart) => {
-    const updatedCart = [...cart, obj];
     const toSet = document.getElementById(obj.id);
+    const cartData = localStorage.getItem('cart');
+    let updatedCart: ProductCart[] = cartData ? JSON.parse(cartData) : [];
+
+    // Verificar se o item já está no carrinho
+    const existingItemIndex = updatedCart.findIndex((item) => item.id === obj.id);
+
+    if (existingItemIndex !== -1) {
+      // Item já está no carrinho, então apenas atualizamos a quantidade
+      updatedCart[existingItemIndex].quantity += obj.quantity;
+    } else {
+      // Item não está no carrinho, adicionamos ao array
+      updatedCart = [...updatedCart, obj];
+    }
+
+    // Atualiza o localStorage com o carrinho atualizado
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
     setCart(updatedCart);
-    toSet!.classList.add('bg-green-700');
-    toSet!.innerHTML = 'Adicionado ao carrinho';
-    setTimeout(() => toSet!.classList.remove('bg-green-700'), 3000);
-    setTimeout(() => { toSet!.innerHTML = 'Adicionar ao carrinho'; }, 3000);
+
+    // Alterações visuais no botão
+    if (toSet) {
+      toSet.classList.add('bg-green-700');
+      toSet.innerHTML = 'Adicionado ao carrinho';
+      setTimeout(() => toSet.classList.remove('bg-green-700'), 3000);
+      setTimeout(() => { toSet.innerHTML = 'Adicionar ao carrinho'; }, 3000);
+    }
   };
 
   // Função responsável por retornar a quantidade de itens no carrinho.
   const getQuantity = (): number => {
-    const total = cart.reduce((acc, curr) => {
-      return acc + (curr.price * curr.quantity);
-    }, 0);
-    return Number(total.toFixed(2));
+    const cartData = localStorage.getItem('cart');
+    let totalData = 0;
+    if (cartData) {
+      const total = JSON.parse(cartData).reduce((acc: number, curr: ProductCart) => {
+        return acc + (curr.price * curr.quantity);
+      }, 0);
+      totalData = Number(total.toFixed(2));
+    }
+    return totalData;
   };
 
   // Função responsável por aumentar em 1 a quantidade de um produto antes de adiciona-lo ao carrinho.
@@ -135,11 +158,21 @@ function Provider({ children }: MyProviderProps) {
 
   // Função responsável por remover um produto do carrinho.
   const removeProduct = (id: string): void => {
-    const newCart = cart.filter((product) => product.id !== id);
-    setCart(newCart);
+    const cartData = localStorage.getItem('cart');
+    let updatedCart: ProductCart[] = cartData ? JSON.parse(cartData) : [];
+    if (cartData) {
+      const newCart = JSON
+        .parse(cartData)
+        .filter((product: ProductCart) => product.id !== id);
+
+      updatedCart = newCart;
+
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+      setCart(updatedCart);
+    }
   };
 
-  const toggleCategories = async ():Promise<void> => {
+  const toggleSideBar = async ():Promise<void> => {
     setSidebarOpen(!sidebarOpen);
   };
 
@@ -168,11 +201,13 @@ function Provider({ children }: MyProviderProps) {
     removeProduct,
     addQuantity,
     sutractQuantity,
-    toggleCategories,
+    toggleSideBar,
     sidebarOpen,
     setSidebarOpen,
     productDataLoaded,
     setProductDataLoaded,
+    setLoading,
+    setCart,
   };
   return (
     <Context.Provider value={ value }>

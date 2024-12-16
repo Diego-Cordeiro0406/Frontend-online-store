@@ -4,11 +4,12 @@ import { Routes, Route } from 'react-router-dom';
 import MainScreen from './pages/MainScreen';
 import ShoppingCart from './pages/ShoppingCart';
 import ProductDetails from './pages/ProductDetails';
+import CheckoutAddress from './pages/CheckoutAddress';
 import Context from './context/Context';
 
 import './App.css';
-import CheckoutScreen from './pages/CheckoutScreen';
-import ProductAttributes from './pages/ProductAttributes';
+import CheckoutShipping from './pages/CheckoutShipping';
+import CheckoutPayment from './pages/CheckoutPayment';
 
 function App() {
   const context = useContext(Context);
@@ -21,6 +22,10 @@ function App() {
 
       fetchData();
     }
+    const cart = localStorage.getItem('cart');
+    if (!cart) {
+      localStorage.setItem('cart', JSON.stringify([]));
+    }
   }, []);
 
   if (!context) return null;
@@ -29,12 +34,10 @@ function App() {
     <Routes>
       <Route path="/" element={ <MainScreen /> } />
       <Route path="/cart" element={ <ShoppingCart /> } />
-      <Route
-        path="/product/:id"
-        element={ <ProductDetails /> }
-      />
-      <Route path="/attributes/:id" element={ <ProductAttributes /> } />
-      <Route path="checkout" element={ <CheckoutScreen /> } />
+      <Route path="/product/:id" element={ <ProductDetails /> } />
+      <Route path="checkout/address" element={ <CheckoutAddress /> } />
+      <Route path="checkout/shipping" element={ <CheckoutShipping /> } />
+      <Route path="checkout/payment" element={ <CheckoutPayment /> } />
     </Routes>
   );
 }
