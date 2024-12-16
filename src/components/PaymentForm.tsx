@@ -169,11 +169,11 @@ function PaymentForm() {
           >
             Voltar
           </button>
-          <a
+          <div
             className="cardInput h-16"
-            href="https://youtu.be/xvFZjo5PgG0?si=Poi0lsPiF-RUk5AL"
           >
             <button
+              onClick={ () => navigate('/') }
               className="
               rounded-[6px]
               bg-black
@@ -184,7 +184,7 @@ function PaymentForm() {
             >
               Pagar
             </button>
-          </a>
+          </div>
         </div>
       </form>
     </div>
